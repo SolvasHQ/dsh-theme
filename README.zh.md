@@ -10,7 +10,17 @@
 明暗双模：每套预设和每项 DIY 颜色都同时带浅色与深色两套值，因此原生外观在
 浅色 / 深色 / 跟随系统之间切换时依然生效。
 
-![调色板参考图](research/preview.png)
+## 界面截图
+
+| 中文界面 | 英文界面 |
+|:---:|:---:|
+| <img src="docs/screenshots/panel-zh.png" width="300" alt="中文个性化面板"> | <img src="docs/screenshots/panel-en.png" width="300" alt="英文个性化面板"> |
+| <img src="docs/screenshots/panel-zh-custom.png" width="300" alt="中文自定义主题编辑器"> | <img src="docs/screenshots/panel-en-custom.png" width="300" alt="英文自定义主题编辑器"> |
+
+**入口：侧边栏左下角的调色盘图标**——就是 Settings 按钮上方那一行图标。
+点击即可在左下角弹出面板；同样的选项也在 **设置 → 个性化** 页面中。
+
+界面文案跟随通用设置里的语言（简体中文 / English）。
 
 ## 功能
 
@@ -28,6 +38,12 @@
 - **中英双语**：跟随通用设置里的语言自动切换。
 - **重启不丢失**：选择写入 DSH 的 Host 设置文档（volatile config），重启应用、
   更换本地端口后依然保留。
+
+## 调色板参考
+
+十套预设的浅色 / 深色配色对照：
+
+![调色板参考图](research/preview.png)
 
 ## 安装
 

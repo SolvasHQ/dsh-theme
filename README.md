@@ -12,7 +12,18 @@ Dark and light are first class: every preset and every DIY color carries a value
 for both modes, so it keeps working when the native appearance switches between
 light, dark, and system.
 
-![Palette reference sheet](research/preview.png)
+## Screenshots
+
+| Chinese UI | English UI |
+|:---:|:---:|
+| <img src="docs/screenshots/panel-zh.png" width="300" alt="Chinese personalization panel"> | <img src="docs/screenshots/panel-en.png" width="300" alt="English personalization panel"> |
+| <img src="docs/screenshots/panel-zh-custom.png" width="300" alt="Chinese custom theme editor"> | <img src="docs/screenshots/panel-en-custom.png" width="300" alt="English custom theme editor"> |
+
+**Entry point: the palette icon at the bottom-left of the sidebar** — the action
+row of icons directly above the Settings button. Click it to open the panel; the
+same options are also available under **Settings → 个性化 / Personalization**.
+
+The interface copy follows the app language (Simplified Chinese / English).
 
 ## Features
 
@@ -34,6 +45,12 @@ light, dark, and system.
 - **Restart-safe persistence** — choices are stored in DSH's Host settings
   document, so they survive app restarts and profile changes of the localhost
   port. No `localStorage` surprises.
+
+## Palette reference
+
+All ten presets, with their light and dark token swatches:
+
+![Palette reference sheet](research/preview.png)
 
 ## Install
 
