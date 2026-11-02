@@ -3,6 +3,7 @@
 [English](README.md) | **简体中文**
 
 [![verify](https://github.com/SolvasHQ/dsh-theme/actions/workflows/verify.yml/badge.svg)](https://github.com/SolvasHQ/dsh-theme/actions/workflows/verify.yml)
+[![npm](https://img.shields.io/npm/v/@solvashq/dsh-theme.svg)](https://www.npmjs.com/package/@solvashq/dsh-theme)
 
 为 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) Web GUI 提供
 主题配色、DIY 调色、字体与界面字号自定义，入口在侧边栏左下角的调色盘图标。
@@ -63,10 +64,22 @@
 
 3. 找到 **DSH 主题**，打开详情页，点击 **Install**。
 
-Discover 会安装该版本固定到 Git commit 的代码，因此不需要发布到 npm；最新
-GitHub Release 也附带预构建的 `dsh-theme.tgz`。jsDelivr
+Discover 会安装该版本固定到 Git commit 的代码。同一版本也已发布到 npm
+（`@solvashq/dsh-theme@1.4.0`），最新 GitHub Release 也附带预构建的
+`dsh-theme.tgz`。jsDelivr
 对 `@main` 分支可能有最长约 12 小时的缓存；想立即拿到新版本可访问
 `https://purge.jsdelivr.net/gh/SolvasHQ/dsh-theme@main/market/index.json` 刷新缓存。
+
+### npm
+
+已发布为 [`@solvashq/dsh-theme`](https://www.npmjs.com/package/@solvashq/dsh-theme)：
+
+```bash
+npm install @solvashq/dsh-theme
+```
+
+也可以让 DSH Agent 直接从 npm 安装这个 bundle，spec 用
+`@solvashq/dsh-theme@1.4.0`。
 
 ### 从源码安装（开发）
 

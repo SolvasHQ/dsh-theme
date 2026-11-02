@@ -3,6 +3,7 @@
 **English** | [简体中文](README.zh.md)
 
 [![verify](https://github.com/SolvasHQ/dsh-theme/actions/workflows/verify.yml/badge.svg)](https://github.com/SolvasHQ/dsh-theme/actions/workflows/verify.yml)
+[![npm](https://img.shields.io/npm/v/@solvashq/dsh-theme.svg)](https://www.npmjs.com/package/@solvashq/dsh-theme)
 
 Theme palettes, a full DIY color editor, fonts, and interface text size for the
 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) Web GUI —
@@ -70,11 +71,23 @@ The index is version-pinned so it is available immediately. Replace the tag with
 
 3. Find **DSH Theme**, open its page, and press **Install**.
 
-Discover installs the pinned Git commit of the release, so nothing has to be
-published to npm. A prebuilt `dsh-theme.tgz` is also attached to the latest
-GitHub Release. jsDelivr may cache the `@main` branch for up to 12 hours; purge
+Discover installs the pinned Git commit of the release. The same release is also
+published to npm as `@solvashq/dsh-theme@1.4.0`, and a prebuilt `dsh-theme.tgz`
+is attached to the latest GitHub Release. jsDelivr may cache the `@main` branch
+for up to 12 hours; purge
 `https://purge.jsdelivr.net/gh/SolvasHQ/dsh-theme@main/market/index.json` to pick
 up a new release immediately.
+
+### npm
+
+The bundle is published as [`@solvashq/dsh-theme`](https://www.npmjs.com/package/@solvashq/dsh-theme):
+
+```bash
+npm install @solvashq/dsh-theme
+```
+
+Or let your DSH agent install the bundle from npm with the spec
+`@solvashq/dsh-theme@1.4.0`.
 
 ### From source (development)
 

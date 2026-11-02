@@ -4,6 +4,7 @@ All notable changes to this plugin are documented here.
 
 ## 1.4.0
 
+- Published to npm as `@solvashq/dsh-theme@1.4.0` (public, MIT).
 - Publishable identity: renamed the package to the public scope
   `@solvashq/dsh-theme` (from `@local/dsh-theme`) and dropped `private`, so the
   same code can be published to npm or installed from a prebuilt GitHub Release
