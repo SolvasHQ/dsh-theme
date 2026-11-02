@@ -4,6 +4,7 @@
 
 [![verify](https://github.com/SolvasHQ/dsh-theme/actions/workflows/verify.yml/badge.svg)](https://github.com/SolvasHQ/dsh-theme/actions/workflows/verify.yml)
 [![npm](https://img.shields.io/npm/v/@solvashq/dsh-theme.svg)](https://www.npmjs.com/package/@solvashq/dsh-theme)
+[![Open Plugin Market](https://img.shields.io/endpoint?url=https%3A%2F%2Fdshopen.org%2Fbadge%2F%40solvashq%2Fdsh-theme.json%3Flang%3Dzh)](https://dshopen.org/plugins/@solvashq/dsh-theme/)
 
 为 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) Web GUI 提供
 主题配色、DIY 调色、字体与界面字号自定义，入口在侧边栏左下角的调色盘图标。
