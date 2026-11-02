@@ -54,9 +54,29 @@ All ten presets, with their light and dark token swatches:
 
 ## Install
 
-> This is a **local DSH bundle**, not an npm package. It is installed by linking
-> the cloned directory into a DSH profile and adding it to that profile's bundle
-> list. Node.js 20+ and pnpm are required.
+### Discover — recommended
+
+No npm account and no manual profile wiring:
+
+1. Open **Plugins → Discover**.
+2. Add this index source:
+
+   ```
+   https://cdn.jsdelivr.net/gh/SolvasHQ/dsh-theme@main/market/index.json
+   ```
+
+3. Find **DSH Theme**, open its page, and press **Install**.
+
+Discover installs the pinned Git commit of the release, so nothing has to be
+published to npm. jsDelivr may cache the `@main` branch for up to 12 hours; purge
+`https://purge.jsdelivr.net/gh/SolvasHQ/dsh-theme@main/market/index.json` to pick
+up a new release immediately.
+
+### From source (development)
+
+> This is a **local DSH bundle**. It is installed by linking the cloned directory
+> into a DSH profile and adding it to that profile's bundle list. Node.js 20+ and
+> pnpm are required.
 
 1. Clone the repository somewhere stable:
 
@@ -149,8 +169,10 @@ cordis.patch.yml          bundle patch inserting the plugin row
 locale/                   plugin metadata for en / zh
 src/client.template.js    client source template
 build/build-client.mjs    build script (palettes → client.js)
+market/index.json         Discover market index (format 1)
+docs/screenshots/         README screenshots (Chinese and English UI)
 research/                 palette anchors, design notes, palette sheet
-tools/                    manifest, token, and panel verification scripts
+tools/                    manifest, market, token, and panel checks
 ```
 
 ## Compatibility

@@ -1,0 +1,92 @@
+{
+  "format": 1,
+  "title": {
+    "en": "SolvasHQ DSH Plugins",
+    "zh": "SolvasHQ DSH 插件"
+  },
+  "description": {
+    "en": "Open-source appearance and productivity plugins for the DeepSeek Harness Web GUI.",
+    "zh": "面向 DeepSeek Harness Web GUI 的开源外观与效率插件。"
+  },
+  "metadata": {
+    "categories": {
+      "appearance": {
+        "title": {
+          "en": "Appearance",
+          "zh": "外观"
+        }
+      }
+    },
+    "labels": {
+      "open-source": {
+        "title": {
+          "en": "Open source",
+          "zh": "开源"
+        }
+      },
+      "no-telemetry": {
+        "title": {
+          "en": "No telemetry",
+          "zh": "无遥测"
+        }
+      },
+      "offline": {
+        "title": {
+          "en": "Works offline",
+          "zh": "可离线使用"
+        }
+      }
+    }
+  },
+  "plugins": [
+    {
+      "name": "@local/dsh-theme",
+      "title": {
+        "en": "DSH Theme",
+        "zh": "DSH 主题"
+      },
+      "description": {
+        "en": "Lightweight theme colors, a full DIY palette editor, fonts, and text size for the DeepSeek Harness Web GUI.",
+        "zh": "轻量的主题配色、完整 DIY 调色、字体与界面字号，用于 DeepSeek Harness Web GUI。"
+      },
+      "icon": "../icon.svg",
+      "author": "SolvasHQ",
+      "homepage": "https://github.com/SolvasHQ/dsh-theme#readme",
+      "repository": {
+        "url": "https://github.com/SolvasHQ/dsh-theme"
+      },
+      "metadata": {
+        "category": "appearance",
+        "keywords": [
+          "theme",
+          "dark mode",
+          "light mode",
+          "fonts",
+          "typography",
+          "appearance",
+          "chinese",
+          "diy"
+        ],
+        "labels": [
+          "open-source",
+          "no-telemetry",
+          "offline"
+        ]
+      },
+      "versions": [
+        {
+          "version": "1.3.0",
+          "publishTimestamp": 1793601618,
+          "source": {
+            "type": "git",
+            "url": "https://github.com/SolvasHQ/dsh-theme",
+            "commit": "040c875fb9faf7ae6502304d3faf87f0edde2b08"
+          },
+          "engines": {
+            "dsh": ">=0.2.1-rc.2 <0.3.0"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -31,6 +31,9 @@ jobs:
       - name: Manifest, locale, icon checks
         run: node tools/check-manifest.mjs
 
+      - name: Discover market index checks
+        run: node tools/check-market.mjs
+
       - name: Token and contrast checks
         run: node tools/verify-tokens.mjs
 

@@ -47,8 +47,27 @@
 
 ## 安装
 
-> 这是一个 **本地 DSH bundle**，不是 npm 包。安装方式是把克隆下来的目录链接进
-> DSH profile 的 bundle 列表。运行需要 Node.js 20+ 与 pnpm。
+### Discover 一键安装（推荐）
+
+不需要 npm 账号，也不需要手动改 profile：
+
+1. 打开 **Plugins → Discover**。
+2. 添加索引源：
+
+   ```
+   https://cdn.jsdelivr.net/gh/SolvasHQ/dsh-theme@main/market/index.json
+   ```
+
+3. 找到 **DSH 主题**，打开详情页，点击 **Install**。
+
+Discover 会安装该版本固定到 Git commit 的代码，因此不需要发布到 npm。jsDelivr
+对 `@main` 分支可能有最长约 12 小时的缓存；想立即拿到新版本可访问
+`https://purge.jsdelivr.net/gh/SolvasHQ/dsh-theme@main/market/index.json` 刷新缓存。
+
+### 从源码安装（开发）
+
+> 这是一个 **本地 DSH bundle**。安装方式是把克隆下来的目录链接进 DSH profile 的
+> bundle 列表。运行需要 Node.js 20+ 与 pnpm。
 
 1. 克隆仓库到固定位置：
 
@@ -129,8 +148,10 @@ cordis.patch.yml          bundle patch，插入插件行
 locale/                   插件元数据（中/英）
 src/client.template.js    客户端源码模板
 build/build-client.mjs    构建脚本（palettes → client.js）
+market/index.json         Discover 市场索引（format 1）
+docs/screenshots/         README 截图（中文 / 英文界面）
 research/                 配色锚点、设计说明、调色板图
-tools/                    manifest、token、面板验证脚本
+tools/                    manifest、market、token、面板验证脚本
 ```
 
 ## 兼容性
