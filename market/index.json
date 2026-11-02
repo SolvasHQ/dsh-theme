@@ -40,7 +40,7 @@
   },
   "plugins": [
     {
-      "name": "@local/dsh-theme",
+      "name": "@solvashq/dsh-theme",
       "title": {
         "en": "DSH Theme",
         "zh": "DSH 主题"

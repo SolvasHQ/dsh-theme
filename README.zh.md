@@ -89,8 +89,8 @@ Discover 会安装该版本固定到 Git commit 的代码，因此不需要发�
 
    ```json
    {
-     "dsh": { "profile": { "bundles": ["@deepseek-ai/dsh-base", "@deepseek-ai/dsh-web-app", "@local/dsh-theme"] } },
-     "dependencies": { "@local/dsh-theme": "link:/绝对路径/dsh-theme" }
+     "dsh": { "profile": { "bundles": ["@deepseek-ai/dsh-base", "@deepseek-ai/dsh-web-app", "@solvashq/dsh-theme"] } },
+     "dependencies": { "@solvashq/dsh-theme": "link:/绝对路径/dsh-theme" }
    }
    ```
 
@@ -103,7 +103,7 @@ Discover 会安装该版本固定到 Git commit 的代码，因此不需要发�
 
 ## 实现要点
 
-- **主题覆盖层**：客户端用 `ctx.theme.overrideTokens('@local/dsh-theme', tokens)`
+- **主题覆盖层**：客户端用 `ctx.theme.overrideTokens('@solvashq/dsh-theme', tokens)`
   注册单一 token 覆盖层，每个 token 都是 `{ light, dark }` 对，因此叠加在原生
   配色之上，系统明暗切换无需重新注册主题。
 - **token 生成**：每套配色/模式用 14 个锚点色生成约 97 个

@@ -15,14 +15,14 @@
  * the app language (zh / en).
  */
 window.__ModuleLoader__.load({
-  id: '@local/dsh-theme',
+  id: '@solvashq/dsh-theme',
   factory(require) {
     const React = require('react');
     const h = React.createElement;
     const { useState, useEffect, useSyncExternalStore } = React;
 
     const NS = 'dsh.theme';
-    const SOURCE = '@local/dsh-theme';
+    const SOURCE = '@solvashq/dsh-theme';
     const STORAGE_KEY = 'dsh.theme.v1';
     /** Previous storage key, still read once so an open session migrates its cache. */
     const LEGACY_STORAGE_KEY = 'dsh.personalization.v1';

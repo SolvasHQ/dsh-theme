@@ -167,7 +167,7 @@ for (const testCase of cases) {
   }
   const layer = overrides[0];
   layers.set(testCase.label, layer.tokens);
-  if (layer.source !== '@local/dsh-theme') problems.push(`${testCase.label}: unexpected layer source ${layer.source}`);
+  if (layer.source !== '@solvashq/dsh-theme') problems.push(`${testCase.label}: unexpected layer source ${layer.source}`);
 
   const names = Object.keys(layer.tokens);
   if (!referenceNames) referenceNames = names.slice().sort();

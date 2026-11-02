@@ -1,7 +1,10 @@
 {
-  "name": "@local/dsh-theme",
-  "version": "1.3.0",
-  "private": true,
+  "name": "@solvashq/dsh-theme",
+  "version": "1.4.0",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "description": "DSH Theme — theme palettes, DIY colors, bold borders, fonts, light/dark control, and text size for the DeepSeek Harness web client, switchable from the sidebar foot.",
   "type": "module",
   "author": "SolvasHQ (https://github.com/SolvasHQ)",
@@ -43,7 +46,8 @@
     "client.js",
     "cordis.patch.yml",
     "locale/*.json",
-    "icon.svg"
+    "icon.svg",
+    "assets/*"
   ],
   "dsh": {
     "bundle": {

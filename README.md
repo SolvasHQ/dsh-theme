@@ -101,8 +101,8 @@ up a new release immediately.
 
    ```json
    {
-     "dsh": { "profile": { "bundles": ["@deepseek-ai/dsh-base", "@deepseek-ai/dsh-web-app", "@local/dsh-theme"] } },
-     "dependencies": { "@local/dsh-theme": "link:/absolute/path/to/dsh-theme" }
+     "dsh": { "profile": { "bundles": ["@deepseek-ai/dsh-base", "@deepseek-ai/dsh-web-app", "@solvashq/dsh-theme"] } },
+     "dependencies": { "@solvashq/dsh-theme": "link:/absolute/path/to/dsh-theme" }
    }
    ```
 
@@ -117,7 +117,7 @@ HMR transport within about a second; Host-side changes need a DSH restart.
 ## How it works
 
 - **Theme layer** — the client half registers a single
-  `ctx.theme.overrideTokens('@local/dsh-theme', tokens)` layer. Every
+  `ctx.theme.overrideTokens('@solvashq/dsh-theme', tokens)` layer. Every
   token is a `{ light, dark }` pair, so the layer composes over whichever
   built-in palette is active and survives OS scheme flips without touching the
   theme registry.

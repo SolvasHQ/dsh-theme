@@ -2,6 +2,20 @@
 
 All notable changes to this plugin are documented here.
 
+## 1.4.0
+
+- Publishable identity: renamed the package to the public scope
+  `@solvashq/dsh-theme` (from `@local/dsh-theme`) and dropped `private`, so the
+  same code can be published to npm or installed from a prebuilt GitHub Release
+  tarball. The bundle row and settings namespace stay `dsh-theme`, so existing
+  preferences are preserved.
+- Added square raster icons (`assets/icon-180.png`, `assets/icon-512.png`) for
+  storefront and market cards that prefer raster artwork over SVG.
+- Added a prebuilt `dsh-theme.tgz` release asset; the Discover index now pins
+  version 1.4.0 to this release's Git commit.
+- No functional changes: palettes, DIY editor, fonts, text size, and appearance
+  control behave exactly as in 1.3.0.
+
 ## 1.3.0
 
 - Renamed the project to **DSH Theme** so one name covers the repository, the
