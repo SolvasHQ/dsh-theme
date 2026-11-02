@@ -49,7 +49,7 @@
         "en": "Lightweight theme colors, a full DIY palette editor, fonts, and text size for the DeepSeek Harness Web GUI.",
         "zh": "轻量的主题配色、完整 DIY 调色、字体与界面字号，用于 DeepSeek Harness Web GUI。"
       },
-      "icon": "../icon.svg",
+      "icon": "../assets/icon-512.png",
       "author": "SolvasHQ",
       "homepage": "https://github.com/SolvasHQ/dsh-theme#readme",
       "repository": {
@@ -75,12 +75,12 @@
       },
       "versions": [
         {
-          "version": "1.3.0",
-          "publishTimestamp": 1793601618,
+          "version": "1.4.0",
+          "publishTimestamp": 1793602404,
           "source": {
             "type": "git",
             "url": "https://github.com/SolvasHQ/dsh-theme",
-            "commit": "040c875fb9faf7ae6502304d3faf87f0edde2b08"
+            "commit": "dd49ef3f12ff147933fcd4b29dcbfcba5759b41c"
           },
           "engines": {
             "dsh": ">=0.2.1-rc.2 <0.3.0"
