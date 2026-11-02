@@ -4,15 +4,20 @@ on:
   push:
   pull_request:
 
+# One run per branch: a newer push cancels an older in-flight verification.
+concurrency:
+  group: verify-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   verify:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
-          node-version: 20
+          node-version: 22
 
       - name: Rebuild the committed client artifact
         run: node build/build-client.mjs
