@@ -2,6 +2,7 @@ name: verify
 
 on:
   push:
+    branches: [main]
   pull_request:
 
 # One run per branch: a newer push cancels an older in-flight verification.

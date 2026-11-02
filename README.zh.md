@@ -55,12 +55,16 @@
 2. 添加索引源：
 
    ```
-   https://cdn.jsdelivr.net/gh/SolvasHQ/dsh-theme@main/market/index.json
+   https://cdn.jsdelivr.net/gh/SolvasHQ/dsh-theme@v1.4.0/market/index.json
    ```
+
+索引钉在 `@v1.4.0` 版本上，可立即使用；如果希望跟随最新提交，可把 tag 换成
+`@main`——jsDelivr 对该分支可能有最长约 12 小时的缓存。
 
 3. 找到 **DSH 主题**，打开详情页，点击 **Install**。
 
-Discover 会安装该版本固定到 Git commit 的代码，因此不需要发布到 npm。jsDelivr
+Discover 会安装该版本固定到 Git commit 的代码，因此不需要发布到 npm；最新
+GitHub Release 也附带预构建的 `dsh-theme.tgz`。jsDelivr
 对 `@main` 分支可能有最长约 12 小时的缓存；想立即拿到新版本可访问
 `https://purge.jsdelivr.net/gh/SolvasHQ/dsh-theme@main/market/index.json` 刷新缓存。
 

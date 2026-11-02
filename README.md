@@ -62,13 +62,17 @@ No npm account and no manual profile wiring:
 2. Add this index source:
 
    ```
-   https://cdn.jsdelivr.net/gh/SolvasHQ/dsh-theme@main/market/index.json
+   https://cdn.jsdelivr.net/gh/SolvasHQ/dsh-theme@v1.4.0/market/index.json
    ```
+
+The index is version-pinned so it is available immediately. Replace the tag with
+`@main` for the moving branch — jsDelivr may cache it for up to 12 hours.
 
 3. Find **DSH Theme**, open its page, and press **Install**.
 
 Discover installs the pinned Git commit of the release, so nothing has to be
-published to npm. jsDelivr may cache the `@main` branch for up to 12 hours; purge
+published to npm. A prebuilt `dsh-theme.tgz` is also attached to the latest
+GitHub Release. jsDelivr may cache the `@main` branch for up to 12 hours; purge
 `https://purge.jsdelivr.net/gh/SolvasHQ/dsh-theme@main/market/index.json` to pick
 up a new release immediately.
 
