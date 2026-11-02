@@ -1,0 +1,59 @@
+{
+  "name": "@local/dsh-personalization",
+  "version": "1.2.0",
+  "private": true,
+  "description": "Theme palettes, DIY colors, bold borders, fonts, light/dark control, and text size for the DeepSeek Harness web client, switchable from the sidebar foot.",
+  "type": "module",
+  "author": "SolvasHQ (https://github.com/SolvasHQ)",
+  "license": "MIT",
+  "homepage": "https://github.com/SolvasHQ/dsh-theme#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SolvasHQ/dsh-theme.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SolvasHQ/dsh-theme/issues"
+  },
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "theme",
+    "personalization",
+    "fonts",
+    "web-ui"
+  ],
+  "scripts": {
+    "build": "node build/build-client.mjs",
+    "check": "node tools/check-manifest.mjs && node tools/verify-tokens.mjs && node tools/check-panel.mjs"
+  },
+  "dependencies": {
+    "@deepseek-ai/schemastery": "~3.18.5"
+  },
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-theme",
+        "@deepseek-ai/dsh-client-ui-sidebar"
+      ]
+    }
+  }
+}

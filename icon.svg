@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" role="img" aria-label="Personalization">
+  <defs>
+    <linearGradient id="dshp-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#26272E"/>
+      <stop offset="1" stop-color="#111216"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="44" height="44" rx="12" fill="url(#dshp-bg)"/>
+  <rect x="2.5" y="2.5" width="43" height="43" rx="11.5" fill="none" stroke="#FFFFFF" stroke-opacity="0.10"/>
+  <circle cx="24" cy="24" r="13.2" fill="none" stroke="#FFFFFF" stroke-opacity="0.92" stroke-width="2.2"/>
+  <circle cx="18.3" cy="19.5" r="3.1" fill="#D97757"/>
+  <circle cx="29.9" cy="19.2" r="3.1" fill="#F2C14E"/>
+  <circle cx="31.2" cy="29.3" r="3.1" fill="#5E8BFF"/>
+  <path d="M17.1 31.1c2.6 2.2 6.1 3.2 9.5 2.6" fill="none" stroke="#FFFFFF" stroke-opacity="0.55" stroke-width="2" stroke-linecap="round"/>
+</svg>

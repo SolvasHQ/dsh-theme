@@ -1,0 +1,440 @@
+{
+  "themes": [
+    {
+      "id": "default",
+      "name": "Default",
+      "nameZh": "默认",
+      "description": "Warm paper white with near-black ink and a quiet forest-green accent — the familiar DSH layout, warmed up.",
+      "light": {
+        "bgBase": "#F8F7F4",
+        "bgLayer1": "#FFFFFF",
+        "bgLayer2": "#F2F0EA",
+        "bgOverlay": "#FFFDF8",
+        "borderL1": "#E8E4DB",
+        "borderL2": "#D6D0C3",
+        "brandPrimary": "#2F6B50",
+        "labelPrimary": "#191814",
+        "labelSecondary": "#5F5A51",
+        "stateError": "#C0362C",
+        "stateIdle": "#948E82",
+        "stateSuccess": "#2E7D4F",
+        "stateWarn": "#966300",
+        "sidebarFill": "#F1EFE9"
+      },
+      "dark": {
+        "bgBase": "#141413",
+        "bgLayer1": "#1D1C1A",
+        "bgLayer2": "#262421",
+        "bgOverlay": "#2C2A26",
+        "borderL1": "#302E29",
+        "borderL2": "#433F38",
+        "brandPrimary": "#3F8560",
+        "labelPrimary": "#F1EFE9",
+        "labelSecondary": "#ABA599",
+        "stateError": "#E5675C",
+        "stateIdle": "#726C61",
+        "stateSuccess": "#5DB583",
+        "stateWarn": "#D9A441",
+        "sidebarFill": "#101010"
+      }
+    },
+    {
+      "id": "mono",
+      "name": "Mono",
+      "nameZh": "单色",
+      "description": "Strict grayscale in the Vercel/shadcn tradition: black on white, white on black, zero hue in the neutrals.",
+      "light": {
+        "bgBase": "#FFFFFF",
+        "bgLayer1": "#FFFFFF",
+        "bgLayer2": "#F4F4F4",
+        "bgOverlay": "#FFFFFF",
+        "borderL1": "#E6E6E6",
+        "borderL2": "#D2D2D2",
+        "brandPrimary": "#171717",
+        "labelPrimary": "#0F0F0F",
+        "labelSecondary": "#5F5F5F",
+        "stateError": "#C62828",
+        "stateIdle": "#999999",
+        "stateSuccess": "#1E7B3C",
+        "stateWarn": "#8F6400",
+        "sidebarFill": "#F6F6F6"
+      },
+      "dark": {
+        "bgBase": "#0A0A0A",
+        "bgLayer1": "#141414",
+        "bgLayer2": "#1D1D1D",
+        "bgOverlay": "#242424",
+        "borderL1": "#2A2A2A",
+        "borderL2": "#414141",
+        "brandPrimary": "#EDEDED",
+        "labelPrimary": "#FAFAFA",
+        "labelSecondary": "#A6A6A6",
+        "stateError": "#F26D6D",
+        "stateIdle": "#6B6B6B",
+        "stateSuccess": "#46B96B",
+        "stateWarn": "#CFA33F",
+        "sidebarFill": "#111111"
+      }
+    },
+    {
+      "id": "claude",
+      "name": "Claude",
+      "nameZh": "克劳德",
+      "description": "Anthropic's warm cream and clay: bone-white surfaces, warm brown ink and a soft terracotta accent.",
+      "light": {
+        "bgBase": "#FAF8F1",
+        "bgLayer1": "#FEFDF9",
+        "bgLayer2": "#F2EFE5",
+        "bgOverlay": "#FFFEFA",
+        "borderL1": "#E5E1D4",
+        "borderL2": "#D2CCBC",
+        "brandPrimary": "#BB5A38",
+        "labelPrimary": "#3A3428",
+        "labelSecondary": "#6E6759",
+        "stateError": "#B23A2C",
+        "stateIdle": "#97907F",
+        "stateSuccess": "#3F7A51",
+        "stateWarn": "#9A6407",
+        "sidebarFill": "#F4F1E7"
+      },
+      "dark": {
+        "bgBase": "#1F1E1B",
+        "bgLayer1": "#272622",
+        "bgLayer2": "#302E28",
+        "bgOverlay": "#35332C",
+        "borderL1": "#3B3833",
+        "borderL2": "#4E4A42",
+        "brandPrimary": "#BF6035",
+        "labelPrimary": "#F1EBDF",
+        "labelSecondary": "#B6AD9F",
+        "stateError": "#E8786A",
+        "stateIdle": "#8B8477",
+        "stateSuccess": "#6FB284",
+        "stateWarn": "#D9A54B",
+        "sidebarFill": "#1A1917"
+      }
+    },
+    {
+      "id": "claude-plus",
+      "name": "Claude+",
+      "nameZh": "克劳德+",
+      "description": "Claude turned up: deeper parchment background, darker espresso text and a burnt-sienna accent with more punch.",
+      "light": {
+        "bgBase": "#F2EEE3",
+        "bgLayer1": "#FBF8F0",
+        "bgLayer2": "#E9E4D6",
+        "bgOverlay": "#FFFCF5",
+        "borderL1": "#DCD5C4",
+        "borderL2": "#C7BEAA",
+        "brandPrimary": "#A33F1F",
+        "labelPrimary": "#211E17",
+        "labelSecondary": "#5B5447",
+        "stateError": "#9E2F22",
+        "stateIdle": "#8C8574",
+        "stateSuccess": "#2F6B43",
+        "stateWarn": "#8A5A00",
+        "sidebarFill": "#ECE7DA"
+      },
+      "dark": {
+        "bgBase": "#161513",
+        "bgLayer1": "#1F1E1A",
+        "bgLayer2": "#292722",
+        "bgOverlay": "#2C2924",
+        "borderL1": "#35322D",
+        "borderL2": "#474339",
+        "brandPrimary": "#C5512B",
+        "labelPrimary": "#FBF6EC",
+        "labelSecondary": "#B9B1A2",
+        "stateError": "#EC7565",
+        "stateIdle": "#8A8376",
+        "stateSuccess": "#64AC7C",
+        "stateWarn": "#D8A344",
+        "sidebarFill": "#111110"
+      }
+    },
+    {
+      "id": "vermillion",
+      "name": "Vermillion",
+      "nameZh": "朱红",
+      "description": "Cinnabar seal-ink red on warm paper, with a soot-dark night mode — East-Asian stationery energy.",
+      "light": {
+        "bgBase": "#FAF7F3",
+        "bgLayer1": "#FFFDF9",
+        "bgLayer2": "#F3EEE7",
+        "bgOverlay": "#FFFFFF",
+        "borderL1": "#E7E0D6",
+        "borderL2": "#D5CBBE",
+        "brandPrimary": "#C63D22",
+        "labelPrimary": "#1E1B18",
+        "labelSecondary": "#635C52",
+        "stateError": "#B32F24",
+        "stateIdle": "#9C9488",
+        "stateSuccess": "#37754A",
+        "stateWarn": "#9A6203",
+        "sidebarFill": "#F4F0E9"
+      },
+      "dark": {
+        "bgBase": "#171412",
+        "bgLayer1": "#201C19",
+        "bgLayer2": "#292420",
+        "bgOverlay": "#302A25",
+        "borderL1": "#36302B",
+        "borderL2": "#48403A",
+        "brandPrimary": "#D2492D",
+        "labelPrimary": "#F4EDE6",
+        "labelSecondary": "#B4A99B",
+        "stateError": "#EF6C5C",
+        "stateIdle": "#8A8175",
+        "stateSuccess": "#62AE7F",
+        "stateWarn": "#D7A03F",
+        "sidebarFill": "#120F0D"
+      }
+    },
+    {
+      "id": "amber-mono",
+      "name": "Amber Mono",
+      "nameZh": "琥珀单色",
+      "description": "Near-monochrome warm gray with one amber accent — a paper-and-lamp-light minimal look.",
+      "light": {
+        "bgBase": "#FAF9F6",
+        "bgLayer1": "#FFFFFF",
+        "bgLayer2": "#F3F1EC",
+        "bgOverlay": "#FFFEFB",
+        "borderL1": "#E6E2D9",
+        "borderL2": "#D3CDC0",
+        "brandPrimary": "#A16800",
+        "labelPrimary": "#1F1C16",
+        "labelSecondary": "#645D50",
+        "stateError": "#B03A2E",
+        "stateIdle": "#9A9284",
+        "stateSuccess": "#4A7A46",
+        "stateWarn": "#8A6100",
+        "sidebarFill": "#F2EFE8"
+      },
+      "dark": {
+        "bgBase": "#191713",
+        "bgLayer1": "#221F1A",
+        "bgLayer2": "#2B2721",
+        "bgOverlay": "#322D26",
+        "borderL1": "#363129",
+        "borderL2": "#48423A",
+        "brandPrimary": "#A06B00",
+        "labelPrimary": "#F3EEE4",
+        "labelSecondary": "#B8AE9D",
+        "stateError": "#E97463",
+        "stateIdle": "#8C8476",
+        "stateSuccess": "#63AE7B",
+        "stateWarn": "#D9A63C",
+        "sidebarFill": "#131110"
+      }
+    },
+    {
+      "id": "mx-brutalist",
+      "name": "MX Brutalist",
+      "nameZh": "粗暴极简",
+      "description": "Pure white, pure black, hard 1px ink borders and a saturated electric-blue accent — zero softness, high impact.",
+      "light": {
+        "bgBase": "#FFFFFF",
+        "bgLayer1": "#FFFFFF",
+        "bgLayer2": "#F2F2F2",
+        "bgOverlay": "#FFFFFF",
+        "borderL1": "#171717",
+        "borderL2": "#000000",
+        "brandPrimary": "#1732E0",
+        "labelPrimary": "#000000",
+        "labelSecondary": "#3A3A3A",
+        "stateError": "#D50000",
+        "stateIdle": "#6E6E6E",
+        "stateSuccess": "#00702F",
+        "stateWarn": "#7A5A00",
+        "sidebarFill": "#F7F7F7"
+      },
+      "dark": {
+        "bgBase": "#000000",
+        "bgLayer1": "#0B0B0B",
+        "bgLayer2": "#161616",
+        "bgOverlay": "#1D1D1D",
+        "borderL1": "#3B3B3B",
+        "borderL2": "#E8E8E8",
+        "brandPrimary": "#3A5BFF",
+        "labelPrimary": "#FFFFFF",
+        "labelSecondary": "#AFAFAF",
+        "stateError": "#FF3B30",
+        "stateIdle": "#8A8A8A",
+        "stateSuccess": "#2BD964",
+        "stateWarn": "#FFD60A",
+        "sidebarFill": "#0B0B0B"
+      }
+    },
+    {
+      "id": "tiesen",
+      "name": "Tiesen",
+      "nameZh": "墨青",
+      "description": "Quiet, cool and desaturated: blue-teal ink on a pale mist page, calm enough for long reading sessions.",
+      "light": {
+        "bgBase": "#F6F8F9",
+        "bgLayer1": "#FFFFFF",
+        "bgLayer2": "#EDF1F2",
+        "bgOverlay": "#FFFFFF",
+        "borderL1": "#E0E6E7",
+        "borderL2": "#C9D3D5",
+        "brandPrimary": "#2E6B6E",
+        "labelPrimary": "#15242A",
+        "labelSecondary": "#56676D",
+        "stateError": "#B23F39",
+        "stateIdle": "#849699",
+        "stateSuccess": "#2C7A55",
+        "stateWarn": "#94660D",
+        "sidebarFill": "#EEF2F3"
+      },
+      "dark": {
+        "bgBase": "#0F1618",
+        "bgLayer1": "#172023",
+        "bgLayer2": "#1F2A2D",
+        "bgOverlay": "#243034",
+        "borderL1": "#253337",
+        "borderL2": "#33464A",
+        "brandPrimary": "#3E8B86",
+        "labelPrimary": "#E7EFEF",
+        "labelSecondary": "#9DAFB2",
+        "stateError": "#E27C74",
+        "stateIdle": "#6C7E82",
+        "stateSuccess": "#58B98F",
+        "stateWarn": "#D5A24A",
+        "sidebarFill": "#0B1113"
+      }
+    },
+    {
+      "id": "vescrow",
+      "name": "Vescrow",
+      "nameZh": "暗紫",
+      "description": "Deep indigo night: violet-tinted near-black, a navy primary and a faint lilac stage — dark-first and moody.",
+      "light": {
+        "bgBase": "#FDFCFE",
+        "bgLayer1": "#FFFFFF",
+        "bgLayer2": "#F3F1F6",
+        "bgOverlay": "#FFFFFF",
+        "borderL1": "#E6E1E9",
+        "borderL2": "#D3CCDA",
+        "brandPrimary": "#1F2A6E",
+        "labelPrimary": "#14101C",
+        "labelSecondary": "#635D69",
+        "stateError": "#C22B2B",
+        "stateIdle": "#9A93A0",
+        "stateSuccess": "#2F7D5B",
+        "stateWarn": "#96680F",
+        "sidebarFill": "#F4F2F8"
+      },
+      "dark": {
+        "bgBase": "#07080F",
+        "bgLayer1": "#0C0F1A",
+        "bgLayer2": "#121627",
+        "bgOverlay": "#171B30",
+        "borderL1": "#1E2340",
+        "borderL2": "#2C3358",
+        "brandPrimary": "#4C5BD9",
+        "labelPrimary": "#F6F4FA",
+        "labelSecondary": "#A29EAF",
+        "stateError": "#EC6A61",
+        "stateIdle": "#6A6578",
+        "stateSuccess": "#58B98A",
+        "stateWarn": "#D6A447",
+        "sidebarFill": "#090B16"
+      }
+    }
+  ],
+  "fonts": [
+    {
+      "id": "system",
+      "name": "System",
+      "nameZh": "跟随系统",
+      "description": "Native system UI fonts on every platform — zero load cost and the most familiar reading rhythm.",
+      "latin": "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+      "cjk": "'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei UI', 'Microsoft YaHei', 'Noto Sans SC', 'Source Han Sans SC', sans-serif"
+    },
+    {
+      "id": "humanist",
+      "name": "Humanist (Inter)",
+      "nameZh": "人本无衬线",
+      "description": "Neutral humanist sans with a tall x-height; pairs Inter with Source Han Sans / Noto Sans SC for even CJK-Latin texture.",
+      "latin": "'Inter', 'Inter Variable', 'Segoe UI Variable Display', 'Helvetica Neue', Arial, sans-serif",
+      "cjk": "'Source Han Sans SC', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif"
+    },
+    {
+      "id": "serif",
+      "name": "Literary Serif",
+      "nameZh": "宋体衬线",
+      "description": "A book-like serif pairing: Source Serif / Georgia for Latin and Source Han Serif / Noto Serif SC (思源宋体) for Chinese.",
+      "latin": "'Source Serif 4', 'Source Serif Pro', 'Iowan Old Style', Georgia, 'Times New Roman', serif",
+      "cjk": "'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', 'STSong', 'SimSun', serif"
+    },
+    {
+      "id": "rounded",
+      "name": "Soft Rounded",
+      "nameZh": "圆润无衬线",
+      "description": "Rounded terminals and open apertures for a friendly, app-like feel; falls back to PingFang/Noto Sans SC for Chinese.",
+      "latin": "ui-rounded, 'SF Pro Rounded', 'Hiragino Maru Gothic ProN', 'M PLUS Rounded 1c', 'Nunito', 'Quicksand', system-ui, sans-serif",
+      "cjk": "'PingFang SC', 'Hiragino Sans GB', 'Noto Sans SC', 'Microsoft YaHei', sans-serif"
+    },
+    {
+      "id": "mono",
+      "name": "Monospace",
+      "nameZh": "等宽",
+      "description": "Coding-flavoured UI: JetBrains Mono / SF Mono / Cascadia Code paired with Sarasa Mono SC so Chinese glyphs also align to the grid.",
+      "latin": "'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Fira Code', ui-monospace, Menlo, Consolas, monospace",
+      "cjk": "'Sarasa Mono SC', 'Sarasa Term SC', 'Noto Sans Mono CJK SC', 'Noto Sans SC', 'PingFang SC', monospace"
+    },
+    {
+      "id": "kai",
+      "name": "Literary Kai",
+      "nameZh": "文楷手写",
+      "description": "A calligraphic display pairing for a personal, editorial mood: Palatino for Latin and LXGW WenKai / KaiTi for Chinese.",
+      "latin": "'Palatino Linotype', 'Iowan Old Style', 'Book Antiqua', Palatino, Georgia, serif",
+      "cjk": "'LXGW WenKai', 'Kaiti SC', 'STKaiti', 'KaiTi', 'Noto Serif SC', serif"
+    }
+  ],
+  "fontSizes": [
+    {
+      "percent": 90,
+      "px": 14.4
+    },
+    {
+      "percent": 100,
+      "px": 16
+    },
+    {
+      "percent": 110,
+      "px": 17.6
+    },
+    {
+      "percent": 120,
+      "px": 19.2
+    },
+    {
+      "percent": 130,
+      "px": 20.8
+    }
+  ],
+  "sources": [
+    "https://www.shadcnblocks.com/r/theme/claude.json — Claude theme (tweakcn) light/dark OKLCH seed values for the claude palette",
+    "https://www.shadcnblocks.com/r/theme/vermillion.json — Vermillion theme (tweakcn) cinnabar primary + neutral ramp",
+    "https://www.shadcnblocks.com/r/theme/vescrow.json — Vescrow theme (tweakcn) indigo/navy ramp and dark surfaces",
+    "https://www.shadcnblocks.com/r/theme/amber-minimal.json — Amber Minimal theme (tweakcn) amber accent reference for amber-mono",
+    "https://www.shadcnblocks.com/r/theme/default.json — shadcn default theme (neutral ramp, destructive red) for mono",
+    "https://www.shadcnblocks.com/theme/vescrow — Vescrow description: deep-indigo, faintly violet white stage, navy primary",
+    "https://tweakcn.com/themes/cmie97f2b000704l27r9g1p11 — Tiesen (tweakcn) referenced by the Tiesen brand page",
+    "https://tiesen.id.vn/blogs/brand — Tiesen brand guidelines (cool ink identity, palette link)",
+    "https://docs.rikka-ai.com/settings/appearance — RikkaHub theme model (light/dark pairs, preset theme list) used for naming",
+    "https://github.com/viniciusoike/claudeplot — Anthropic/Claude brand colors (#D97757 clay, #F5F4EF cream)",
+    "https://colorarchive.org/brands/anthropic/ — Anthropic brand palette cross-check",
+    "https://github.com/catppuccin/catppuccin — Catppuccin Latte/Mocha used as sanity reference for dark surface ladders",
+    "https://www.nordtheme.com/ — Nord palette (cool blue-gray) reference for tiesen",
+    "https://ethanschoonover.com/solarized/ — Solarized warm/cool base ladders reference for claude and amber-mono",
+    "https://ui.shadcn.com/docs/theming — shadcn/ui semantic token model (background/card/popover/border/primary) mapped onto the 14 DSH tokens",
+    "D:\\deepseek-harness\\resources\\app.asar — DSH's own --dsw-alias-* defaults (light #FFFFFF/#0F1115, dark #151517, sidebar #F9FAFB/#1B1B1C) used to anchor the default theme",
+    "https://fonts.google.com/noto/specimen/Noto+Serif+SC — Noto Serif SC in the serif stack",
+    "https://www.jetbrains.com/lp/mono/ — JetBrains Mono in the mono stack",
+    "https://github.com/lxgw/LxgwWenKai — LXGW WenKai (霞鹜文楷) in the kai stack",
+    "https://github.com/be5invis/Sarasa-Gothic — Sarasa Mono SC for monospaced CJK"
+  ]
+}

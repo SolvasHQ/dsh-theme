@@ -1,0 +1,33 @@
+name: verify
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Rebuild the committed client artifact
+        run: node build/build-client.mjs
+
+      - name: Fail when client.js is stale
+        run: git diff --exit-code -- client.js
+
+      - name: Syntax check
+        run: node --check client.js && node --check index.js
+
+      - name: Manifest, locale, icon checks
+        run: node tools/check-manifest.mjs
+
+      - name: Token and contrast checks
+        run: node tools/verify-tokens.mjs
+
+      - name: Panel functional checks
+        run: node tools/check-panel.mjs
