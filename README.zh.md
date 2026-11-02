@@ -1,5 +1,7 @@
 # DSH 个性化主题插件
 
+[English](README.md) | **简体中文**
+
 [![verify](https://github.com/SolvasHQ/dsh-theme/actions/workflows/verify.yml/badge.svg)](https://github.com/SolvasHQ/dsh-theme/actions/workflows/verify.yml)
 
 为 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) Web GUI 提供
@@ -124,6 +126,4 @@ config，不修改 Harness 本身、不读取其他插件的 DOM。
 
 MIT，见 [LICENSE](LICENSE)。
 
-English: [README.md](README.md) ·
-[更新日志](CHANGELOG.md) ·
-[问题反馈](https://github.com/SolvasHQ/dsh-theme/issues)
+[更新日志](CHANGELOG.md) · [问题反馈](https://github.com/SolvasHQ/dsh-theme/issues)

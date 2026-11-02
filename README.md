@@ -1,5 +1,7 @@
 # DSH Personalization
 
+**English** | [简体中文](README.zh.md)
+
 [![verify](https://github.com/SolvasHQ/dsh-theme/actions/workflows/verify.yml/badge.svg)](https://github.com/SolvasHQ/dsh-theme/actions/workflows/verify.yml)
 
 Theme palettes, a full DIY color editor, fonts, and interface text size for the
@@ -142,6 +144,4 @@ DOM.
 
 MIT — see [LICENSE](LICENSE).
 
-中文文档：[README.zh.md](README.zh.md) ·
-[Changelog](CHANGELOG.md) ·
-[Issues](https://github.com/SolvasHQ/dsh-theme/issues)
+[Changelog](CHANGELOG.md) · [Issues](https://github.com/SolvasHQ/dsh-theme/issues)
