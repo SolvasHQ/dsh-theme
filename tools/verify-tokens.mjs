@@ -15,7 +15,7 @@ const source = fs.readFileSync(path.join(root, 'client.js'), 'utf8');
 function loadPlugin(pref) {
   let definition = null;
   const store = new Map();
-  if (pref) store.set('dsh.personalization.v1', JSON.stringify(pref));
+  if (pref) store.set('dsh.theme.v1', JSON.stringify(pref));
   const sandbox = {
     window: {
       __ModuleLoader__: {
@@ -167,7 +167,7 @@ for (const testCase of cases) {
   }
   const layer = overrides[0];
   layers.set(testCase.label, layer.tokens);
-  if (layer.source !== '@local/dsh-personalization') problems.push(`${testCase.label}: unexpected layer source ${layer.source}`);
+  if (layer.source !== '@local/dsh-theme') problems.push(`${testCase.label}: unexpected layer source ${layer.source}`);
 
   const names = Object.keys(layer.tokens);
   if (!referenceNames) referenceNames = names.slice().sort();

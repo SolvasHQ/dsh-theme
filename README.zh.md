@@ -1,4 +1,4 @@
-# DSH 个性化主题插件
+# DSH 主题
 
 [English](README.md) | **简体中文**
 
@@ -57,7 +57,8 @@
    cd dsh-theme
    ```
 
-2. 安装插件自身的运行时依赖：
+2. 在**插件目录内**安装运行时依赖。DSH 以保留符号链接的方式加载 profile 插件，
+   因此 schema 库及其传递依赖必须位于插件自己的 `node_modules` 中：
 
    ```bash
    pnpm install --prod
@@ -69,8 +70,8 @@
 
    ```json
    {
-     "dsh": { "profile": { "bundles": ["@deepseek-ai/dsh-base", "@deepseek-ai/dsh-web-app", "@local/dsh-personalization"] } },
-     "dependencies": { "@local/dsh-personalization": "link:/绝对路径/dsh-personalization" }
+     "dsh": { "profile": { "bundles": ["@deepseek-ai/dsh-base", "@deepseek-ai/dsh-web-app", "@local/dsh-theme"] } },
+     "dependencies": { "@local/dsh-theme": "link:/绝对路径/dsh-theme" }
    }
    ```
 
@@ -83,7 +84,7 @@
 
 ## 实现要点
 
-- **主题覆盖层**：客户端用 `ctx.theme.overrideTokens('@local/dsh-personalization', tokens)`
+- **主题覆盖层**：客户端用 `ctx.theme.overrideTokens('@local/dsh-theme', tokens)`
   注册单一 token 覆盖层，每个 token 都是 `{ light, dark }` 对，因此叠加在原生
   配色之上，系统明暗切换无需重新注册主题。
 - **token 生成**：每套配色/模式用 14 个锚点色生成约 97 个

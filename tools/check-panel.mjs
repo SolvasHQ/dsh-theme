@@ -227,7 +227,7 @@ function makeRenderer() {
 function createHarness(initialStorage, hostPreferences) {
   let definition = null;
   const store = new Map();
-  if (initialStorage) store.set('dsh.personalization.v1', initialStorage);
+  if (initialStorage) store.set('dsh.theme.v1', initialStorage);
   const sandbox = {
     window: {
       __ModuleLoader__: {
@@ -378,7 +378,7 @@ check(harness.slotRegistrations.footer.length === 1, 'sidebar footer action regi
 check(harness.slotRegistrations.overlay.length === 1, 'shell overlay registered');
 check(harness.slotRegistrations.section.length === 1, 'settings section registered');
 
-const dicts = harness.dictionaries['dsh.personalization'];
+const dicts = harness.dictionaries['dsh.theme'];
 check(Boolean(dicts && dicts.zh && dicts.en), 'locale dictionaries registered for zh and en');
 if (dicts && dicts.zh && dicts.en) {
   const zhKeys = Object.keys(dicts.zh).sort();
@@ -443,14 +443,14 @@ let layer = harness.themeCalls[harness.themeCalls.length - 1];
 check(Boolean(layer), 'picking a palette registers a theme layer');
 check(layer.tokens['--dsw-alias-bg-base'].light === '#FAF8F1', 'Claude light base token applied');
 check(layer.tokens['--dsw-alias-bg-base'].dark === '#1F1E1B', 'Claude dark base token applied');
-check(harness.storage.get('dsh.personalization.v1').includes('"palette":"claude"'), 'palette choice persisted');
+check(harness.storage.get('dsh.theme.v1').includes('"palette":"claude"'), 'palette choice persisted');
 check(byClass(tree, 'dsph-theme').filter((node) => node.props['aria-pressed'] === true).length === 1, 'exactly one theme card is pressed');
 const claudeTriggerTree = renderer.render(Trigger, { t, wide: true });
 check(
   findAll(claudeTriggerTree, (node) => node.props && String(node.props.className || '').includes('dsph-triggerDot')).length === 1,
   'an active preset shows the trigger dot',
 );
-check(harness.requestedEntryIds.includes('personalization'), 'the client opens the Host settings form for its entry id');
+check(harness.requestedEntryIds.includes('dsh-theme'), 'the client opens the Host settings form for its entry id');
 check(
   harness.hostWrites.some((write) => write.field === 'preferences' && write.value.includes('"palette":"claude"')),
   'a palette choice is written to the durable Host settings document',
@@ -491,7 +491,7 @@ layer = harness.themeCalls[harness.themeCalls.length - 1];
 check(layer.tokens['--dsw-alias-bg-base'].light === '#FDF6EC', 'DIY background reaches the token layer');
 inputs = byClass(tree, 'dsph-colorInput');
 check(inputs[1].props.value !== autoCardColor, 'an unpinned card color follows the background automatically');
-check(harness.storage.get('dsh.personalization.v1').includes('"bg":"#FDF6EC"'), 'DIY background persisted');
+check(harness.storage.get('dsh.theme.v1').includes('"bg":"#FDF6EC"'), 'DIY background persisted');
 
 inputs[1].props.onChange({ target: { value: '#FFF9EF' } });
 tree = renderer.render(Overlay, { t });
@@ -532,8 +532,8 @@ layer = harness.themeCalls[harness.themeCalls.length - 1];
 check(layer.tokens['--dsw-alias-brand-primary'].dark === '#4C5BD9', 'the dark accent reaches the dark brand token');
 check(layer.tokens['--dsw-alias-brand-primary'].light === '#7A5AF8', 'the light accent is unaffected by the dark tab');
 check(
-  harness.storage.get('dsh.personalization.v1').includes('"accent":"#7A5AF8"') &&
-    harness.storage.get('dsh.personalization.v1').includes('"accent":"#4C5BD9"'),
+  harness.storage.get('dsh.theme.v1').includes('"accent":"#7A5AF8"') &&
+    harness.storage.get('dsh.theme.v1').includes('"accent":"#4C5BD9"'),
   'both per-mode accents persist independently',
 );
 
@@ -610,7 +610,7 @@ byClass(tree, 'dsph-reset')[0].props.onClick();
 tree = renderer.render(Overlay, { t });
 check(harness.fontSize() === 14, 'reset restores the default text size');
 check(harness.preference() === 'system', 'reset restores the system appearance preference');
-check(harness.storage.get('dsh.personalization.v1').includes('"palette":"none"'), 'reset clears the palette preference');
+check(harness.storage.get('dsh.theme.v1').includes('"palette":"none"'), 'reset clears the palette preference');
 check(byText(tree, '100%').length === 1, 'reset returns the size label to 100%');
 
 // --- settings page variant ---
@@ -622,7 +622,7 @@ check(byClass(pageTree, 'dsph-slider').length === 1, 'settings page renders the 
 
 // --- English panel renders no Chinese copy ---
 const enHarness = createHarness(null);
-const enDict = enHarness.dictionaries['dsh.personalization'].en;
+const enDict = enHarness.dictionaries['dsh.theme'].en;
 const en = translateWith(enDict);
 const enRenderer = makeRenderer();
 const enTrigger = enHarness.slotRegistrations.footer[0];
@@ -642,7 +642,7 @@ check(enCustomText.includes('Custom theme') && enCustomText.includes('Background
 
 // --- Chinese panel still renders Chinese copy ---
 const zhHarness = createHarness(null);
-const zhDict = zhHarness.dictionaries['dsh.personalization'].zh;
+const zhDict = zhHarness.dictionaries['dsh.theme'].zh;
 const zh = translateWith(zhDict);
 const zhRenderer = makeRenderer();
 const zhTrigger = zhHarness.slotRegistrations.footer[0];

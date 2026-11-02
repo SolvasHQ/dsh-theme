@@ -1,4 +1,4 @@
-# DSH Personalization
+# DSH Theme
 
 **English** | [简体中文](README.zh.md)
 
@@ -56,7 +56,7 @@ All ten presets, with their light and dark token swatches:
 
 > This is a **local DSH bundle**, not an npm package. It is installed by linking
 > the cloned directory into a DSH profile and adding it to that profile's bundle
-> list. Node.js 20+ and pnpm are required for the runtime dependency.
+> list. Node.js 20+ and pnpm are required.
 
 1. Clone the repository somewhere stable:
 
@@ -65,7 +65,10 @@ All ten presets, with their light and dark token swatches:
    cd dsh-theme
    ```
 
-2. Install the plugin's runtime dependency (a schema library shared with DSH):
+2. Install the plugin's runtime dependencies **inside the plugin directory**.
+   DSH loads profile plugins with symlink-preserving resolution, so the schema
+   library and its transitive packages must live in the plugin's own
+   `node_modules`:
 
    ```bash
    pnpm install --prod
@@ -78,8 +81,8 @@ All ten presets, with their light and dark token swatches:
 
    ```json
    {
-     "dsh": { "profile": { "bundles": ["@deepseek-ai/dsh-base", "@deepseek-ai/dsh-web-app", "@local/dsh-personalization"] } },
-     "dependencies": { "@local/dsh-personalization": "link:/absolute/path/to/dsh-personalization" }
+     "dsh": { "profile": { "bundles": ["@deepseek-ai/dsh-base", "@deepseek-ai/dsh-web-app", "@local/dsh-theme"] } },
+     "dependencies": { "@local/dsh-theme": "link:/absolute/path/to/dsh-theme" }
    }
    ```
 
@@ -94,7 +97,7 @@ HMR transport within about a second; Host-side changes need a DSH restart.
 ## How it works
 
 - **Theme layer** — the client half registers a single
-  `ctx.theme.overrideTokens('@local/dsh-personalization', tokens)` layer. Every
+  `ctx.theme.overrideTokens('@local/dsh-theme', tokens)` layer. Every
   token is a `{ light, dark }` pair, so the layer composes over whichever
   built-in palette is active and survives OS scheme flips without touching the
   theme registry.

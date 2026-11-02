@@ -15,17 +15,19 @@
  * the app language (zh / en).
  */
 window.__ModuleLoader__.load({
-  id: '@local/dsh-personalization',
+  id: '@local/dsh-theme',
   factory(require) {
     const React = require('react');
     const h = React.createElement;
     const { useState, useEffect, useSyncExternalStore } = React;
 
-    const NS = 'dsh.personalization';
-    const SOURCE = '@local/dsh-personalization';
-    const STORAGE_KEY = 'dsh.personalization.v1';
+    const NS = 'dsh.theme';
+    const SOURCE = '@local/dsh-theme';
+    const STORAGE_KEY = 'dsh.theme.v1';
+    /** Previous storage key, still read once so an open session migrates its cache. */
+    const LEGACY_STORAGE_KEY = 'dsh.personalization.v1';
     /** Host settings entry id (the bundle patch row id) holding the durable prefs. */
-    const SETTINGS_ENTRY_ID = 'personalization';
+    const SETTINGS_ENTRY_ID = 'dsh-theme';
     const TEXT_SIZE_DEFAULT = 14;
     const TEXT_SIZE_MIN = 10;
     const TEXT_SIZE_MAX = 22;
@@ -622,7 +624,7 @@ window.__ModuleLoader__.load({
 
     function readPref() {
       try {
-        const raw = window.localStorage.getItem(STORAGE_KEY);
+        const raw = window.localStorage.getItem(STORAGE_KEY) || window.localStorage.getItem(LEGACY_STORAGE_KEY);
         if (!raw) return defaultPref();
         return normalizePrefData(JSON.parse(raw));
       } catch (error) {
@@ -1462,7 +1464,7 @@ window.__ModuleLoader__.load({
 
     function apply(ctx) {
       const theme = ctx.theme;
-      ctx.effect(() => ctx.locale.register(NS, { zh, en }), 'personalization: dictionaries');
+      ctx.effect(() => ctx.locale.register(NS, { zh, en }), 'dsh-theme: dictionaries');
       const t = ctx.locale.bind(NS);
 
       /* Durable preferences live in the Host settings document under this entry id. */
@@ -1548,14 +1550,14 @@ window.__ModuleLoader__.load({
           pushHostPref();
           engine.dispose();
         };
-      }, 'personalization: token layer and theme-state sync');
+      }, 'dsh-theme: token layer and theme-state sync');
 
       ctx.slots.inject('sidebar.footer.action', () =>
         ctx.slots.register(
           {
             name: 'sidebar.footer.action',
-            id: 'dsh-personalization',
-            order: 27,
+            id: 'dsh-theme',
+            order: 28,
             locale: NS,
             label: () => t('trigger'),
           },
@@ -1567,7 +1569,7 @@ window.__ModuleLoader__.load({
         ctx.slots.register(
           {
             name: 'shell.overlay',
-            id: 'dsh-personalization',
+            id: 'dsh-theme',
             order: 90,
             locale: NS,
             label: () => t('title'),
@@ -1580,7 +1582,7 @@ window.__ModuleLoader__.load({
         ctx.slots.register(
           {
             name: 'settings.section',
-            id: 'personalization',
+            id: 'dsh-theme',
             order: 25,
             locale: NS,
             label: () => t('section'),

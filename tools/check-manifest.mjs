@@ -53,7 +53,7 @@ try {
   const patch = fs.readFileSync(path.join(root, 'cordis.patch.yml'), 'utf8');
   check(patch.includes('- insert:'), 'patch: insert list');
   check(pkg && patch.includes(`'${pkg.name}'`), 'patch: names the package');
-  check(/id:\s*personalization/.test(patch), 'patch: row id personalization');
+  check(/id:\s*dsh-theme/.test(patch), 'patch: row id dsh-theme');
 } catch (error) {
   fail('patch: ' + error.message);
 }

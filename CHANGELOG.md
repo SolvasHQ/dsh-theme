@@ -2,6 +2,15 @@
 
 All notable changes to this plugin are documented here.
 
+## 1.3.0
+
+- Renamed the project to **DSH Theme** so one name covers the repository, the
+  local package (`@local/dsh-theme`), the client module id, plugin metadata, and
+  the bundle row/settings namespace (`dsh-theme`). Existing preferences are
+  migrated on upgrade, so the active theme, DIY colors, and fonts are kept.
+- No functional changes: palettes, DIY editor, fonts, text size, and appearance
+  control behave exactly as in 1.2.0.
+
 ## 1.2.0
 
 - Durable preferences: the host half now declares a volatile `preferences`

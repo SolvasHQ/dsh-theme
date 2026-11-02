@@ -1,8 +1,8 @@
 {
-  "name": "@local/dsh-personalization",
-  "version": "1.2.0",
+  "name": "@local/dsh-theme",
+  "version": "1.3.0",
   "private": true,
-  "description": "Theme palettes, DIY colors, bold borders, fonts, light/dark control, and text size for the DeepSeek Harness web client, switchable from the sidebar foot.",
+  "description": "DSH Theme — theme palettes, DIY colors, bold borders, fonts, light/dark control, and text size for the DeepSeek Harness web client, switchable from the sidebar foot.",
   "type": "module",
   "author": "SolvasHQ (https://github.com/SolvasHQ)",
   "license": "MIT",
@@ -28,7 +28,9 @@
     "check": "node tools/check-manifest.mjs && node tools/verify-tokens.mjs && node tools/check-panel.mjs"
   },
   "dependencies": {
-    "@deepseek-ai/schemastery": "~3.18.5"
+    "@deepseek-ai/schemastery": "~3.18.5",
+    "@deepseek-ai/cosmokit": "~1.8.6",
+    "@standard-schema/spec": "^1.1.0"
   },
   "exports": {
     ".": "./index.js",
