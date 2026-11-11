@@ -45,9 +45,9 @@ The interface copy follows the app language (Simplified Chinese / English).
   custom theme under a name, switch between saved themes, and export/import the
   current theme as JSON for sharing or backup.
 - **Fonts** — independent Latin and Chinese stacks plus a code font, applied to
-  interface, conversation, and code text. Each role can use a shipped preset or
-  **any font installed on this machine** via a custom font-family input; where
-  the desktop runtime supports it, **Detect local fonts** fills a suggestion list.
+  interface, conversation, and code text. Each role lists the shipped presets
+  plus **fonts read from this machine** (marked `Local ·`); **Detect local fonts**
+  refreshes the list, and duplicates with a preset are allowed.
 - **Text size** — 10–22 px through the native theme service, so it survives
   reloads and shares the Ctrl/Cmd `+`/`-` shortcuts.
 - **Bilingual UI** — follows the app language (Simplified Chinese / English).

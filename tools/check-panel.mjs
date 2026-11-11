@@ -575,9 +575,15 @@ saveCustomButton.props.onClick();
 tree = renderer.render(Overlay, { t });
 check(harness.storage.get('dsh.theme.v1').includes('"customName":"Mine"'), 'saving stores the custom theme name');
 check(harness.storage.get('dsh.theme.v1').includes('"customs"'), 'saving stores the custom theme list');
-const baseSelect = byClass(tree, 'dsph-nativeSelect')[0];
-check(Boolean(baseSelect), 'custom editor exposes a preset base selector');
-baseSelect.props.onChange({ target: { value: 'catppuccin' } });
+const baseButton = byClass(tree, 'dsph-baseButton')[0];
+check(Boolean(baseButton), 'custom editor exposes a preset base selector');
+baseButton.props.onClick();
+tree = renderer.render(Overlay, { t });
+const baseOption = findAll(tree, (node) => node.props && node.props.role === 'option').find(
+  (node) => textOf(node) === 'theme.catppuccin',
+);
+check(Boolean(baseOption), 'base selector lists Catppuccin with its swatch');
+baseOption.props.onClick();
 tree = renderer.render(Overlay, { t });
 layer = harness.themeCalls[harness.themeCalls.length - 1];
 check(layer.tokens['--dsw-alias-bg-base'].light === '#EFF1F5', 'cloning Catppuccin as base applies its light background');
@@ -600,7 +606,7 @@ check(
 byClass(tree, 'dsph-selectButton')[0].props.onClick();
 tree = renderer.render(Overlay, { t });
 let options = findAll(tree, (node) => node.props && node.props.role === 'option');
-check(options.length === 7, 'Latin select opens with seven options');
+check(options.length === 6, 'Latin select opens with six options');
 const serifOption = options.find((node) => textOf(node) === 'font.latin.serif');
 check(Boolean(serifOption), 'Latin serif option exists');
 serifOption.props.onClick();
@@ -613,29 +619,13 @@ check(layer.tokens['--dsh-font-family-text'].light.includes('"PingFang SC"'), 'u
 byClass(tree, 'dsph-selectButton')[1].props.onClick();
 tree = renderer.render(Overlay, { t });
 options = findAll(tree, (node) => node.props && node.props.role === 'option');
-check(options.length === 8, 'CJK select opens with eight options');
+check(options.length === 7, 'CJK select opens with seven options');
 const kaiOption = options.find((node) => textOf(node) === 'font.cjk.kai');
 check(Boolean(kaiOption), 'CJK WenKai option exists');
 kaiOption.props.onClick();
 tree = renderer.render(Overlay, { t });
 layer = harness.themeCalls[harness.themeCalls.length - 1];
 check(layer.tokens['--dsh-font-family-text'].light.includes('LXGW WenKai'), 'CJK choice reaches the stack');
-
-// A custom local font family reaches the text stack, with the default CJK side kept.
-byClass(tree, 'dsph-selectButton')[0].props.onClick();
-tree = renderer.render(Overlay, { t });
-options = findAll(tree, (node) => node.props && node.props.role === 'option');
-const customFontOption = options.find((node) => textOf(node) === 'font.latin.custom');
-check(Boolean(customFontOption), 'Latin select offers a custom font option');
-customFontOption.props.onClick();
-tree = renderer.render(Overlay, { t });
-const fontInput = byClass(tree, 'dsph-fontInput')[0];
-check(Boolean(fontInput), 'custom font choice reveals a font-family input');
-fontInput.props.onChange({ target: { value: '"My Local Font", sans-serif' } });
-tree = renderer.render(Overlay, { t });
-layer = harness.themeCalls[harness.themeCalls.length - 1];
-check(layer.tokens['--dsh-font-family-text'].light.includes('"My Local Font"'), 'custom local font reaches the text stack');
-check(layer.tokens['--dsh-font-family-text'].light.includes('LXGW WenKai'), 'custom Latin font keeps the selected CJK fallback');
 
 // --- text size slider ---
 const slider = byClass(tree, 'dsph-slider')[0];
