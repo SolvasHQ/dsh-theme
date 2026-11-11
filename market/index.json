@@ -75,12 +75,12 @@
       },
       "versions": [
         {
-          "version": "1.4.0",
-          "publishTimestamp": 1793602404,
+          "version": "1.5.0",
+          "publishTimestamp": 1794399307,
           "source": {
             "type": "git",
             "url": "https://github.com/SolvasHQ/dsh-theme",
-            "commit": "dd49ef3f12ff147933fcd4b29dcbfcba5759b41c"
+            "commit": "41d9e800e40304fcc27eef01ad656992c2f8a9fa"
           },
           "engines": {
             "dsh": ">=0.2.1-rc.2 <0.3.0"
