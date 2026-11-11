@@ -81,7 +81,7 @@ try {
   check(client.includes('window.__ModuleLoader__.load('), 'client: module loader wrapper');
   check(client.includes(`id: '${pkg ? pkg.name : '@local/dsh-personalization'}'`), 'client: module id matches the package');
   check(!client.includes('__PALETTES__'), 'client: palette placeholder replaced');
-  check((client.match(/"bgBase":/g) || []).length === 18, 'client: nine palettes with light and dark anchors');
+  check((client.match(/"bgBase":/g) || []).length === 26, 'client: thirteen palettes with light and dark anchors');
   check(client.includes('--dsw-alias-bg-base'), 'client: theme token layer present');
   check(client.includes('requested') === false, 'client: no placeholder markers');
 } catch (error) {

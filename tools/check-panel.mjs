@@ -408,7 +408,7 @@ let tree = renderer.render(Overlay, { t });
 check(byClass(tree, 'dsph-panel').length === 1, 'overlay renders the panel when open');
 check(byText(tree, 'title').length >= 1, 'panel renders its title');
 check(byClass(tree, 'dsph-mode').length === 3, 'panel renders the light/dark/system control');
-check(byClass(tree, 'dsph-theme').length === 11, 'panel renders eleven theme cards (incl. custom)');
+check(byClass(tree, 'dsph-theme').length === 15, 'panel renders fifteen theme cards (incl. custom)');
 check(byClass(tree, 'dsph-selectButton').length === 3, 'panel renders three font selects');
 check(byClass(tree, 'dsph-slider').length === 1, 'panel renders the text-size slider');
 check(byText(tree, '100%').length === 1, 'text size starts at 100%');
@@ -561,7 +561,7 @@ check(!styleTags(tree).some((css) => css.includes('border-width:1px')), 'bold CS
 // Back returns to the preset grid with Custom still selected.
 byClass(tree, 'dsph-back')[0].props.onClick();
 tree = renderer.render(Overlay, { t });
-check(byClass(tree, 'dsph-theme').length === 11, 'back returns to the preset grid');
+check(byClass(tree, 'dsph-theme').length === 15, 'back returns to the preset grid');
 check(
   byClass(tree, 'dsph-theme').filter((node) => node.props['aria-pressed'] === true).length === 1,
   'Custom stays the active theme after leaving the editor',
@@ -616,7 +616,7 @@ check(byText(tree, '100%').length === 1, 'reset returns the size label to 100%')
 // --- settings page variant ---
 const pageTree = renderer.render(SettingsPage, { t });
 check(byClass(pageTree, 'dsph-page').length === 1, 'settings page renders the page shell');
-check(byClass(pageTree, 'dsph-theme').length === 11, 'settings page renders the theme grid');
+check(byClass(pageTree, 'dsph-theme').length === 15, 'settings page renders the theme grid');
 check(byClass(pageTree, 'dsph-mode').length === 3, 'settings page renders the mode control');
 check(byClass(pageTree, 'dsph-slider').length === 1, 'settings page renders the size slider');
 

@@ -30,8 +30,9 @@
 - **左下角入口**：侧边栏底部（Settings 按钮上方的图标行）新增调色盘图标，点击在
   左下角弹出紧凑面板。
 - **设置页**：同样内容作为独立「个性化」页出现在 设置 中。
-- **10 套主题配色**：默认（原生外观）、暖白、单色、克劳德、克劳德+、朱红、
-  琥珀单色、粗暴极简、墨青、暗紫，另有「自定义」。
+- **14 套主题配色**：默认（原生外观）、暖白、单色、克劳德、克劳德+、朱红、
+  琥珀单色、粗暴极简、墨青、暗紫，以及 **Catppuccin、Nord、Gruvbox、Tokyo
+  Night**，另有「自定义」。
 - **DIY 调色编辑器**：浅色/深色分开编辑——背景、卡片、弹层、侧栏、文字、边框，
   以及该模式自己的强调色；错误/成功/警告状态色共用；另有「加粗边框」开关
   （全局 1px 边框 + 墨色边框 token）。未手动指定的槽位会从背景/文字自动派生。
@@ -44,7 +45,7 @@
 
 ## 调色板参考
 
-十套预设的浅色 / 深色配色对照：
+十四套预设的浅色 / 深色配色对照：
 
 ![调色板参考图](research/preview.png)
 
@@ -58,16 +59,16 @@
 2. 添加索引源：
 
    ```
-   https://cdn.jsdelivr.net/gh/SolvasHQ/dsh-theme@v1.4.0/market/index.json
+   https://cdn.jsdelivr.net/gh/SolvasHQ/dsh-theme@v1.5.0/market/index.json
    ```
 
-索引钉在 `@v1.4.0` 版本上，可立即使用；如果希望跟随最新提交，可把 tag 换成
+索引钉在 `@v1.5.0` 版本上，可立即使用；如果希望跟随最新提交，可把 tag 换成
 `@main`——jsDelivr 对该分支可能有最长约 12 小时的缓存。
 
 3. 找到 **DSH 主题**，打开详情页，点击 **Install**。
 
 Discover 会安装该版本固定到 Git commit 的代码。同一版本也已发布到 npm
-（`@solvashq/dsh-theme@1.4.0`），最新 GitHub Release 也附带预构建的
+（`@solvashq/dsh-theme@1.5.0`），最新 GitHub Release 也附带预构建的
 `dsh-theme.tgz`。jsDelivr
 对 `@main` 分支可能有最长约 12 小时的缓存；想立即拿到新版本可访问
 `https://purge.jsdelivr.net/gh/SolvasHQ/dsh-theme@main/market/index.json` 刷新缓存。
@@ -81,7 +82,7 @@ npm install @solvashq/dsh-theme
 ```
 
 也可以让 DSH Agent 直接从 npm 安装这个 bundle，spec 用
-`@solvashq/dsh-theme@1.4.0`。
+`@solvashq/dsh-theme@1.5.0`。
 
 ### 从源码安装（开发）
 
@@ -178,6 +179,12 @@ tools/                    manifest、market、token、面板验证脚本
 在 DeepSeek Harness 桌面版 `0.2.1-rc.2`（Web GUI）上验证。插件只使用公开的
 客户端扩展点（`slots`、`theme`、`locale`、`configForms`）与 Host volatile
 config，不修改 Harness 本身、不读取其他插件的 DOM。
+
+## 配色致谢
+
+Catppuccin、Nord、Gruvbox、Tokyo Night 是各自作者维护的社区配色。本项目把它们
+作为颜色参考，映射到 DSH 的 14 个锚点并做了对比度调整；链接记录在
+`research/palettes.json` 的 `sources` 中，许可证以各自仓库为准。
 
 ## 许可证
 

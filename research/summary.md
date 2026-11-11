@@ -3,7 +3,7 @@
 Design research for a theme-personalization panel in the DeepSeek Harness desktop web UI.
 **No plugin code is included here** — only color and font research.
 
-- `palettes.json` — machine-readable: 9 themes × 14 tokens × (light + dark), 6 font stacks, 5 size steps, sources.
+- `palettes.json` — machine-readable: 13 themes × 14 tokens × (light + dark), 6 font stacks, 5 size steps, sources.
 - `summary.md` — this human-readable digest (all contrast ratios computed from the JSON).
 
 ## Themes at a glance
@@ -19,6 +19,10 @@ Design research for a theme-personalization panel in the DeepSeek Harness deskto
 | `mx-brutalist` | MX Brutalist | 粗暴极简 | Pure white / pure black, hard ink borders, electric-blue accent. No softness. | **21.0:1** | **21.0:1** | `#1732E0` | `#3A5BFF` |
 | `tiesen` | Tiesen | 墨青 | Quiet, cool, desaturated blue-teal ink on pale mist — calm for long reading. | **15.0:1** | **15.7:1** | `#2E6B6E` | `#3E8B86` |
 | `vescrow` | Vescrow | 暗紫 | Deep indigo night: violet-tinted near-black, navy primary, faint lilac stage. | **18.3:1** | **18.3:1** | `#1F2A6E` | `#4C5BD9` |
+| `catppuccin` | Catppuccin | Catppuccin | Soft pastel Latte/Mocha surfaces, cool blue accent, gentle contrast. | **11.0:1** | **11.3:1** | `#1E66F5` | `#89B4FA` |
+| `nord` | Nord | Nord | Arctic blue-gray light, Polar Night dark, snow borders, frost-blue accent. | **10.8:1** | **10.8:1** | `#5E81AC` | `#88C0D0` |
+| `gruvbox` | Gruvbox | Gruvbox | Warm cream-paper light and charcoal dark, orange accent, olive/amber states. | **10.2:1** | **10.8:1** | `#AF3A03` | `#FABD2F` |
+| `tokyo-night` | Tokyo Night | Tokyo Night | Cool blue-violet city glow, deep navy backgrounds, bright blue accent. | **10.7:1** | **10.6:1** | `#2E7DE9` | `#7AA2F7` |
 
 ## Theme details
 

@@ -341,6 +341,158 @@
         "stateWarn": "#D6A447",
         "sidebarFill": "#090B16"
       }
+    },
+    {
+      "id": "catppuccin",
+      "name": "Catppuccin",
+      "nameZh": "Catppuccin",
+      "description": "Catppuccin Latte and Mocha: soft pastel surfaces, a cool blue accent and gentle contrast — the community favourite in light and dark.",
+      "light": {
+        "bgBase": "#EFF1F5",
+        "bgLayer1": "#FFFFFF",
+        "bgLayer2": "#E6E9EF",
+        "bgOverlay": "#FFFFFF",
+        "borderL1": "#DCE0E8",
+        "borderL2": "#CCD0DA",
+        "brandPrimary": "#1E66F5",
+        "labelPrimary": "#313344",
+        "labelSecondary": "#64677B",
+        "stateError": "#D20F39",
+        "stateIdle": "#8C8FA1",
+        "stateSuccess": "#307522",
+        "stateWarn": "#966017",
+        "sidebarFill": "#E6E9EF"
+      },
+      "dark": {
+        "bgBase": "#1E1E2E",
+        "bgLayer1": "#313244",
+        "bgLayer2": "#45475A",
+        "bgOverlay": "#45475A",
+        "borderL1": "#313244",
+        "borderL2": "#585B70",
+        "brandPrimary": "#89B4FA",
+        "labelPrimary": "#CDD6F4",
+        "labelSecondary": "#A6ADC8",
+        "stateError": "#F38BA8",
+        "stateIdle": "#6C7086",
+        "stateSuccess": "#A6E3A1",
+        "stateWarn": "#F9E2AF",
+        "sidebarFill": "#181825"
+      }
+    },
+    {
+      "id": "nord",
+      "name": "Nord",
+      "nameZh": "Nord",
+      "description": "Arctic blue-gray light and Polar Night dark: calm low-saturation surfaces, snow borders and a frost-blue accent.",
+      "light": {
+        "bgBase": "#ECEFF4",
+        "bgLayer1": "#E5E9F0",
+        "bgLayer2": "#D8DEE9",
+        "bgOverlay": "#E5E9F0",
+        "borderL1": "#D8DEE9",
+        "borderL2": "#C2CBD9",
+        "brandPrimary": "#5E81AC",
+        "labelPrimary": "#2E3440",
+        "labelSecondary": "#4C566A",
+        "stateError": "#A3535B",
+        "stateIdle": "#7B88A1",
+        "stateSuccess": "#5E6E53",
+        "stateWarn": "#746447",
+        "sidebarFill": "#E5E9F0"
+      },
+      "dark": {
+        "bgBase": "#2E3440",
+        "bgLayer1": "#3B4252",
+        "bgLayer2": "#434C5E",
+        "bgOverlay": "#434C5E",
+        "borderL1": "#434C5E",
+        "borderL2": "#4C566A",
+        "brandPrimary": "#88C0D0",
+        "labelPrimary": "#ECEFF4",
+        "labelSecondary": "#D8DEE9",
+        "stateError": "#D08B90",
+        "stateIdle": "#4C566A",
+        "stateSuccess": "#A3BE8C",
+        "stateWarn": "#EBCB8B",
+        "sidebarFill": "#272C36"
+      }
+    },
+    {
+      "id": "gruvbox",
+      "name": "Gruvbox",
+      "nameZh": "Gruvbox",
+      "description": "Warm retro groove: cream-paper light and charcoal dark surfaces, an orange accent and olive/amber state colours.",
+      "light": {
+        "bgBase": "#FBF1C7",
+        "bgLayer1": "#F2E5BC",
+        "bgLayer2": "#EBDBB2",
+        "bgOverlay": "#F2E5BC",
+        "borderL1": "#D5C4A1",
+        "borderL2": "#BDAE93",
+        "brandPrimary": "#AF3A03",
+        "labelPrimary": "#3C3836",
+        "labelSecondary": "#73675D",
+        "stateError": "#CC241D",
+        "stateIdle": "#A89984",
+        "stateSuccess": "#6E6E16",
+        "stateWarn": "#855F18",
+        "sidebarFill": "#F2E5BC"
+      },
+      "dark": {
+        "bgBase": "#282828",
+        "bgLayer1": "#3C3836",
+        "bgLayer2": "#504945",
+        "bgOverlay": "#3C3836",
+        "borderL1": "#504945",
+        "borderL2": "#665C54",
+        "brandPrimary": "#FABD2F",
+        "labelPrimary": "#EBDBB2",
+        "labelSecondary": "#A89984",
+        "stateError": "#FB5743",
+        "stateIdle": "#928374",
+        "stateSuccess": "#B8BB26",
+        "stateWarn": "#FABD2F",
+        "sidebarFill": "#1D2021"
+      }
+    },
+    {
+      "id": "tokyo-night",
+      "name": "Tokyo Night",
+      "nameZh": "Tokyo Night",
+      "description": "Tokyo Night Day and Night: cool blue-violet city glow, deep navy backgrounds and a bright blue accent.",
+      "light": {
+        "bgBase": "#E1E2E7",
+        "bgLayer1": "#D0D5E3",
+        "bgLayer2": "#C4C8DA",
+        "bgOverlay": "#D0D5E3",
+        "borderL1": "#C4C8DA",
+        "borderL2": "#B6BBD0",
+        "brandPrimary": "#2E7DE9",
+        "labelPrimary": "#1B2B53",
+        "labelSecondary": "#4D5B8C",
+        "stateError": "#B2214B",
+        "stateIdle": "#7B87A8",
+        "stateSuccess": "#526C35",
+        "stateWarn": "#775D36",
+        "sidebarFill": "#D0D5E3"
+      },
+      "dark": {
+        "bgBase": "#1A1B26",
+        "bgLayer1": "#292E42",
+        "bgLayer2": "#3B4261",
+        "bgOverlay": "#292E42",
+        "borderL1": "#3B4261",
+        "borderL2": "#414868",
+        "brandPrimary": "#7AA2F7",
+        "labelPrimary": "#C0CAF5",
+        "labelSecondary": "#A9B1D6",
+        "stateError": "#F7768E",
+        "stateIdle": "#565F89",
+        "stateSuccess": "#9ECE6A",
+        "stateWarn": "#E0AF68",
+        "sidebarFill": "#16161E"
+      }
     }
   ],
   "fonts": [
@@ -435,6 +587,10 @@
     "https://fonts.google.com/noto/specimen/Noto+Serif+SC — Noto Serif SC in the serif stack",
     "https://www.jetbrains.com/lp/mono/ — JetBrains Mono in the mono stack",
     "https://github.com/lxgw/LxgwWenKai — LXGW WenKai (霞鹜文楷) in the kai stack",
-    "https://github.com/be5invis/Sarasa-Gothic — Sarasa Mono SC for monospaced CJK"
+    "https://github.com/be5invis/Sarasa-Gothic — Sarasa Mono SC for monospaced CJK",
+    "https://github.com/catppuccin/catppuccin — Catppuccin Latte/Mocha anchors (MIT)",
+    "https://www.nordtheme.com/ — Nord palette (MIT)",
+    "https://github.com/morhetz/gruvbox — Gruvbox palette (MIT)",
+    "https://github.com/folke/tokyonight.nvim — Tokyo Night palette (MIT)"
   ]
 }

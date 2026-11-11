@@ -83,6 +83,10 @@ window.__ModuleLoader__.load({
       'theme.mx-brutalist': '粗暴极简',
       'theme.tiesen': '墨青',
       'theme.vescrow': '暗紫',
+      'theme.catppuccin': 'Catppuccin',
+      'theme.nord': 'Nord',
+      'theme.gruvbox': 'Gruvbox',
+      'theme.tokyo-night': 'Tokyo Night',
       'theme.custom': '自定义',
       'customTitle': '自定义主题',
       'back': '返回',
@@ -146,6 +150,10 @@ window.__ModuleLoader__.load({
       'theme.mx-brutalist': 'MX Brutalist',
       'theme.tiesen': 'Tiesen',
       'theme.vescrow': 'Vescrow',
+      'theme.catppuccin': 'Catppuccin',
+      'theme.nord': 'Nord',
+      'theme.gruvbox': 'Gruvbox',
+      'theme.tokyo-night': 'Tokyo Night',
       'theme.custom': 'Custom',
       'customTitle': 'Custom theme',
       'back': 'Back',
@@ -1276,7 +1284,7 @@ window.__ModuleLoader__.load({
 .dsph-sectionTheme{gap:6px;padding-top:3px}
 .dsph-sectionTitle{display:flex;align-items:baseline;justify-content:space-between;gap:8px;font-size:12px;line-height:18px;font-weight:500;color:var(--dsw-alias-label-tertiary)}
 .dsph-sectionValue{font-size:12px;line-height:18px;color:var(--dsw-alias-label-secondary);font-variant-numeric:tabular-nums}
-.dsph-themes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px}
+.dsph-themes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}
 .dsph-theme{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;padding:5px 4px 4px;border:.5px solid transparent;border-radius:9px;background:transparent;color:var(--dsw-alias-label-primary);cursor:pointer;font:inherit;font-size:11px;line-height:14px;min-width:0;outline:none}
 .dsph-theme:hover{background:var(--dsw-alias-interactive-bg-hover)}
 .dsph-theme[aria-pressed='true']{background:var(--dsw-alias-bg-layer-2);border-color:var(--dsw-alias-border-l2)}
