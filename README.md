@@ -66,7 +66,7 @@ No npm account and no manual profile wiring:
 2. Add this index source:
 
    ```
-   https://cdn.jsdelivr.net/gh/SolvasHQ/dsh-theme@v1.5.0/market/index.json
+   https://cdn.jsdelivr.net/gh/SolvasHQ/dsh-theme@v1.4.0/market/index.json
    ```
 
 The index is version-pinned so it is available immediately. Replace the tag with
@@ -75,7 +75,7 @@ The index is version-pinned so it is available immediately. Replace the tag with
 3. Find **DSH Theme**, open its page, and press **Install**.
 
 Discover installs the pinned Git commit of the release. The same release is also
-published to npm as `@solvashq/dsh-theme@1.5.0`, and a prebuilt `dsh-theme.tgz`
+published to npm as `@solvashq/dsh-theme@1.4.0`, and a prebuilt `dsh-theme.tgz`
 is attached to the latest GitHub Release. jsDelivr may cache the `@main` branch
 for up to 12 hours; purge
 `https://purge.jsdelivr.net/gh/SolvasHQ/dsh-theme@main/market/index.json` to pick
@@ -90,7 +90,7 @@ npm install @solvashq/dsh-theme
 ```
 
 Or let your DSH agent install the bundle from npm with the spec
-`@solvashq/dsh-theme@1.5.0`.
+`@solvashq/dsh-theme@1.4.0`.
 
 ### From source (development)
 
@@ -197,7 +197,7 @@ tools/                    manifest, market, token, and panel checks
 
 ## Compatibility
 
-Tested against DeepSeek Harness desktop `0.2.1-rc.2` (Web GUI). The plugin uses
+Tested against DeepSeek Harness desktop `0.2.2-rc.1` (Web GUI); the 0.2.1-rc.2 line still works. The plugin uses
 the documented client seams (`slots`, `theme`, `locale`, `configForms`) and
 host-side volatile config; it does not patch the harness or read other plugins'
 DOM.

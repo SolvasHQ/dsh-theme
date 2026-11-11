@@ -257,7 +257,7 @@ function createHarness(initialStorage, hostPreferences) {
   const themeCalls = [];
   const themeListeners = [];
   const dictionaries = {};
-  const slotRegistrations = { footer: [], overlay: [], section: [] };
+  const slotRegistrations = { footer: [], overlay: [], section: [], icon: [] };
   const hostWrites = [];
   const requestedEntryIds = [];
   const hostScope = {
@@ -325,6 +325,7 @@ function createHarness(initialStorage, hostPreferences) {
         if (options.name === 'sidebar.footer.action') slotRegistrations.footer.push(Component);
         if (options.name === 'shell.overlay') slotRegistrations.overlay.push(Component);
         if (options.name === 'settings.section') slotRegistrations.section.push(Component);
+        if (options.name === 'settings.section.icon') slotRegistrations.icon.push(Component);
         return () => {};
       },
     },
@@ -377,6 +378,7 @@ check(harness.exported.inject.includes('locale'), 'module injects the locale ser
 check(harness.slotRegistrations.footer.length === 1, 'sidebar footer action registered');
 check(harness.slotRegistrations.overlay.length === 1, 'shell overlay registered');
 check(harness.slotRegistrations.section.length === 1, 'settings section registered');
+check(harness.slotRegistrations.icon.length === 1, 'settings section icon registered');
 
 const dicts = harness.dictionaries['dsh.theme'];
 check(Boolean(dicts && dicts.zh && dicts.en), 'locale dictionaries registered for zh and en');
@@ -386,6 +388,7 @@ if (dicts && dicts.zh && dicts.en) {
   check(zhKeys.join('|') === enKeys.join('|'), 'zh and en dictionaries share one key set');
   const missing = zhKeys.filter((key) => !dicts.en[key]);
   check(missing.length === 0, 'every key has an English string');
+  check(dicts.zh.section === '主题' && dicts.en.section === 'Theme', 'settings section label is Theme');
 }
 
 const Trigger = harness.slotRegistrations.footer[0];
@@ -393,6 +396,9 @@ const Overlay = harness.slotRegistrations.overlay[0];
 const SettingsPage = harness.slotRegistrations.section[0];
 
 const renderer = makeRenderer();
+const iconTree = renderer.render(harness.slotRegistrations.icon[0], { size: 16, active: true });
+check(findAll(iconTree, (node) => node.type === 'svg').length === 1, 'settings icon renders an svg');
+check(findAll(iconTree, (node) => node.type === 'circle').length === 4, 'settings icon draws the palette ring and dots');
 let triggerTree = renderer.render(Trigger, { t, wide: true });
 let triggerButtons = findAll(triggerTree, (node) => node.type === 'button');
 check(triggerButtons.length === 1, 'trigger renders one button');

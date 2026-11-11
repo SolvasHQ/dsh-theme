@@ -59,16 +59,16 @@
 2. 添加索引源：
 
    ```
-   https://cdn.jsdelivr.net/gh/SolvasHQ/dsh-theme@v1.5.0/market/index.json
+   https://cdn.jsdelivr.net/gh/SolvasHQ/dsh-theme@v1.4.0/market/index.json
    ```
 
-索引钉在 `@v1.5.0` 版本上，可立即使用；如果希望跟随最新提交，可把 tag 换成
+索引钉在 `@v1.4.0` 版本上，可立即使用；如果希望跟随最新提交，可把 tag 换成
 `@main`——jsDelivr 对该分支可能有最长约 12 小时的缓存。
 
 3. 找到 **DSH 主题**，打开详情页，点击 **Install**。
 
 Discover 会安装该版本固定到 Git commit 的代码。同一版本也已发布到 npm
-（`@solvashq/dsh-theme@1.5.0`），最新 GitHub Release 也附带预构建的
+（`@solvashq/dsh-theme@1.4.0`），最新 GitHub Release 也附带预构建的
 `dsh-theme.tgz`。jsDelivr
 对 `@main` 分支可能有最长约 12 小时的缓存；想立即拿到新版本可访问
 `https://purge.jsdelivr.net/gh/SolvasHQ/dsh-theme@main/market/index.json` 刷新缓存。
@@ -82,7 +82,7 @@ npm install @solvashq/dsh-theme
 ```
 
 也可以让 DSH Agent 直接从 npm 安装这个 bundle，spec 用
-`@solvashq/dsh-theme@1.5.0`。
+`@solvashq/dsh-theme@1.4.0`。
 
 ### 从源码安装（开发）
 
@@ -176,7 +176,7 @@ tools/                    manifest、market、token、面板验证脚本
 
 ## 兼容性
 
-在 DeepSeek Harness 桌面版 `0.2.1-rc.2`（Web GUI）上验证。插件只使用公开的
+在 DeepSeek Harness 桌面版 `0.2.2-rc.1`（Web GUI）上验证；0.2.1-rc.2 也仍然可用。插件只使用公开的
 客户端扩展点（`slots`、`theme`、`locale`、`configForms`）与 Host volatile
 config，不修改 Harness 本身、不读取其他插件的 DOM。
 

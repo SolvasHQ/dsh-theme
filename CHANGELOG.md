@@ -2,7 +2,7 @@
 
 All notable changes to this plugin are documented here.
 
-## 1.5.0
+## Unreleased
 
 - Added four community-inspired presets: **Catppuccin**, **Nord**, **Gruvbox**, and
   **Tokyo Night**, each with contrast-tuned light/dark anchors and state colours.
@@ -10,6 +10,7 @@ All notable changes to this plugin are documented here.
 - The preset grid now uses four columns, so 14 presets fit in the same panel
   height without introducing a scrollbar.
 - Refreshed the 14-preset palette reference sheet (`research/preview.png`).
+- Settings navigation labels the page **主题 / Theme** and uses the palette glyph (via `settings.section.icon`).
 - No behavioural changes to the DIY editor, fonts, or text size.
 
 ## 1.4.0

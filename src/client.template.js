@@ -61,7 +61,7 @@ window.__ModuleLoader__.load({
       'title': '个性化',
       'subtitle': '主题配色、字体与界面字号',
       'close': '关闭',
-      'section': '个性化',
+      'section': '主题',
       'appearance': '明暗',
       'mode.system': '跟随系统',
       'mode.light': '浅色',
@@ -128,7 +128,7 @@ window.__ModuleLoader__.load({
       'title': 'Personalization',
       'subtitle': 'Theme palette, fonts, and text size',
       'close': 'Close',
-      'section': 'Personalization',
+      'section': 'Theme',
       'appearance': 'Appearance',
       'mode.system': 'System',
       'mode.light': 'Light',
@@ -1445,6 +1445,42 @@ window.__ModuleLoader__.load({
       );
     }
 
+    /** Palette glyph for the Settings navigation, matching the plugin's icon. */
+    function PaletteIcon(props) {
+      const size = props.size || 18;
+      const active = Boolean(props.active);
+      return h(
+        'svg',
+        {
+          width: size,
+          height: size,
+          viewBox: '0 0 48 48',
+          fill: 'none',
+          'aria-hidden': 'true',
+          focusable: 'false',
+          style: { display: 'block' },
+        },
+        h('circle', {
+          cx: 24,
+          cy: 24,
+          r: 13.2,
+          stroke: 'currentColor',
+          strokeWidth: 2.2,
+          strokeOpacity: active ? 1 : 0.82,
+        }),
+        h('circle', { cx: 18.3, cy: 19.5, r: 3.1, fill: '#D97757', fillOpacity: active ? 1 : 0.86 }),
+        h('circle', { cx: 29.9, cy: 19.2, r: 3.1, fill: '#F2C14E', fillOpacity: active ? 1 : 0.86 }),
+        h('circle', { cx: 31.2, cy: 29.3, r: 3.1, fill: '#5E8BFF', fillOpacity: active ? 1 : 0.86 }),
+        h('path', {
+          d: 'M17.1 31.1c2.6 2.2 6.1 3.2 9.5 2.6',
+          stroke: 'currentColor',
+          strokeWidth: 2,
+          strokeOpacity: active ? 0.65 : 0.5,
+          strokeLinecap: 'round',
+        }),
+      );
+    }
+
     function PersonalizationSettingsPage(props) {
       const t = props.t;
       return h(
@@ -1596,6 +1632,16 @@ window.__ModuleLoader__.load({
             label: () => t('section'),
           },
           PersonalizationSettingsPage,
+        ),
+      );
+
+      ctx.slots.inject('settings.section.icon', () =>
+        ctx.slots.register(
+          {
+            name: 'settings.section.icon',
+            id: 'dsh-theme',
+          },
+          PaletteIcon,
         ),
       );
     }
