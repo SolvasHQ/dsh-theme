@@ -12,8 +12,14 @@ All notable changes to this plugin are documented here.
 - Refreshed the 14-preset palette reference sheet (`research/preview.png`).
 - Settings navigation labels the page **主题 / Theme** and uses the palette glyph (via `settings.section.icon`).
 - Fonts list built-in presets plus **fonts read from this machine** (marked
-  `Local ·`), with a **Detect local fonts** action; duplicates with presets are
-  allowed. A custom font-family input is no longer required.
+  `Local ·`), with a **Detect local fonts** action and a toggle to hide them;
+  duplicates with presets are allowed. A custom font-family input is no longer
+  required.
+- Custom themes can use a preset or a saved custom theme as their base (full
+  per-mode anchors and the preset's bold-border trait are preserved), appear in a
+  **My themes** list with the active one checked, support multi-select deletion in
+  Manage mode, and import/export as JSON files with a commented example and a file
+  picker.
 - The custom theme editor can clone any preset as a base, save named custom
   themes, switch between them, and export/import the current theme as JSON.
 - No behavioural changes to the DIY editor, fonts, or text size.

@@ -41,13 +41,16 @@ The interface copy follows the app language (Simplified Chinese / English).
   text, border, and that mode's accent color; shared error/success/warning colors;
   and a **Bold borders** switch (1 px borders everywhere + ink-strength border
   tokens). Unpinned slots derive from the background/text automatically.
-- **Custom theme library** — start from any preset as a base, save the current
-  custom theme under a name, switch between saved themes, and export/import the
-  current theme as JSON for sharing or backup.
+- **Custom theme library** — start from any preset (or a saved custom theme) as
+  a base, save the current custom theme under a name, switch between saved themes
+  from the list below the preset grid, multi-select and delete them in Manage
+  mode, and export/import the current theme as a JSON file. The import dialog
+  includes a commented example and a file picker.
 - **Fonts** — independent Latin and Chinese stacks plus a code font, applied to
   interface, conversation, and code text. Each role lists the shipped presets
-  plus **fonts read from this machine** (marked `Local ·`); **Detect local fonts**
-  refreshes the list, and duplicates with a preset are allowed.
+  plus **fonts read from this machine** (marked `Local ·`, with a toggle to hide
+  them); **Detect local fonts** refreshes the list, and duplicates with a preset
+  are allowed.
 - **Text size** — 10–22 px through the native theme service, so it survives
   reloads and shares the Ctrl/Cmd `+`/`-` shortcuts.
 - **Bilingual UI** — follows the app language (Simplified Chinese / English).

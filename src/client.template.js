@@ -49,8 +49,10 @@ window.__ModuleLoader__.load({
       bold: false,
     });
 
-    /** Per-mode DIY color slots, in editor order, with the anchor each feeds. */
+    /** Per-mode DIY color slots shown in the editor. */
     const CUSTOM_FIELDS = ['bg', 'layer', 'overlay', 'sidebar', 'label', 'border', 'accent'];
+    /** Additional per-mode anchors preserved when a preset is cloned as a base. */
+    const CUSTOM_EXTRA_KEYS = ['layer2', 'border1', 'label2', 'idle', 'error', 'success', 'warn'];
 
     /* ------------------------------------------------------------------ */
     /* Locale dictionaries                                                 */
@@ -98,13 +100,24 @@ window.__ModuleLoader__.load({
       'custom.save': '保存',
       'custom.delete': '删除',
       'custom.basePlaceholder': '选择基底主题',
+      'custom.baseLabel': '基底主题',
       'custom.savedPlaceholder': '选择已保存主题',
+      'custom.importedName': '导入的主题',
+      'custom.example': '示例',
+      'custom.fromFile': '从文件导入',
+      'custom.exampleName': '主题名称，可自定义',
+      'custom.exampleBg': '背景色',
+      'custom.exampleAccent': '强调色',
+      'custom.exampleHint': '支持 light / dark 两套颜色，其余字段可省略',
+      'font.showLocal': '本机字体',
       'custom.export': '导出',
       'custom.import': '导入',
       'custom.exportPrompt': '复制这段主题 JSON',
       'custom.importPrompt': '粘贴主题 JSON',
       'custom.importFailed': '导入失败：这段 JSON 无效',
       'custom.savedTitle': '我的主题',
+      'custom.manage': '管理',
+      'custom.done': '完成',
       'custom.cancel': '取消',
       'custom.importConfirm': '导入',
       'custom.importPlaceholder': '粘贴主题 JSON',
@@ -190,13 +203,24 @@ window.__ModuleLoader__.load({
       'custom.save': 'Save',
       'custom.delete': 'Delete',
       'custom.basePlaceholder': 'Start from a preset',
+      'custom.baseLabel': 'Base theme',
       'custom.savedPlaceholder': 'Load a saved theme',
+      'custom.importedName': 'Imported theme',
+      'custom.example': 'Example',
+      'custom.fromFile': 'Import from file',
+      'custom.exampleName': 'theme name, yours to choose',
+      'custom.exampleBg': 'background',
+      'custom.exampleAccent': 'accent',
+      'custom.exampleHint': 'light / dark pairs are supported; other fields are optional',
+      'font.showLocal': 'Local fonts',
       'custom.export': 'Export',
       'custom.import': 'Import',
       'custom.exportPrompt': 'Copy this theme JSON',
       'custom.importPrompt': 'Paste theme JSON',
       'custom.importFailed': 'Import failed: invalid theme JSON',
       'custom.savedTitle': 'My themes',
+      'custom.manage': 'Manage',
+      'custom.done': 'Done',
       'custom.cancel': 'Cancel',
       'custom.importConfirm': 'Import',
       'custom.importPlaceholder': 'Paste theme JSON',
@@ -322,16 +346,17 @@ window.__ModuleLoader__.load({
       const light = luminance(background) > 0.42;
       const ink = light ? mix(background, '#0B0B0C', 0.9) : mix(background, '#F7F5F1', 0.9);
       const label = extra.label || ensureContrast(ink, background, 12);
-      const label2 = ensureContrast(mix(label, background, 0.42), background, 4.5);
+      const label2 = extra.label2 ? ensureContrast(extra.label2, background, 4.5) : ensureContrast(mix(label, background, 0.42), background, 4.5);
       const brand = ensureContrast(accent, background, 3);
       const border2 = extra.border || (bold ? label : mix(background, label, 0.24));
-      const border1 = extra.border
-        ? mix(background, border2, bold ? 0.8 : 0.5)
-        : bold
-          ? mix(background, label, 0.55)
-          : mix(background, label, 0.13);
+      const border1 = extra.border1
+        || (extra.border
+          ? mix(background, border2, bold ? 0.8 : 0.5)
+          : bold
+            ? mix(background, label, 0.55)
+            : mix(background, label, 0.13));
       const layer1 = extra.layer || (light ? mix(background, '#FFFFFF', 0.6) : mix(background, label, 0.07));
-      const layer2 = light ? mix(layer1, label, 0.05) : mix(layer1, label, 0.06);
+      const layer2 = extra.layer2 || (light ? mix(layer1, label, 0.05) : mix(layer1, label, 0.06));
       const overlay = extra.overlay || (light ? mix(layer1, '#FFFFFF', 0.5) : mix(layer1, label, 0.08));
       const sidebar = extra.sidebar || (light ? mix(background, label, 0.025) : mix(background, '#000000', 0.3));
       const error = ensureContrast(extra.error || (light ? '#C0362C' : '#E5675C'), background, 4.4);
@@ -348,7 +373,7 @@ window.__ModuleLoader__.load({
         labelPrimary: label,
         labelSecondary: label2,
         stateError: error,
-        stateIdle: mix(label, background, light ? 0.52 : 0.45),
+        stateIdle: extra.idle ? ensureContrast(extra.idle, background, 1.8) : mix(label, background, light ? 0.52 : 0.45),
         stateSuccess: success,
         stateWarn: warn,
         sidebarFill: sidebar,
@@ -359,11 +384,20 @@ window.__ModuleLoader__.load({
 
     function customPalette(custom) {
       if (customPaletteCache.input === custom) return customPaletteCache.output;
-      const shared = { error: custom.error, success: custom.success, warn: custom.warn };
+      const shared = {
+        error: custom.error,
+        success: custom.success,
+        warn: custom.warn,
+      };
+      const mode = (key) => Object.assign({}, shared, custom[key], {
+        error: custom[key].error || custom.error,
+        success: custom[key].success || custom.success,
+        warn: custom[key].warn || custom.warn,
+      });
       const palette = {
         id: 'custom',
-        light: deriveAnchors(custom.light.bg, custom.light.accent, custom.bold, Object.assign({}, custom.light, shared)),
-        dark: deriveAnchors(custom.dark.bg, custom.dark.accent, custom.bold, Object.assign({}, custom.dark, shared)),
+        light: deriveAnchors(custom.light.bg, custom.light.accent, custom.bold, mode('light')),
+        dark: deriveAnchors(custom.dark.bg, custom.dark.accent, custom.bold, mode('dark')),
       };
       customPaletteCache = { input: custom, output: palette };
       return palette;
@@ -674,8 +708,9 @@ window.__ModuleLoader__.load({
 
     function readModeColors(source) {
       const mode = { bg: null, layer: null, overlay: null, sidebar: null, label: null, border: null, accent: null };
+      for (const key of CUSTOM_EXTRA_KEYS) mode[key] = null;
       if (!source || typeof source !== 'object') return mode;
-      for (const key of CUSTOM_FIELDS) if (isHexColor(source[key])) mode[key] = source[key];
+      for (const key of CUSTOM_FIELDS.concat(CUSTOM_EXTRA_KEYS)) if (isHexColor(source[key])) mode[key] = source[key];
       return mode;
     }
 
@@ -915,11 +950,18 @@ window.__ModuleLoader__.load({
       const mode = (p) => ({
         bg: p.bgBase,
         layer: p.bgLayer1,
+        layer2: p.bgLayer2,
         overlay: p.bgOverlay,
         sidebar: p.sidebarFill,
         label: p.labelPrimary,
+        label2: p.labelSecondary,
         border: p.borderL2,
+        border1: p.borderL1,
         accent: p.brandPrimary,
+        error: p.stateError,
+        success: p.stateSuccess,
+        warn: p.stateWarn,
+        idle: p.stateIdle,
       });
       return {
         light: mode(preset.light),
@@ -927,7 +969,7 @@ window.__ModuleLoader__.load({
         error: preset.light.stateError,
         success: preset.light.stateSuccess,
         warn: preset.light.stateWarn,
-        bold: false,
+        bold: paletteId === 'mx-brutalist',
       };
     }
 
@@ -966,23 +1008,44 @@ window.__ModuleLoader__.load({
       updatePref({ palette: 'custom', custom: cloneCustom(entry.custom), customName: entry.name });
     }
 
-    function exportCustomTheme(t) {
-      if (typeof window === 'undefined') return;
+    function exportCustomTheme() {
+      if (typeof document === 'undefined') return;
       const current = prefStore.get();
-      const text = JSON.stringify(
-        { format: 'dsh-theme-custom', version: 1, name: current.customName || '', custom: current.custom },
-        null,
-        2,
-      );
-      try {
-        if (window.navigator && window.navigator.clipboard && window.navigator.clipboard.writeText) {
-          window.navigator.clipboard.writeText(text).catch(() => window.prompt(t('custom.exportPrompt'), text));
-          return;
-        }
-      } catch (error) {
-        /* fall through to the prompt */
-      }
-      window.prompt(t('custom.exportPrompt'), text);
+      const payload = {
+        format: 'dsh-theme-custom',
+        version: 1,
+        name: current.customName || 'dsh-theme',
+        custom: current.custom,
+      };
+      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = (current.customName || 'dsh-theme').replace(/[\\/:*?"<>|]+/g, '-') + '.json';
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }
+
+    function stripJsonComments(text) {
+      return String(text || '')
+        .replace(/\/\*[\s\S]*?\*\//g, '')
+        .replace(/^\s*\/\/.*$/gm, '');
+    }
+
+    function exampleThemeJson(t) {
+      return [
+        '{',
+        '  // ' + t('custom.exampleName'),
+        '  "name": "My theme",',
+        '  "custom": {',
+        '    // ' + t('custom.exampleHint'),
+        '    "light": { "bg": "#FAF8F1", "layer": "#FFFFFF", "accent": "#BB5A38" },',
+        '    "dark": { "bg": "#1F1E1B", "layer": "#2A2824", "accent": "#BB5A38" }',
+        '  }',
+        '}',
+      ].join('\n');
     }
 
     function importCustomTheme(t) {
@@ -1204,20 +1267,55 @@ window.__ModuleLoader__.load({
       return h(
         'div',
         { className: 'dsph-section dsph-sectionSaved' },
-        h('div', { className: 'dsph-sectionTitle' }, h('span', null, t('custom.savedTitle'))),
+        h(
+          'div',
+          { className: 'dsph-sectionTitle' },
+          h('span', null, t('custom.savedTitle')),
+          props.managing
+            ? h(
+                'button',
+                {
+                  type: 'button',
+                  className: 'dsph-fontDetect',
+                  disabled: props.selected.length === 0,
+                  onClick: props.onDelete,
+                },
+                t('custom.delete'),
+              )
+            : null,
+          h(
+            'button',
+            { type: 'button', className: 'dsph-fontDetect', onClick: props.onManage },
+            props.managing ? t('custom.done') : t('custom.manage'),
+          ),
+        ),
         h(
           'div',
           { className: 'dsph-savedList' },
-          props.customs.map((entry) =>
-            h(
+          props.customs.map((entry) => {
+            const active = props.activeName === entry.name;
+            const selected = props.selected.includes(entry.name);
+            return h(
               'button',
               {
                 key: entry.name,
                 type: 'button',
-                className: 'dsph-savedTheme',
+                className: 'dsph-savedTheme' + (active ? ' dsph-savedThemeActive' : ''),
+                'aria-pressed': active,
                 title: entry.name,
-                onClick: () => props.onLoad(entry.name),
+                onClick: () => (props.managing ? props.onToggle(entry.name) : props.onLoad(entry.name)),
               },
+              props.managing || active
+                ? h(
+                    'span',
+                    { className: 'dsph-savedCheck' },
+                    props.managing
+                      ? selected
+                        ? h(IconCheck, { size: 10 })
+                        : null
+                      : h(IconCheck, { size: 10 }),
+                  )
+                : null,
               h('span', {
                 className: 'dsph-savedSwatch',
                 style: {
@@ -1231,8 +1329,8 @@ window.__ModuleLoader__.load({
                 h('span', { className: 'dsph-savedName' }, entry.name),
                 h('span', { className: 'dsph-savedTag' }, t('theme.custom')),
               ),
-            ),
-          ),
+            );
+          }),
         ),
       );
     }
@@ -1366,6 +1464,7 @@ window.__ModuleLoader__.load({
             ),
             h('button', { type: 'button', className: 'dsph-miniButton', onClick: props.onExport }, t('custom.export')),
           ),
+          h('div', { className: 'dsph-customLabel' }, t('custom.baseLabel')),
           h(BaseStrip, { t: t, custom: custom, options: baseOptions, onPick: pickBase }),
         ),
         h(
@@ -1400,18 +1499,18 @@ window.__ModuleLoader__.load({
           { className: 'dsph-colors' },
           h(ColorField, {
             label: t('color.error'),
-            value: custom.error || anchors.stateError,
-            onChange: (value) => updateCustom({ error: value }),
+            value: custom[mode].error || custom.error || anchors.stateError,
+            onChange: (value) => setModeField('error', value),
           }),
           h(ColorField, {
             label: t('color.success'),
-            value: custom.success || anchors.stateSuccess,
-            onChange: (value) => updateCustom({ success: value }),
+            value: custom[mode].success || custom.success || anchors.stateSuccess,
+            onChange: (value) => setModeField('success', value),
           }),
           h(ColorField, {
             label: t('color.warn'),
-            value: custom.warn || anchors.stateWarn,
-            onChange: (value) => updateCustom({ warn: value }),
+            value: custom[mode].warn || custom.warn || anchors.stateWarn,
+            onChange: (value) => setModeField('warn', value),
           }),
         ),
         h(
@@ -1497,10 +1596,13 @@ window.__ModuleLoader__.load({
       const [openMenu, setOpenMenu] = useState(null);
       const [editingCustom, setEditingCustom] = useState(false);
       const [localFonts, setLocalFonts] = useState([]);
+      const [showLocalFonts, setShowLocalFonts] = useState(true);
       const [fontNotice, setFontNotice] = useState('');
       const [importOpen, setImportOpen] = useState(false);
       const [importText, setImportText] = useState('');
       const [importError, setImportError] = useState('');
+      const [manageThemes, setManageThemes] = useState(false);
+      const [selectedThemes, setSelectedThemes] = useState([]);
       const percent = Math.round((themeState.text / TEXT_SIZE_DEFAULT) * 100) + '%';
 
       const openImport = () => {
@@ -1511,15 +1613,31 @@ window.__ModuleLoader__.load({
 
       const applyImport = () => {
         try {
-          const data = JSON.parse(importText);
+          const data = JSON.parse(stripJsonComments(importText));
           const custom = readCustom(data && data.custom ? data.custom : data);
-          const name = data && typeof data.name === 'string' ? data.name.trim().slice(0, 40) : '';
-          updatePref({ palette: 'custom', custom, customName: name });
+          const name = data && typeof data.name === 'string' && data.name.trim()
+            ? data.name.trim().slice(0, 40)
+            : t('custom.importedName');
+          const current = prefStore.get();
+          const customs = current.customs
+            .filter((entry) => entry.name !== name)
+            .concat([{ name, custom }])
+            .slice(0, 30);
+          updatePref({ palette: 'custom', custom, customName: name, customs });
           setImportOpen(false);
           setEditingCustom(true);
         } catch (error) {
           setImportError(t('custom.importFailed'));
         }
+      };
+
+      const readImportFile = (event) => {
+        const file = event.target.files && event.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = () => setImportText(String(reader.result || ''));
+        reader.onerror = () => setImportError(t('custom.importFailed'));
+        reader.readAsText(file);
       };
 
       const detectLocalFonts = (showNotice) => {
@@ -1544,10 +1662,12 @@ window.__ModuleLoader__.load({
         }
       };
 
-      const localFontOptions = localFonts.map((family) => ({
-        id: 'local:' + family,
-        label: t('font.localPrefix') + family,
-      }));
+      const localFontOptions = showLocalFonts
+        ? localFonts.map((family) => ({
+            id: 'local:' + family,
+            label: t('font.localPrefix') + family,
+          }))
+        : [];
 
       useEffect(() => {
         detectLocalFonts(false);
@@ -1579,7 +1699,7 @@ window.__ModuleLoader__.load({
               onDelete: deleteCustomTheme,
               onClone: cloneCustomBase,
               onCloneSaved: cloneSavedCustom,
-              onExport: () => exportCustomTheme(t),
+              onExport: exportCustomTheme,
               onImport: () => importCustomTheme(t),
             })
           : h(ThemeGrid, {
@@ -1589,10 +1709,29 @@ window.__ModuleLoader__.load({
               onCustom: () => setEditingCustom(true),
               onImport: openImport,
             }),
-        !editingCustom
+          !editingCustom
           ? h(CustomThemeList, {
               t: t,
               customs: pref.customs,
+              activeName: pref.palette === 'custom' ? pref.customName : '',
+              managing: manageThemes,
+              selected: selectedThemes,
+              onManage: () => {
+                setManageThemes(!manageThemes);
+                setSelectedThemes([]);
+              },
+              onToggle: (name) =>
+                setSelectedThemes((list) => (list.includes(name) ? list.filter((item) => item !== name) : list.concat([name]))),
+              onDelete: () => {
+                const current = prefStore.get();
+                const customs = current.customs.filter((entry) => !selectedThemes.includes(entry.name));
+                updatePref({
+                  customs,
+                  customName: selectedThemes.includes(current.customName) ? '' : current.customName,
+                });
+                setSelectedThemes([]);
+                setManageThemes(false);
+              },
               onLoad: (name) => loadCustomTheme(name),
             })
           : null,
@@ -1603,6 +1742,16 @@ window.__ModuleLoader__.load({
             'div',
             { className: 'dsph-sectionTitle' },
             h('span', null, t('fontsTitle')),
+            h(
+              'label',
+              { className: 'dsph-fontToggle' },
+              h('input', {
+                type: 'checkbox',
+                checked: showLocalFonts,
+                onChange: (event) => setShowLocalFonts(event.target.checked),
+              }),
+              t('font.showLocal'),
+            ),
             h(
               'button',
               { type: 'button', className: 'dsph-fontDetect', onClick: () => detectLocalFonts(true) },
@@ -1686,6 +1835,29 @@ window.__ModuleLoader__.load({
                   placeholder: t('custom.importPlaceholder'),
                   onChange: (event) => setImportText(event.target.value),
                 }),
+                h(
+                  'div',
+                  { className: 'dsph-dialogTools' },
+                  h(
+                    'button',
+                    {
+                      type: 'button',
+                      className: 'dsph-miniButton',
+                      onClick: () => setImportText(exampleThemeJson(t)),
+                    },
+                    t('custom.example'),
+                  ),
+                  h(
+                    'label',
+                    { className: 'dsph-miniButton dsph-fileButton' },
+                    t('custom.fromFile'),
+                    h('input', {
+                      type: 'file',
+                      accept: '.json,application/json',
+                      onChange: readImportFile,
+                    }),
+                  ),
+                ),
                 importError ? h('div', { className: 'dsph-dialogError' }, importError) : null,
                 h(
                   'div',
@@ -1785,16 +1957,19 @@ window.__ModuleLoader__.load({
 .dsph-savedList{display:flex;gap:4px;overflow-x:auto;overflow-y:hidden;padding:2px 0 3px;max-width:100%}
 .dsph-savedTheme{display:flex;align-items:center;gap:5px;flex:none;max-width:170px;padding:4px 6px;border:.5px solid var(--dsw-alias-border-l1);border-radius:8px;background:transparent;color:var(--dsw-alias-label-primary);font:inherit;cursor:pointer}
 .dsph-savedTheme:hover{background:var(--dsw-alias-bg-layer-2)}
+.dsph-savedThemeActive{border-color:var(--dsw-alias-brand-primary);background:var(--dsw-alias-bg-layer-2)}
+.dsph-savedCheck{width:10px;display:inline-flex;align-items:center;justify-content:center;color:var(--dsw-alias-brand-primary);flex:none}
 .dsph-savedSwatch{width:18px;height:18px;border-radius:50%;flex:none;box-shadow:inset 0 0 0 .5px rgba(0,0,0,.18)}
 .dsph-savedBody{display:flex;flex-direction:column;min-width:0;text-align:left}
 .dsph-savedName{font-size:11px;line-height:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:120px}
 .dsph-savedTag{font-size:8px;line-height:10px;color:var(--dsw-alias-label-secondary)}
-.dsph-baseStrip{display:flex;gap:4px;overflow-x:auto;overflow-y:hidden;padding:2px 0;max-width:100%}
-.dsph-baseChip{display:flex;flex-direction:column;align-items:center;gap:1px;flex:none;width:58px;padding:3px 2px;border:.5px solid transparent;border-radius:7px;background:transparent;color:var(--dsw-alias-label-secondary);font:inherit;cursor:pointer}
+.dsph-baseStrip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:3px;max-height:96px;overflow-y:auto;overflow-x:hidden;padding:2px 0}
+.dsph-baseChip{display:flex;flex-direction:column;align-items:center;gap:1px;min-width:0;padding:3px 2px;border:.5px solid transparent;border-radius:7px;background:transparent;color:var(--dsw-alias-label-secondary);font:inherit;cursor:pointer}
 .dsph-baseChip:hover{background:var(--dsw-alias-bg-layer-2);color:var(--dsw-alias-label-primary)}
 .dsph-baseSwatch{width:18px;height:18px;border-radius:50%;box-shadow:inset 0 0 0 .5px rgba(0,0,0,.18)}
-.dsph-baseLabel{max-width:54px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:9px;line-height:11px}
+.dsph-baseLabel{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:9px;line-height:11px}
 .dsph-baseTag{font-size:8px;line-height:10px;color:var(--dsw-alias-brand-primary)}
+.dsph-customLabel{font-size:10px;line-height:13px;color:var(--dsw-alias-label-secondary);margin-top:1px}
 .dsph-dialogOverlay{position:absolute;inset:0;z-index:10;display:flex;align-items:center;justify-content:center;padding:12px;border-radius:16px;background:color-mix(in srgb, var(--dsw-alias-bg-base) 72%, transparent)}
 .dsph-dialog{width:100%;max-width:320px;box-sizing:border-box;padding:10px;border-radius:12px;border:.5px solid var(--dsw-alias-border-l2);background:var(--dsw-alias-bg-layer-1);box-shadow:var(--dsw-elevation-prominent,0 12px 32px rgba(0,0,0,.18));display:flex;flex-direction:column;gap:6px}
 .dsph-dialogTitle{font-size:12px;line-height:16px;font-weight:600}
@@ -1802,6 +1977,9 @@ window.__ModuleLoader__.load({
 .dsph-dialogText:focus{border-color:var(--dsw-alias-brand-primary)}
 .dsph-dialogError{font-size:10px;line-height:13px;color:var(--dsw-alias-state-error-primary)}
 .dsph-dialogActions{display:flex;justify-content:flex-end;gap:4px}
+.dsph-dialogTools{display:flex;gap:4px;flex-wrap:wrap}
+.dsph-fileButton{cursor:pointer}
+.dsph-fileButton input{display:none}
 .dsph-dialogConfirm{border-color:var(--dsw-alias-brand-primary);color:var(--dsw-alias-brand-primary)}
 .dsph-back{flex:none;width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;padding:0;border:none;border-radius:6px;background:transparent;color:var(--dsw-alias-label-secondary);cursor:pointer}
 .dsph-back:hover{background:var(--dsw-alias-interactive-bg-hover);color:var(--dsw-alias-label-primary)}
@@ -1834,6 +2012,8 @@ window.__ModuleLoader__.load({
 .dsph-fontInput:focus{border-color:var(--dsw-alias-brand-primary)}
 .dsph-fontDetect{border:none;background:transparent;color:var(--dsw-alias-brand-primary);font:inherit;font-size:10px;line-height:14px;padding:0;cursor:pointer;opacity:.85}
 .dsph-fontDetect:hover{text-decoration:underline}
+.dsph-fontToggle{display:inline-flex;align-items:center;gap:3px;margin-left:auto;font-size:10px;line-height:14px;color:var(--dsw-alias-label-secondary);cursor:pointer}
+.dsph-fontToggle input{margin:0;accent-color:var(--dsw-alias-brand-primary)}
 .dsph-fontNotice{font-size:10px;line-height:13px;color:var(--dsw-alias-label-secondary)}
 .dsph-field{display:flex;flex-direction:column;gap:3px;min-width:0}
 .dsph-fieldLabel{font-size:11px;line-height:14px;color:var(--dsw-alias-label-tertiary)}

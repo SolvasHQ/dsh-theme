@@ -551,6 +551,8 @@ check(
   'both per-mode accents persist independently',
 );
 
+byClass(tree, 'dsph-modeTab')[0].props.onClick();
+tree = renderer.render(Overlay, { t });
 byClass(tree, 'dsph-colorInput')[7].props.onChange({ target: { value: '#A8001E' } });
 tree = renderer.render(Overlay, { t });
 byClass(tree, 'dsph-colorInput')[8].props.onChange({ target: { value: '#1E7B3C' } });
