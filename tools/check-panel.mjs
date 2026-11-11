@@ -415,6 +415,14 @@ check(byClass(tree, 'dsph-panel').length === 1, 'overlay renders the panel when 
 check(byText(tree, 'title').length >= 1, 'panel renders its title');
 check(byClass(tree, 'dsph-mode').length === 3, 'panel renders the light/dark/system control');
 check(byClass(tree, 'dsph-theme').length === 15, 'panel renders fifteen theme cards (incl. custom)');
+const importThemeButton = byClass(tree, 'dsph-importTheme')[0];
+check(Boolean(importThemeButton), 'theme section offers an import action');
+importThemeButton.props.onClick();
+tree = renderer.render(Overlay, { t });
+check(byClass(tree, 'dsph-dialog').length === 1, 'import action opens the theme JSON dialog');
+findAll(tree, (node) => node.type === 'button' && textOf(node) === 'custom.cancel')[0].props.onClick();
+tree = renderer.render(Overlay, { t });
+check(byClass(tree, 'dsph-dialog').length === 0, 'cancel closes the import dialog');
 check(byClass(tree, 'dsph-selectButton').length === 3, 'panel renders three font selects');
 check(byClass(tree, 'dsph-slider').length === 1, 'panel renders the text-size slider');
 check(byText(tree, '100%').length === 1, 'text size starts at 100%');
@@ -575,15 +583,12 @@ saveCustomButton.props.onClick();
 tree = renderer.render(Overlay, { t });
 check(harness.storage.get('dsh.theme.v1').includes('"customName":"Mine"'), 'saving stores the custom theme name');
 check(harness.storage.get('dsh.theme.v1').includes('"customs"'), 'saving stores the custom theme list');
-const baseButton = byClass(tree, 'dsph-baseButton')[0];
-check(Boolean(baseButton), 'custom editor exposes a preset base selector');
-baseButton.props.onClick();
-tree = renderer.render(Overlay, { t });
-const baseOption = findAll(tree, (node) => node.props && node.props.role === 'option').find(
-  (node) => textOf(node) === 'theme.catppuccin',
-);
-check(Boolean(baseOption), 'base selector lists Catppuccin with its swatch');
-baseOption.props.onClick();
+const baseChip = findAll(
+  tree,
+  (node) => node.type === 'button' && String(node.props.className || '').includes('dsph-baseChip'),
+).find((node) => textOf(node).includes('theme.catppuccin'));
+check(Boolean(baseChip), 'base selector lists Catppuccin with its swatch');
+baseChip.props.onClick();
 tree = renderer.render(Overlay, { t });
 layer = harness.themeCalls[harness.themeCalls.length - 1];
 check(layer.tokens['--dsw-alias-bg-base'].light === '#EFF1F5', 'cloning Catppuccin as base applies its light background');
@@ -592,6 +597,7 @@ check(layer.tokens['--dsw-alias-bg-base'].light === '#EFF1F5', 'cloning Catppucc
 byClass(tree, 'dsph-back')[0].props.onClick();
 tree = renderer.render(Overlay, { t });
 check(byClass(tree, 'dsph-theme').length === 15, 'back returns to the preset grid');
+check(byClass(tree, 'dsph-savedTheme').length === 1, 'saved custom themes appear below the preset grid');
 check(
   byClass(tree, 'dsph-theme').filter((node) => node.props['aria-pressed'] === true).length === 1,
   'Custom stays the active theme after leaving the editor',

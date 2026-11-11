@@ -104,6 +104,10 @@ window.__ModuleLoader__.load({
       'custom.exportPrompt': '复制这段主题 JSON',
       'custom.importPrompt': '粘贴主题 JSON',
       'custom.importFailed': '导入失败：这段 JSON 无效',
+      'custom.savedTitle': '我的主题',
+      'custom.cancel': '取消',
+      'custom.importConfirm': '导入',
+      'custom.importPlaceholder': '粘贴主题 JSON',
       'color.bg': '背景',
       'color.layer': '卡片',
       'color.overlay': '弹层',
@@ -192,6 +196,10 @@ window.__ModuleLoader__.load({
       'custom.exportPrompt': 'Copy this theme JSON',
       'custom.importPrompt': 'Paste theme JSON',
       'custom.importFailed': 'Import failed: invalid theme JSON',
+      'custom.savedTitle': 'My themes',
+      'custom.cancel': 'Cancel',
+      'custom.importConfirm': 'Import',
+      'custom.importPlaceholder': 'Paste theme JSON',
       'color.bg': 'Background',
       'color.layer': 'Card',
       'color.overlay': 'Popover',
@@ -952,6 +960,12 @@ window.__ModuleLoader__.load({
       updatePref({ palette: 'custom', custom: customFromPreset(paletteId), customName: '' });
     }
 
+    function cloneSavedCustom(name) {
+      const entry = prefStore.get().customs.find((item) => item.name === name);
+      if (!entry) return;
+      updatePref({ palette: 'custom', custom: cloneCustom(entry.custom), customName: entry.name });
+    }
+
     function exportCustomTheme(t) {
       if (typeof window === 'undefined') return;
       const current = prefStore.get();
@@ -1184,6 +1198,45 @@ window.__ModuleLoader__.load({
       );
     }
 
+    function CustomThemeList(props) {
+      const t = props.t;
+      if (!props.customs.length) return null;
+      return h(
+        'div',
+        { className: 'dsph-section dsph-sectionSaved' },
+        h('div', { className: 'dsph-sectionTitle' }, h('span', null, t('custom.savedTitle'))),
+        h(
+          'div',
+          { className: 'dsph-savedList' },
+          props.customs.map((entry) =>
+            h(
+              'button',
+              {
+                key: entry.name,
+                type: 'button',
+                className: 'dsph-savedTheme',
+                title: entry.name,
+                onClick: () => props.onLoad(entry.name),
+              },
+              h('span', {
+                className: 'dsph-savedSwatch',
+                style: {
+                  background:
+                    'linear-gradient(135deg, ' + entry.custom.light.bg + ' 0 50%, ' + entry.custom.light.accent + ' 50% 100%)',
+                },
+              }),
+              h(
+                'span',
+                { className: 'dsph-savedBody' },
+                h('span', { className: 'dsph-savedName' }, entry.name),
+                h('span', { className: 'dsph-savedTag' }, t('theme.custom')),
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+
     function ColorField(props) {
       return h(
         'label',
@@ -1203,65 +1256,32 @@ window.__ModuleLoader__.load({
       );
     }
 
-    function BasePicker(props) {
+    function BaseStrip(props) {
       const t = props.t;
-      const [open, setOpen] = useState(false);
-      const options = [{ id: 'none', label: t('theme.none') }].concat(
-        PALETTES.map((palette) => ({ id: palette.id, label: t('theme.' + palette.id) })),
-      );
-      useEffect(() => {
-        if (!open) return undefined;
-        const close = (event) => {
-          const target = event.target;
-          if (target instanceof Element && target.closest('.dsph-basePicker')) return;
-          setOpen(false);
-        };
-        document.addEventListener('mousedown', close, true);
-        return () => document.removeEventListener('mousedown', close, true);
-      }, [open]);
       return h(
         'div',
-        { className: 'dsph-basePicker' },
-        h(
-          'button',
-          {
-            type: 'button',
-            className: 'dsph-selectButton dsph-baseButton',
-            'aria-haspopup': 'listbox',
-            'aria-expanded': open,
-            onClick: () => setOpen(!open),
-          },
-          h('span', { className: 'dsph-selectValue' }, t('custom.basePlaceholder')),
-          h(IconChevron, { open: open }),
-        ),
-        open
-          ? h(
-              'div',
-              { className: 'dsph-menu dsph-baseMenu', role: 'listbox', 'aria-label': t('custom.basePlaceholder') },
-              options.map((option) => {
-                const swatch = option.id === 'none' ? { bg: '#ffffff', accent: '#4176e6' } : swatchFor(option.id, props.custom);
-                return h(
-                  'button',
-                  {
-                    key: option.id,
-                    type: 'button',
-                    role: 'option',
-                    className: 'dsph-option dsph-baseOption',
-                    'aria-selected': false,
-                    onClick: () => {
-                      setOpen(false);
-                      props.onPick(option.id);
-                    },
-                  },
-                  h('span', {
-                    className: 'dsph-optionSwatch',
-                    style: { background: 'linear-gradient(135deg, ' + swatch.bg + ' 0 50%, ' + swatch.accent + ' 50% 100%)' },
-                  }),
-                  h('span', { className: 'dsph-optionLabel' }, option.label),
-                );
-              }),
-            )
-          : null,
+        { className: 'dsph-baseStrip', role: 'group', 'aria-label': t('custom.basePlaceholder') },
+        props.options.map((option) => {
+          const swatch = option.custom
+            ? { bg: option.custom.light.bg, accent: option.custom.light.accent }
+            : swatchFor(option.id, props.custom);
+          return h(
+            'button',
+            {
+              key: option.id,
+              type: 'button',
+              className: 'dsph-baseChip',
+              title: option.label,
+              onClick: () => props.onPick(option),
+            },
+            h('span', {
+              className: 'dsph-baseSwatch',
+              style: { background: 'linear-gradient(135deg, ' + swatch.bg + ' 0 50%, ' + swatch.accent + ' 50% 100%)' },
+            }),
+            h('span', { className: 'dsph-baseLabel' }, option.label),
+            option.tag ? h('span', { className: 'dsph-baseTag' }, t('theme.custom')) : null,
+          );
+        }),
       );
     }
 
@@ -1287,6 +1307,20 @@ window.__ModuleLoader__.load({
       const setModeField = (key, value) => {
         const next = Object.assign({}, custom[mode], { [key]: value });
         updateCustom(mode === 'light' ? { light: next } : { dark: next });
+      };
+      const baseOptions = [{ id: 'none', label: t('theme.none') }]
+        .concat(PALETTES.map((palette) => ({ id: palette.id, label: t('theme.' + palette.id) })))
+        .concat(
+          pref.customs.map((entry) => ({
+            id: 'saved:' + entry.name,
+            label: entry.name,
+            custom: entry.custom,
+            tag: true,
+          })),
+        );
+      const pickBase = (option) => {
+        if (option.tag) props.onCloneSaved(option.id.slice(6));
+        else props.onClone(option.id);
       };
       return h(
         'div',
@@ -1321,19 +1355,6 @@ window.__ModuleLoader__.load({
               t('custom.save'),
             ),
             h(
-              'select',
-              {
-                className: 'dsph-nativeSelect',
-                value: pref.customName || '',
-                'aria-label': t('custom.savedPlaceholder'),
-                onChange: (event) => {
-                  if (event.target.value) props.onLoad(event.target.value);
-                },
-              },
-              h('option', { value: '' }, t('custom.savedPlaceholder')),
-              pref.customs.map((entry) => h('option', { key: entry.name, value: entry.name }, entry.name)),
-            ),
-            h(
               'button',
               {
                 type: 'button',
@@ -1343,14 +1364,9 @@ window.__ModuleLoader__.load({
               },
               t('custom.delete'),
             ),
-          ),
-          h(
-            'div',
-            { className: 'dsph-customRow' },
-            h(BasePicker, { t: t, custom: custom, onPick: props.onClone }),
             h('button', { type: 'button', className: 'dsph-miniButton', onClick: props.onExport }, t('custom.export')),
-            h('button', { type: 'button', className: 'dsph-miniButton', onClick: props.onImport }, t('custom.import')),
           ),
+          h(BaseStrip, { t: t, custom: custom, options: baseOptions, onPick: pickBase }),
         ),
         h(
           'div',
@@ -1482,7 +1498,29 @@ window.__ModuleLoader__.load({
       const [editingCustom, setEditingCustom] = useState(false);
       const [localFonts, setLocalFonts] = useState([]);
       const [fontNotice, setFontNotice] = useState('');
+      const [importOpen, setImportOpen] = useState(false);
+      const [importText, setImportText] = useState('');
+      const [importError, setImportError] = useState('');
       const percent = Math.round((themeState.text / TEXT_SIZE_DEFAULT) * 100) + '%';
+
+      const openImport = () => {
+        setImportText('');
+        setImportError('');
+        setImportOpen(true);
+      };
+
+      const applyImport = () => {
+        try {
+          const data = JSON.parse(importText);
+          const custom = readCustom(data && data.custom ? data.custom : data);
+          const name = data && typeof data.name === 'string' ? data.name.trim().slice(0, 40) : '';
+          updatePref({ palette: 'custom', custom, customName: name });
+          setImportOpen(false);
+          setEditingCustom(true);
+        } catch (error) {
+          setImportError(t('custom.importFailed'));
+        }
+      };
 
       const detectLocalFonts = (showNotice) => {
         if (typeof window === 'undefined' || typeof window.queryLocalFonts !== 'function') {
@@ -1540,6 +1578,7 @@ window.__ModuleLoader__.load({
               onLoad: loadCustomTheme,
               onDelete: deleteCustomTheme,
               onClone: cloneCustomBase,
+              onCloneSaved: cloneSavedCustom,
               onExport: () => exportCustomTheme(t),
               onImport: () => importCustomTheme(t),
             })
@@ -1548,10 +1587,15 @@ window.__ModuleLoader__.load({
               value: pref.palette,
               custom: pref.custom,
               onCustom: () => setEditingCustom(true),
-              onImport: () => {
-                if (importCustomTheme(t)) setEditingCustom(true);
-              },
+              onImport: openImport,
             }),
+        !editingCustom
+          ? h(CustomThemeList, {
+              t: t,
+              customs: pref.customs,
+              onLoad: (name) => loadCustomTheme(name),
+            })
+          : null,
         h(
           'div',
           { className: 'dsph-section' },
@@ -1628,6 +1672,46 @@ window.__ModuleLoader__.load({
             onChange: (event) => updateTextSize(event.target.value),
           }),
         ),
+        importOpen
+          ? h(
+              'div',
+              { className: 'dsph-dialogOverlay' },
+              h(
+                'div',
+                { className: 'dsph-dialog', role: 'dialog', 'aria-modal': 'true', 'aria-label': t('theme.import') },
+                h('div', { className: 'dsph-dialogTitle' }, t('theme.import')),
+                h('textarea', {
+                  className: 'dsph-dialogText',
+                  value: importText,
+                  placeholder: t('custom.importPlaceholder'),
+                  onChange: (event) => setImportText(event.target.value),
+                }),
+                importError ? h('div', { className: 'dsph-dialogError' }, importError) : null,
+                h(
+                  'div',
+                  { className: 'dsph-dialogActions' },
+                  h(
+                    'button',
+                    {
+                      type: 'button',
+                      className: 'dsph-miniButton',
+                      onClick: () => setImportOpen(false),
+                    },
+                    t('custom.cancel'),
+                  ),
+                  h(
+                    'button',
+                    {
+                      type: 'button',
+                      className: 'dsph-miniButton dsph-dialogConfirm',
+                      onClick: applyImport,
+                    },
+                    t('custom.importConfirm'),
+                  ),
+                ),
+              ),
+            )
+          : null,
       );
     }
 
@@ -1644,7 +1728,7 @@ window.__ModuleLoader__.load({
 .dsph-trigger[data-active='true']{color:var(--dsw-alias-brand-primary)}
 .dsph-triggerNarrow{width:36px;height:36px;border-radius:var(--dsw-radius-md,12px)}
 .dsph-triggerDot{position:absolute;top:4px;right:5px;width:5px;height:5px;border-radius:50%;background:var(--dsw-alias-brand-primary);box-shadow:0 0 0 1.5px var(--dsw-specific-sidebar-fill)}
-.dsph-panel{position:fixed;left:12px;bottom:64px;z-index:70;width:min(356px,calc(100vw - 24px));max-height:min(660px,calc(100vh - 84px));overflow:auto;overscroll-behavior:contain;box-sizing:border-box;padding:11px 12px 11px;border-radius:16px;border:.5px solid var(--dsw-alias-border-l2);background:var(--dsw-alias-bg-layer-1);color:var(--dsw-alias-label-primary);box-shadow:var(--dsw-elevation-prominent,0 12px 32px rgba(0,0,0,.18));font-family:var(--dsw-font-family);pointer-events:auto}
+.dsph-panel{position:fixed;left:12px;bottom:64px;z-index:70;width:min(356px,calc(100vw - 24px));max-height:min(660px,calc(100vh - 84px));overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;box-sizing:border-box;padding:11px 12px 11px;border-radius:16px;border:.5px solid var(--dsw-alias-border-l2);background:var(--dsw-alias-bg-layer-1);color:var(--dsw-alias-label-primary);box-shadow:var(--dsw-elevation-prominent,0 12px 32px rgba(0,0,0,.18));font-family:var(--dsw-font-family);pointer-events:auto}
 .dsph-head{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-bottom:7px}
 .dsph-title{font-size:15px;font-weight:600;line-height:22px;letter-spacing:.01em;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .dsph-headActions{display:flex;align-items:center;gap:2px;flex:none}
@@ -1697,6 +1781,28 @@ window.__ModuleLoader__.load({
 .dsph-importTheme{margin-left:auto;border:none;background:transparent;color:var(--dsw-alias-brand-primary);font:inherit;font-size:10px;line-height:14px;cursor:pointer;padding:0;opacity:.9}
 .dsph-importTheme:hover{text-decoration:underline}
 .dsph-themeHint{font-size:10px;line-height:13px;color:var(--dsw-alias-label-secondary);margin-top:6px}
+.dsph-sectionSaved{margin-top:2px}
+.dsph-savedList{display:flex;gap:4px;overflow-x:auto;overflow-y:hidden;padding:2px 0 3px;max-width:100%}
+.dsph-savedTheme{display:flex;align-items:center;gap:5px;flex:none;max-width:170px;padding:4px 6px;border:.5px solid var(--dsw-alias-border-l1);border-radius:8px;background:transparent;color:var(--dsw-alias-label-primary);font:inherit;cursor:pointer}
+.dsph-savedTheme:hover{background:var(--dsw-alias-bg-layer-2)}
+.dsph-savedSwatch{width:18px;height:18px;border-radius:50%;flex:none;box-shadow:inset 0 0 0 .5px rgba(0,0,0,.18)}
+.dsph-savedBody{display:flex;flex-direction:column;min-width:0;text-align:left}
+.dsph-savedName{font-size:11px;line-height:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:120px}
+.dsph-savedTag{font-size:8px;line-height:10px;color:var(--dsw-alias-label-secondary)}
+.dsph-baseStrip{display:flex;gap:4px;overflow-x:auto;overflow-y:hidden;padding:2px 0;max-width:100%}
+.dsph-baseChip{display:flex;flex-direction:column;align-items:center;gap:1px;flex:none;width:58px;padding:3px 2px;border:.5px solid transparent;border-radius:7px;background:transparent;color:var(--dsw-alias-label-secondary);font:inherit;cursor:pointer}
+.dsph-baseChip:hover{background:var(--dsw-alias-bg-layer-2);color:var(--dsw-alias-label-primary)}
+.dsph-baseSwatch{width:18px;height:18px;border-radius:50%;box-shadow:inset 0 0 0 .5px rgba(0,0,0,.18)}
+.dsph-baseLabel{max-width:54px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:9px;line-height:11px}
+.dsph-baseTag{font-size:8px;line-height:10px;color:var(--dsw-alias-brand-primary)}
+.dsph-dialogOverlay{position:absolute;inset:0;z-index:10;display:flex;align-items:center;justify-content:center;padding:12px;border-radius:16px;background:color-mix(in srgb, var(--dsw-alias-bg-base) 72%, transparent)}
+.dsph-dialog{width:100%;max-width:320px;box-sizing:border-box;padding:10px;border-radius:12px;border:.5px solid var(--dsw-alias-border-l2);background:var(--dsw-alias-bg-layer-1);box-shadow:var(--dsw-elevation-prominent,0 12px 32px rgba(0,0,0,.18));display:flex;flex-direction:column;gap:6px}
+.dsph-dialogTitle{font-size:12px;line-height:16px;font-weight:600}
+.dsph-dialogText{width:100%;height:120px;box-sizing:border-box;resize:none;border:.5px solid var(--dsw-alias-border-l2);border-radius:7px;background:var(--dsw-alias-bg-layer-2);color:var(--dsw-alias-label-primary);font:inherit;font-size:10px;line-height:13px;padding:6px;outline:none}
+.dsph-dialogText:focus{border-color:var(--dsw-alias-brand-primary)}
+.dsph-dialogError{font-size:10px;line-height:13px;color:var(--dsw-alias-state-error-primary)}
+.dsph-dialogActions{display:flex;justify-content:flex-end;gap:4px}
+.dsph-dialogConfirm{border-color:var(--dsw-alias-brand-primary);color:var(--dsw-alias-brand-primary)}
 .dsph-back{flex:none;width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;padding:0;border:none;border-radius:6px;background:transparent;color:var(--dsw-alias-label-secondary);cursor:pointer}
 .dsph-back:hover{background:var(--dsw-alias-interactive-bg-hover);color:var(--dsw-alias-label-primary)}
 .dsph-back:focus-visible{outline:2px solid var(--dsw-alias-brand-primary);outline-offset:1px}
