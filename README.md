@@ -33,7 +33,7 @@ The interface copy follows the app language (Simplified Chinese / English).
 - **Bottom-left trigger** — a palette icon in the sidebar foot (row above
   Settings). One click opens a compact popover anchored bottom-left.
 - **Settings page** — the same content is also a dedicated
-  **个性化 / Personalization** page in Settings.
+  **主题 / Theme** page in Settings, with the palette glyph in the navigation.
 - **14 presets** — Default (stock harness), Warm, Mono, Claude, Claude+, Vermillion,
   Amber Mono, MX Brutalist, Tiesen, Vescrow, **Catppuccin, Nord, Gruvbox, Tokyo
   Night**, plus a **Custom** card.
@@ -41,8 +41,13 @@ The interface copy follows the app language (Simplified Chinese / English).
   text, border, and that mode's accent color; shared error/success/warning colors;
   and a **Bold borders** switch (1 px borders everywhere + ink-strength border
   tokens). Unpinned slots derive from the background/text automatically.
+- **Custom theme library** — start from any preset as a base, save the current
+  custom theme under a name, switch between saved themes, and export/import the
+  current theme as JSON for sharing or backup.
 - **Fonts** — independent Latin and Chinese stacks plus a code font, applied to
-  interface, conversation, and code text.
+  interface, conversation, and code text. Each role can use a shipped preset or
+  **any font installed on this machine** via a custom font-family input; where
+  the desktop runtime supports it, **Detect local fonts** fills a suggestion list.
 - **Text size** — 10–22 px through the native theme service, so it survives
   reloads and shares the Ctrl/Cmd `+`/`-` shortcuts.
 - **Bilingual UI** — follows the app language (Simplified Chinese / English).

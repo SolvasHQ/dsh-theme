@@ -11,6 +11,10 @@ All notable changes to this plugin are documented here.
   height without introducing a scrollbar.
 - Refreshed the 14-preset palette reference sheet (`research/preview.png`).
 - Settings navigation labels the page **主题 / Theme** and uses the palette glyph (via `settings.section.icon`).
+- Fonts can now use any local font family through a custom input, with local-font
+  detection where the desktop runtime supports it.
+- The custom theme editor can clone any preset as a base, save named custom
+  themes, switch between them, and export/import the current theme as JSON.
 - No behavioural changes to the DIY editor, fonts, or text size.
 
 ## 1.4.0

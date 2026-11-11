@@ -92,6 +92,16 @@ window.__ModuleLoader__.load({
       'back': '返回',
       'boldBorders': '加粗边框',
       'states': '状态色',
+      'custom.namePlaceholder': '主题名称',
+      'custom.save': '保存',
+      'custom.delete': '删除',
+      'custom.basePlaceholder': '选择基底主题',
+      'custom.savedPlaceholder': '选择已保存主题',
+      'custom.export': '导出',
+      'custom.import': '导入',
+      'custom.exportPrompt': '复制这段主题 JSON',
+      'custom.importPrompt': '粘贴主题 JSON',
+      'custom.importFailed': '导入失败：这段 JSON 无效',
       'color.bg': '背景',
       'color.layer': '卡片',
       'color.overlay': '弹层',
@@ -115,6 +125,14 @@ window.__ModuleLoader__.load({
       'font.cjk.kai': '霞鹜文楷',
       'font.cjk.mono': '等宽',
       'font.cjk.rounded': '圆体',
+      'font.latin.custom': '自定义…',
+      'font.cjk.custom': '自定义…',
+      'code.custom': '自定义…',
+      'font.customPlaceholder': '如 "Microsoft YaHei", "Noto Sans SC"',
+      'font.detect': '检测本机字体',
+      'font.detected': '已检测到本机字体，可从输入框的下拉列表选择',
+      'font.detectUnsupported': '当前环境不支持自动检测，直接输入字体名即可',
+      'font.detectFailed': '检测失败，直接输入字体名即可',
       'code.default': '跟随系统',
       'code.cascadia': 'Cascadia Code',
       'code.jetbrains': 'JetBrains Mono',
@@ -159,6 +177,16 @@ window.__ModuleLoader__.load({
       'back': 'Back',
       'boldBorders': 'Bold borders',
       'states': 'Status colors',
+      'custom.namePlaceholder': 'Theme name',
+      'custom.save': 'Save',
+      'custom.delete': 'Delete',
+      'custom.basePlaceholder': 'Start from a preset',
+      'custom.savedPlaceholder': 'Load a saved theme',
+      'custom.export': 'Export',
+      'custom.import': 'Import',
+      'custom.exportPrompt': 'Copy this theme JSON',
+      'custom.importPrompt': 'Paste theme JSON',
+      'custom.importFailed': 'Import failed: invalid theme JSON',
       'color.bg': 'Background',
       'color.layer': 'Card',
       'color.overlay': 'Popover',
@@ -182,6 +210,14 @@ window.__ModuleLoader__.load({
       'font.cjk.kai': 'WenKai',
       'font.cjk.mono': 'Mono',
       'font.cjk.rounded': 'Rounded',
+      'font.latin.custom': 'Custom…',
+      'font.cjk.custom': 'Custom…',
+      'code.custom': 'Custom…',
+      'font.customPlaceholder': 'e.g. "Microsoft YaHei", "Noto Sans SC"',
+      'font.detect': 'Detect local fonts',
+      'font.detected': 'Local fonts detected; pick one from the input suggestions',
+      'font.detectUnsupported': 'Automatic detection is unavailable here; type the font name',
+      'font.detectFailed': 'Detection failed; type the font name instead',
       'code.default': 'System default',
       'code.cascadia': 'Cascadia Code',
       'code.jetbrains': 'JetBrains Mono',
@@ -510,17 +546,30 @@ window.__ModuleLoader__.load({
       return list[0];
     }
 
-    function composeTextStack(latinId, cjkId) {
+    /** Split a user-entered font-family list into safe family names. */
+    function parseFontFamilies(value) {
+      if (typeof value !== 'string') return [];
+      return value
+        .split(',')
+        .map((part) => part.trim().replace(/^["']|["']$/g, '').trim())
+        .filter((name) => name.length > 0 && /^[\p{L}\p{N} ._@'+-]+$/u.test(name))
+        .slice(0, 8);
+    }
+
+    function quoteFamilies(names) {
+      return names.map((name) => '"' + name.replace(/"/g, '') + '"').join(', ');
+    }
+
+    function composeTextStack(latinId, cjkId, latinCustom, cjkCustom) {
       const latin = findFont(LATIN_FONTS, latinId);
       const cjk = findFont(CJK_FONTS, cjkId);
-      if (latin.families.length === 0 && cjk.families.length === 0) return '';
-      const latinFamilies = latin.families.length > 0 ? latin.families : DEFAULT_LATIN_FAMILIES;
-      const cjkFamilies = cjk.families.length > 0 ? cjk.families : DEFAULT_CJK_FAMILIES;
+      const latinFamilies = latinId === 'custom' ? parseFontFamilies(latinCustom) : latin.families;
+      const cjkFamilies = cjkId === 'custom' ? parseFontFamilies(cjkCustom) : cjk.families;
+      if (latinFamilies.length === 0 && cjkFamilies.length === 0) return '';
+      const latinStack = latinFamilies.length > 0 ? latinFamilies : DEFAULT_LATIN_FAMILIES;
+      const cjkStack = cjkFamilies.length > 0 ? cjkFamilies : DEFAULT_CJK_FAMILIES;
       const generic = cjk.generic || latin.generic || DEFAULT_GENERIC;
-      return latinFamilies
-        .concat(cjkFamilies)
-        .map((name) => '"' + name + '"')
-        .join(', ') + ', ' + generic;
+      return quoteFamilies(latinStack.concat(cjkStack)) + ', ' + generic;
     }
 
     function collectTokens(pref) {
@@ -530,10 +579,18 @@ window.__ModuleLoader__.load({
         const generated = buildTokens(palette);
         for (const name of Object.keys(generated)) out[name] = generated[name];
       }
-      const text = composeTextStack(pref.latin, pref.cjk);
+      const text = composeTextStack(pref.latin, pref.cjk, pref.latinCustom, pref.cjkCustom);
       if (text) out['--dsh-font-family-text'] = { light: text, dark: text };
-      const codeFont = findFont(CODE_FONTS, pref.code);
-      if (codeFont.stack) out['--dsh-font-family-code'] = { light: codeFont.stack, dark: codeFont.stack };
+      if (pref.code === 'custom') {
+        const families = parseFontFamilies(pref.codeCustom);
+        if (families.length > 0) {
+          const stack = quoteFamilies(families) + ', monospace';
+          out['--dsh-font-family-code'] = { light: stack, dark: stack };
+        }
+      } else {
+        const codeFont = findFont(CODE_FONTS, pref.code);
+        if (codeFont.stack) out['--dsh-font-family-code'] = { light: codeFont.stack, dark: codeFont.stack };
+      }
       return out;
     }
 
@@ -578,7 +635,18 @@ window.__ModuleLoader__.load({
     }
 
     function defaultPref() {
-      return { palette: 'none', latin: 'system', cjk: 'system', code: 'default', custom: defaultCustom() };
+      return {
+        palette: 'none',
+        latin: 'system',
+        cjk: 'system',
+        code: 'default',
+        latinCustom: '',
+        cjkCustom: '',
+        codeCustom: '',
+        custom: defaultCustom(),
+        customName: '',
+        customs: [],
+      };
     }
 
     function readModeColors(source) {
@@ -627,7 +695,28 @@ window.__ModuleLoader__.load({
       const latin = LATIN_FONTS.some((font) => font.id === data.latin) ? data.latin : 'system';
       const cjk = CJK_FONTS.some((font) => font.id === data.cjk) ? data.cjk : 'system';
       const code = CODE_FONTS.some((font) => font.id === data.code) ? data.code : 'default';
-      return { palette, latin, cjk, code, custom: readCustom(data.custom) };
+      const customText = (value) => (typeof value === 'string' ? value.slice(0, 240) : '');
+      const customs = Array.isArray(data.customs)
+        ? data.customs
+            .slice(0, 30)
+            .map((entry) => ({
+              name: typeof entry?.name === 'string' ? entry.name.trim().slice(0, 40) : '',
+              custom: readCustom(entry?.custom),
+            }))
+            .filter((entry) => entry.name.length > 0)
+        : [];
+      return {
+        palette,
+        latin,
+        cjk,
+        code,
+        latinCustom: customText(data.latinCustom),
+        cjkCustom: customText(data.cjkCustom),
+        codeCustom: customText(data.codeCustom),
+        custom: readCustom(data.custom),
+        customName: typeof data.customName === 'string' ? data.customName.trim().slice(0, 40) : '',
+        customs,
+      };
     }
 
     function readPref() {
@@ -646,7 +735,12 @@ window.__ModuleLoader__.load({
         latin: pref.latin,
         cjk: pref.cjk,
         code: pref.code,
+        latinCustom: pref.latinCustom,
+        cjkCustom: pref.cjkCustom,
+        codeCustom: pref.codeCustom,
         custom: pref.custom,
+        customName: pref.customName,
+        customs: pref.customs,
       });
     }
 
@@ -783,6 +877,95 @@ window.__ModuleLoader__.load({
       const current = prefStore.get();
       const custom = Object.assign({}, current.custom, patch);
       updatePref({ palette: 'custom', custom });
+    }
+
+    function cloneCustom(custom) {
+      return JSON.parse(JSON.stringify(custom));
+    }
+
+    /** Copy a shipped preset into the editable custom shape. */
+    function customFromPreset(paletteId) {
+      const preset = PALETTES.find((item) => item.id === paletteId);
+      if (!preset) return defaultCustom();
+      const mode = (p) => ({
+        bg: p.bgBase,
+        layer: p.bgLayer1,
+        overlay: p.bgOverlay,
+        sidebar: p.sidebarFill,
+        label: p.labelPrimary,
+        border: p.borderL2,
+        accent: p.brandPrimary,
+      });
+      return {
+        light: mode(preset.light),
+        dark: mode(preset.dark),
+        error: preset.light.stateError,
+        success: preset.light.stateSuccess,
+        warn: preset.light.stateWarn,
+        bold: false,
+      };
+    }
+
+    function saveCustomTheme(name) {
+      const trimmed = String(name || '').trim().slice(0, 40);
+      if (!trimmed) return;
+      const current = prefStore.get();
+      const entry = { name: trimmed, custom: cloneCustom(current.custom) };
+      const customs = current.customs
+        .filter((item) => item.name !== trimmed)
+        .concat([entry])
+        .slice(0, 30);
+      updatePref({ palette: 'custom', customName: trimmed, customs });
+    }
+
+    function loadCustomTheme(name) {
+      const current = prefStore.get();
+      const entry = current.customs.find((item) => item.name === name);
+      if (!entry) return;
+      updatePref({ palette: 'custom', custom: cloneCustom(entry.custom), customName: entry.name });
+    }
+
+    function deleteCustomTheme(name) {
+      const current = prefStore.get();
+      const customs = current.customs.filter((item) => item.name !== name);
+      updatePref({ customs, customName: current.customName === name ? '' : current.customName });
+    }
+
+    function cloneCustomBase(paletteId) {
+      updatePref({ palette: 'custom', custom: customFromPreset(paletteId), customName: '' });
+    }
+
+    function exportCustomTheme(t) {
+      if (typeof window === 'undefined') return;
+      const current = prefStore.get();
+      const text = JSON.stringify(
+        { format: 'dsh-theme-custom', version: 1, name: current.customName || '', custom: current.custom },
+        null,
+        2,
+      );
+      try {
+        if (window.navigator && window.navigator.clipboard && window.navigator.clipboard.writeText) {
+          window.navigator.clipboard.writeText(text).catch(() => window.prompt(t('custom.exportPrompt'), text));
+          return;
+        }
+      } catch (error) {
+        /* fall through to the prompt */
+      }
+      window.prompt(t('custom.exportPrompt'), text);
+    }
+
+    function importCustomTheme(t) {
+      if (typeof window === 'undefined' || typeof window.prompt !== 'function') return;
+      const raw = window.prompt(t('custom.importPrompt'));
+      if (!raw) return;
+      try {
+        const data = JSON.parse(raw);
+        const custom = readCustom(data && data.custom ? data.custom : data);
+        const name = data && typeof data.name === 'string' ? data.name.trim().slice(0, 40) : '';
+        updatePref({ palette: 'custom', custom, customName: name });
+      } catch (error) {
+        window.alert(t('custom.importFailed'));
+      }
     }
 
     function updateTextSize(px) {
@@ -998,7 +1181,12 @@ window.__ModuleLoader__.load({
     function CustomEditor(props) {
       const t = props.t;
       const custom = props.custom;
+      const pref = props.pref;
       const [mode, setMode] = useState('light');
+      const [draftName, setDraftName] = useState(pref.customName || '');
+      useEffect(() => {
+        setDraftName(pref.customName || '');
+      }, [pref.customName]);
       const anchors = customPalette(custom)[mode];
       const anchorKeys = {
         layer: 'bgLayer1',
@@ -1025,6 +1213,74 @@ window.__ModuleLoader__.load({
             h(IconBack),
           ),
           h('span', { className: 'dsph-editorTitle' }, t('customTitle')),
+        ),
+        h(
+          'div',
+          { className: 'dsph-customManage' },
+          h(
+            'div',
+            { className: 'dsph-customRow' },
+            h('input', {
+              type: 'text',
+              className: 'dsph-customName',
+              value: draftName,
+              placeholder: t('custom.namePlaceholder'),
+              'aria-label': t('custom.namePlaceholder'),
+              onChange: (event) => setDraftName(event.target.value),
+            }),
+            h(
+              'button',
+              { type: 'button', className: 'dsph-miniButton', onClick: () => props.onSave(draftName) },
+              t('custom.save'),
+            ),
+            h(
+              'button',
+              {
+                type: 'button',
+                className: 'dsph-miniButton',
+                disabled: !pref.customName,
+                onClick: () => props.onDelete(pref.customName),
+              },
+              t('custom.delete'),
+            ),
+          ),
+          h(
+            'div',
+            { className: 'dsph-customRow' },
+            h(
+              'select',
+              {
+                className: 'dsph-nativeSelect',
+                value: '',
+                'aria-label': t('custom.basePlaceholder'),
+                onChange: (event) => {
+                  if (event.target.value) props.onClone(event.target.value);
+                },
+              },
+              h('option', { value: '' }, t('custom.basePlaceholder')),
+              h('option', { value: 'none' }, t('theme.none')),
+              PALETTES.map((palette) => h('option', { key: palette.id, value: palette.id }, t('theme.' + palette.id))),
+            ),
+            h(
+              'select',
+              {
+                className: 'dsph-nativeSelect',
+                value: pref.customName || '',
+                'aria-label': t('custom.savedPlaceholder'),
+                onChange: (event) => {
+                  if (event.target.value) props.onLoad(event.target.value);
+                },
+              },
+              h('option', { value: '' }, t('custom.savedPlaceholder')),
+              pref.customs.map((entry) => h('option', { key: entry.name, value: entry.name }, entry.name)),
+            ),
+          ),
+          h(
+            'div',
+            { className: 'dsph-customRow dsph-customActions' },
+            h('button', { type: 'button', className: 'dsph-miniButton', onClick: props.onExport }, t('custom.export')),
+            h('button', { type: 'button', className: 'dsph-miniButton', onClick: props.onImport }, t('custom.import')),
+          ),
         ),
         h(
           'div',
@@ -1147,13 +1403,64 @@ window.__ModuleLoader__.load({
       );
     }
 
+    function FontField(props) {
+      return h(
+        'div',
+        { className: 'dsph-fontField' },
+        h(Select, {
+          t: props.t,
+          id: props.id,
+          prefix: props.prefix,
+          label: props.label,
+          value: props.value,
+          options: props.options.concat([{ id: 'custom' }]),
+          open: props.open,
+          onToggle: props.onToggle,
+          onPick: props.onPick,
+        }),
+        props.value === 'custom'
+          ? h('input', {
+              type: 'text',
+              className: 'dsph-fontInput',
+              list: props.hasLocalFonts ? 'dsph-local-fonts' : undefined,
+              value: props.customValue,
+              placeholder: props.t('font.customPlaceholder'),
+              'aria-label': props.label,
+              onChange: (event) => props.onCustomChange(event.target.value),
+            })
+          : null,
+      );
+    }
+
     function PersonalizationContent(props) {
       const t = props.t;
       const pref = useStore(prefStore);
       const themeState = useStore(themeStore);
       const [openMenu, setOpenMenu] = useState(null);
       const [editingCustom, setEditingCustom] = useState(false);
+      const [localFonts, setLocalFonts] = useState([]);
+      const [fontNotice, setFontNotice] = useState('');
       const percent = Math.round((themeState.text / TEXT_SIZE_DEFAULT) * 100) + '%';
+
+      const detectLocalFonts = () => {
+        if (typeof window === 'undefined' || typeof window.queryLocalFonts !== 'function') {
+          setFontNotice(t('font.detectUnsupported'));
+          return;
+        }
+        try {
+          Promise.resolve(window.queryLocalFonts())
+            .then((fonts) => {
+              const families = Array.from(
+                new Set((fonts || []).map((font) => font.family).filter((family) => typeof family === 'string' && family)),
+              ).sort();
+              setLocalFonts(families);
+              setFontNotice(families.length > 0 ? t('font.detected') : t('font.detectFailed'));
+            })
+            .catch(() => setFontNotice(t('font.detectFailed')));
+        } catch (error) {
+          setFontNotice(t('font.detectFailed'));
+        }
+      };
 
       useEffect(() => {
         if (!openMenu) return undefined;
@@ -1171,7 +1478,18 @@ window.__ModuleLoader__.load({
         { className: 'dsph-content' },
         h(ModeControl, { t: t, mode: themeState.preference }),
         pref.palette === 'custom' && editingCustom
-          ? h(CustomEditor, { t: t, custom: pref.custom, onBack: () => setEditingCustom(false) })
+          ? h(CustomEditor, {
+              t: t,
+              custom: pref.custom,
+              pref: pref,
+              onBack: () => setEditingCustom(false),
+              onSave: saveCustomTheme,
+              onLoad: loadCustomTheme,
+              onDelete: deleteCustomTheme,
+              onClone: cloneCustomBase,
+              onExport: () => exportCustomTheme(t),
+              onImport: () => importCustomTheme(t),
+            })
           : h(ThemeGrid, {
               t: t,
               value: pref.palette,
@@ -1181,11 +1499,20 @@ window.__ModuleLoader__.load({
         h(
           'div',
           { className: 'dsph-section' },
-          h('div', { className: 'dsph-sectionTitle' }, h('span', null, t('fontsTitle'))),
+          h(
+            'div',
+            { className: 'dsph-sectionTitle' },
+            h('span', null, t('fontsTitle')),
+            h(
+              'button',
+              { type: 'button', className: 'dsph-fontDetect', onClick: detectLocalFonts },
+              t('font.detect'),
+            ),
+          ),
           h(
             'div',
             { className: 'dsph-fontRow' },
-            h(Select, {
+            h(FontField, {
               t: t,
               id: 'latin',
               prefix: 'font.latin.',
@@ -1195,8 +1522,11 @@ window.__ModuleLoader__.load({
               open: openMenu === 'latin',
               onToggle: setOpenMenu,
               onPick: (role, id) => updatePref({ latin: id }),
+              customValue: pref.latinCustom,
+              hasLocalFonts: localFonts.length > 0,
+              onCustomChange: (value) => updatePref({ latinCustom: value }),
             }),
-            h(Select, {
+            h(FontField, {
               t: t,
               id: 'cjk',
               prefix: 'font.cjk.',
@@ -1206,12 +1536,15 @@ window.__ModuleLoader__.load({
               open: openMenu === 'cjk',
               onToggle: setOpenMenu,
               onPick: (role, id) => updatePref({ cjk: id }),
+              customValue: pref.cjkCustom,
+              hasLocalFonts: localFonts.length > 0,
+              onCustomChange: (value) => updatePref({ cjkCustom: value }),
             }),
           ),
           h(
             'div',
             { className: 'dsph-fontRow dsph-fontRowSingle' },
-            h(Select, {
+            h(FontField, {
               t: t,
               id: 'code',
               prefix: 'code.',
@@ -1221,8 +1554,19 @@ window.__ModuleLoader__.load({
               open: openMenu === 'code',
               onToggle: setOpenMenu,
               onPick: (role, id) => updatePref({ code: id }),
+              customValue: pref.codeCustom,
+              hasLocalFonts: localFonts.length > 0,
+              onCustomChange: (value) => updatePref({ codeCustom: value }),
             }),
           ),
+          localFonts.length > 0
+            ? h(
+                'datalist',
+                { id: 'dsph-local-fonts' },
+                localFonts.map((family) => h('option', { key: family, value: family })),
+              )
+            : null,
+          fontNotice ? h('div', { className: 'dsph-fontNotice', role: 'status' }, fontNotice) : null,
         ),
         h(
           'div',
@@ -1296,6 +1640,15 @@ window.__ModuleLoader__.load({
 .dsph-custom{display:none}
 .dsph-editor{display:flex;flex-direction:column;gap:7px;padding:1px 1px 2px}
 .dsph-editorHead{display:flex;align-items:center;gap:6px;min-height:24px}
+.dsph-customManage{display:flex;flex-direction:column;gap:4px;margin-bottom:2px}
+.dsph-customRow{display:flex;align-items:center;gap:4px;min-width:0}
+.dsph-customName{flex:1;min-width:0;box-sizing:border-box;border:.5px solid var(--dsw-alias-border-l2);border-radius:7px;background:var(--dsw-alias-bg-layer-1);color:var(--dsw-alias-label-primary);font:inherit;font-size:11px;line-height:14px;padding:5px 7px;outline:none}
+.dsph-customName:focus{border-color:var(--dsw-alias-brand-primary)}
+.dsph-nativeSelect{flex:1;min-width:0;box-sizing:border-box;border:.5px solid var(--dsw-alias-border-l2);border-radius:7px;background:var(--dsw-alias-bg-layer-1);color:var(--dsw-alias-label-primary);font:inherit;font-size:11px;line-height:14px;padding:4px 6px;outline:none}
+.dsph-miniButton{flex:none;border:.5px solid var(--dsw-alias-border-l2);border-radius:7px;background:transparent;color:var(--dsw-alias-label-secondary);font:inherit;font-size:10px;line-height:14px;padding:4px 7px;cursor:pointer}
+.dsph-miniButton:hover:not(:disabled){background:var(--dsw-alias-bg-layer-2);color:var(--dsw-alias-label-primary)}
+.dsph-miniButton:disabled{opacity:.4;cursor:default}
+.dsph-customActions{justify-content:flex-end}
 .dsph-back{flex:none;width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;padding:0;border:none;border-radius:6px;background:transparent;color:var(--dsw-alias-label-secondary);cursor:pointer}
 .dsph-back:hover{background:var(--dsw-alias-interactive-bg-hover);color:var(--dsw-alias-label-primary)}
 .dsph-back:focus-visible{outline:2px solid var(--dsw-alias-brand-primary);outline-offset:1px}
@@ -1322,6 +1675,12 @@ window.__ModuleLoader__.load({
 .dsph-switchOn .dsph-switchThumb{transform:translateX(12px)}
 .dsph-fontRow{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .dsph-fontRowSingle{grid-template-columns:1fr 1fr}
+.dsph-fontField{display:flex;flex-direction:column;gap:4px;min-width:0}
+.dsph-fontInput{width:100%;box-sizing:border-box;border:.5px solid var(--dsw-alias-border-l2);border-radius:7px;background:var(--dsw-alias-bg-layer-1);color:var(--dsw-alias-label-primary);font:inherit;font-size:11px;line-height:14px;padding:5px 7px;outline:none}
+.dsph-fontInput:focus{border-color:var(--dsw-alias-brand-primary)}
+.dsph-fontDetect{border:none;background:transparent;color:var(--dsw-alias-brand-primary);font:inherit;font-size:10px;line-height:14px;padding:0;cursor:pointer;opacity:.85}
+.dsph-fontDetect:hover{text-decoration:underline}
+.dsph-fontNotice{font-size:10px;line-height:13px;color:var(--dsw-alias-label-secondary)}
 .dsph-field{display:flex;flex-direction:column;gap:3px;min-width:0}
 .dsph-fieldLabel{font-size:11px;line-height:14px;color:var(--dsw-alias-label-tertiary)}
 .dsph-select{position:relative;min-width:0}
@@ -1454,7 +1813,7 @@ window.__ModuleLoader__.load({
         {
           width: size,
           height: size,
-          viewBox: '0 0 48 48',
+          viewBox: '9 9 30 30',
           fill: 'none',
           'aria-hidden': 'true',
           focusable: 'false',
