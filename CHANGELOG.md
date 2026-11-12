@@ -22,6 +22,8 @@ All notable changes to this plugin are documented here.
   picker.
 - The custom theme editor can clone any preset as a base, save named custom
   themes, switch between them, and export/import the current theme as JSON.
+- The panel is localized in all eight shipped DSH languages: Simplified Chinese,
+  English, Japanese, Spanish, French, German, Russian and Brazilian Portuguese.
 - No behavioural changes to the DIY editor, fonts, or text size.
 
 ## 1.4.0

@@ -97,6 +97,7 @@ window.__ModuleLoader__.load({
       'boldBorders': '加粗边框',
       'states': '状态色',
       'custom.namePlaceholder': '主题名称',
+      'custom.nameRequired': '请先给主题命名',
       'custom.save': '保存',
       'custom.delete': '删除',
       'custom.basePlaceholder': '选择基底主题',
@@ -200,6 +201,7 @@ window.__ModuleLoader__.load({
       'boldBorders': 'Bold borders',
       'states': 'Status colors',
       'custom.namePlaceholder': 'Theme name',
+      'custom.nameRequired': 'Name the theme before saving',
       'custom.save': 'Save',
       'custom.delete': 'Delete',
       'custom.basePlaceholder': 'Start from a preset',
@@ -263,6 +265,493 @@ window.__ModuleLoader__.load({
       'code.sf-mono': 'SF Mono',
       'code.sarasa': 'Sarasa Mono SC',
     };
+
+    /* Additional shipped locales inherit every remaining label from English. */
+    const ja = Object.assign({}, en, {
+      'trigger': 'テーマのカスタマイズ',
+      'title': 'パーソナライズ',
+      'subtitle': 'テーマ配色・フォント・文字サイズ',
+      'close': '閉じる',
+      'section': 'テーマ',
+      'appearance': '外観',
+      'mode.system': 'システム',
+      'mode.light': 'ライト',
+      'mode.dark': 'ダーク',
+      'themeTitle': 'テーマカラー',
+      'theme.import': 'テーマ JSON を読み込む',
+      'theme.hint': 'プリセットから始めるか、テーマ JSON を読み込んで「カスタム」で調整します。',
+      'fontsTitle': 'フォント',
+      'latin': '英字',
+      'cjk': '中国語',
+      'codeFont': 'コードフォント',
+      'fontSize': '文字サイズ',
+      'reset': 'リセット',
+      'theme.none': 'デフォルト',
+      'theme.custom': 'カスタム',
+      'customTitle': 'カスタムテーマ',
+      'back': '戻る',
+      'boldBorders': '枠線を太く',
+      'states': 'ステータス色',
+      'custom.namePlaceholder': 'テーマ名',
+      'custom.nameRequired': '保存する前にテーマ名を入力してください',
+      'custom.save': '保存',
+      'custom.delete': '削除',
+      'custom.basePlaceholder': 'プリセットから開始',
+      'custom.baseLabel': 'ベーステーマ',
+      'custom.savedPlaceholder': '保存済みテーマを読み込む',
+      'custom.importedName': '読み込んだテーマ',
+      'custom.example': '例',
+      'custom.fromFile': 'ファイルから読み込む',
+      'custom.exampleName': 'テーマ名（自由に設定）',
+      'custom.exampleBg': '背景',
+      'custom.exampleAccent': 'アクセント',
+      'custom.exampleHint': 'light / dark の組み合わせに対応。ほかの項目は省略できます',
+      'font.showLocal': 'ローカルフォント',
+      'custom.export': 'エクスポート',
+      'custom.import': 'インポート',
+      'custom.importPrompt': 'テーマ JSON を貼り付け',
+      'custom.importFailed': 'インポート失敗：JSON が正しくありません',
+      'custom.savedTitle': 'マイテーマ',
+      'custom.manage': '管理',
+      'custom.done': '完了',
+      'custom.cancel': 'キャンセル',
+      'custom.importConfirm': 'インポート',
+      'custom.importPlaceholder': 'テーマ JSON を貼り付け',
+      'color.bg': '背景',
+      'color.layer': 'カード',
+      'color.overlay': 'ポップオーバー',
+      'color.sidebar': 'サイドバー',
+      'color.label': 'テキスト',
+      'color.border': '枠線',
+      'color.accent': 'アクセント',
+      'color.error': 'エラー',
+      'color.success': '成功',
+      'color.warn': '警告',
+      'font.detect': 'ローカルフォントを検出',
+      'font.detected': 'ローカルフォントを検出しました。入力候補から選択できます',
+      'font.detectUnsupported': 'この環境では自動検出できません。フォント名を入力してください',
+      'font.detectFailed': '検出に失敗しました。フォント名を入力してください',
+      'font.localPrefix': 'ローカル · ',
+      'font.latin.system': 'システム',
+      'font.latin.humanist': 'ヒューマニスト',
+      'font.latin.serif': 'セリフ',
+      'font.latin.rounded': '丸ゴシック',
+      'font.latin.mono': '等幅',
+      'font.latin.kai': 'パラティーノ',
+      'font.cjk.system': 'システム',
+      'font.cjk.yahei': '雅黒',
+      'font.cjk.source-han': '思源黒体',
+      'font.cjk.serif': '思源宋体',
+      'font.cjk.kai': '霞鶩文楷',
+      'font.cjk.mono': '等幅',
+      'font.cjk.rounded': '丸ゴシック',
+      'code.default': 'システム標準',
+    });
+
+    const es = Object.assign({}, en, {
+      'trigger': 'Tema de personalización',
+      'title': 'Personalización',
+      'subtitle': 'Paleta de tema, fuentes y tamaño del texto',
+      'close': 'Cerrar',
+      'section': 'Tema',
+      'appearance': 'Apariencia',
+      'mode.system': 'Sistema',
+      'mode.light': 'Claro',
+      'mode.dark': 'Oscuro',
+      'themeTitle': 'Color del tema',
+      'theme.import': 'Importar tema JSON',
+      'theme.hint': 'Empieza con un preajuste o importa un tema JSON; luego abre Personalizado para ajustarlo.',
+      'fontsTitle': 'Fuentes',
+      'latin': 'Latina',
+      'cjk': 'China',
+      'codeFont': 'Fuente de código',
+      'fontSize': 'Tamaño del texto',
+      'reset': 'Restablecer',
+      'theme.none': 'Predeterminado',
+      'theme.custom': 'Personalizado',
+      'customTitle': 'Tema personalizado',
+      'back': 'Atrás',
+      'boldBorders': 'Bordes gruesos',
+      'states': 'Colores de estado',
+      'custom.namePlaceholder': 'Nombre del tema',
+      'custom.nameRequired': 'Ponle un nombre al tema antes de guardar',
+      'custom.save': 'Guardar',
+      'custom.delete': 'Eliminar',
+      'custom.basePlaceholder': 'Empezar desde un preajuste',
+      'custom.baseLabel': 'Tema base',
+      'custom.savedPlaceholder': 'Cargar un tema guardado',
+      'custom.importedName': 'Tema importado',
+      'custom.example': 'Ejemplo',
+      'custom.fromFile': 'Importar desde archivo',
+      'custom.exampleName': 'nombre del tema, a tu elección',
+      'custom.exampleBg': 'fondo',
+      'custom.exampleAccent': 'acento',
+      'custom.exampleHint': 'se admiten pares claro/oscuro; los demás campos son opcionales',
+      'font.showLocal': 'Fuentes locales',
+      'custom.export': 'Exportar',
+      'custom.import': 'Importar',
+      'custom.importPrompt': 'Pega el JSON del tema',
+      'custom.importFailed': 'Error al importar: JSON no válido',
+      'custom.savedTitle': 'Mis temas',
+      'custom.manage': 'Gestionar',
+      'custom.done': 'Listo',
+      'custom.cancel': 'Cancelar',
+      'custom.importConfirm': 'Importar',
+      'custom.importPlaceholder': 'Pega el JSON del tema',
+      'color.bg': 'Fondo',
+      'color.layer': 'Tarjeta',
+      'color.overlay': 'Emergente',
+      'color.sidebar': 'Barra lateral',
+      'color.label': 'Texto',
+      'color.border': 'Borde',
+      'color.accent': 'Acento',
+      'color.error': 'Error',
+      'color.success': 'Éxito',
+      'color.warn': 'Advertencia',
+      'font.detect': 'Detectar fuentes locales',
+      'font.detected': 'Fuentes locales detectadas; elige una en las sugerencias',
+      'font.detectUnsupported': 'La detección automática no está disponible; escribe el nombre de la fuente',
+      'font.detectFailed': 'La detección falló; escribe el nombre de la fuente',
+      'font.localPrefix': 'Local · ',
+      'font.latin.system': 'Sistema',
+      'font.latin.humanist': 'Humanista',
+      'font.latin.serif': 'Serif',
+      'font.latin.rounded': 'Redondeada',
+      'font.latin.mono': 'Monoespaciada',
+      'font.latin.kai': 'Palatino',
+      'font.cjk.system': 'Sistema',
+      'font.cjk.yahei': 'YaHei',
+      'font.cjk.source-han': 'Source Han Sans',
+      'font.cjk.serif': 'Serif Song',
+      'font.cjk.kai': 'WenKai',
+      'font.cjk.mono': 'Mono',
+      'font.cjk.rounded': 'Redondeada',
+      'code.default': 'Predeterminada del sistema',
+    });
+
+    const fr = Object.assign({}, en, {
+      'trigger': 'Thème de personnalisation',
+      'title': 'Personnalisation',
+      'subtitle': 'Palette de thème, polices et taille du texte',
+      'close': 'Fermer',
+      'section': 'Thème',
+      'appearance': 'Apparence',
+      'mode.system': 'Système',
+      'mode.light': 'Clair',
+      'mode.dark': 'Sombre',
+      'themeTitle': 'Couleur du thème',
+      'theme.import': 'Importer un thème JSON',
+      'theme.hint': 'Partez d’un préréglage ou importez un thème JSON, puis ouvrez Personnalisé pour l’ajuster.',
+      'fontsTitle': 'Polices',
+      'latin': 'Latine',
+      'cjk': 'Chinoise',
+      'codeFont': 'Police de code',
+      'fontSize': 'Taille du texte',
+      'reset': 'Réinitialiser',
+      'theme.none': 'Par défaut',
+      'theme.custom': 'Personnalisé',
+      'customTitle': 'Thème personnalisé',
+      'back': 'Retour',
+      'boldBorders': 'Bordures épaisses',
+      'states': 'Couleurs d’état',
+      'custom.namePlaceholder': 'Nom du thème',
+      'custom.nameRequired': 'Donnez un nom au thème avant d’enregistrer',
+      'custom.save': 'Enregistrer',
+      'custom.delete': 'Supprimer',
+      'custom.basePlaceholder': 'Partir d’un préréglage',
+      'custom.baseLabel': 'Thème de base',
+      'custom.savedPlaceholder': 'Charger un thème enregistré',
+      'custom.importedName': 'Thème importé',
+      'custom.example': 'Exemple',
+      'custom.fromFile': 'Importer depuis un fichier',
+      'custom.exampleName': 'nom du thème, à votre choix',
+      'custom.exampleBg': 'fond',
+      'custom.exampleAccent': 'accent',
+      'custom.exampleHint': 'les paires clair/sombre sont prises en charge ; les autres champs sont facultatifs',
+      'font.showLocal': 'Polices locales',
+      'custom.export': 'Exporter',
+      'custom.import': 'Importer',
+      'custom.importPrompt': 'Collez le JSON du thème',
+      'custom.importFailed': 'Échec de l’import : JSON invalide',
+      'custom.savedTitle': 'Mes thèmes',
+      'custom.manage': 'Gérer',
+      'custom.done': 'Terminé',
+      'custom.cancel': 'Annuler',
+      'custom.importConfirm': 'Importer',
+      'custom.importPlaceholder': 'Collez le JSON du thème',
+      'color.bg': 'Fond',
+      'color.layer': 'Carte',
+      'color.overlay': 'Fenêtre',
+      'color.sidebar': 'Barre latérale',
+      'color.label': 'Texte',
+      'color.border': 'Bordure',
+      'color.accent': 'Accent',
+      'color.error': 'Erreur',
+      'color.success': 'Succès',
+      'color.warn': 'Avertissement',
+      'font.detect': 'Détecter les polices locales',
+      'font.detected': 'Polices locales détectées ; choisissez-en une dans les suggestions',
+      'font.detectUnsupported': 'La détection automatique est indisponible ; saisissez le nom de la police',
+      'font.detectFailed': 'La détection a échoué ; saisissez le nom de la police',
+      'font.localPrefix': 'Locale · ',
+      'font.latin.system': 'Système',
+      'font.latin.humanist': 'Humaniste',
+      'font.latin.serif': 'Serif',
+      'font.latin.rounded': 'Arrondie',
+      'font.latin.mono': 'Chasse fixe',
+      'font.latin.kai': 'Palatino',
+      'font.cjk.system': 'Système',
+      'font.cjk.yahei': 'YaHei',
+      'font.cjk.source-han': 'Source Han Sans',
+      'font.cjk.serif': 'Serif Song',
+      'font.cjk.kai': 'WenKai',
+      'font.cjk.mono': 'Chasse fixe',
+      'font.cjk.rounded': 'Arrondie',
+      'code.default': 'Système par défaut',
+    });
+
+    const de = Object.assign({}, en, {
+      'trigger': 'Personalisierungs-Theme',
+      'title': 'Personalisierung',
+      'subtitle': 'Farbpalette, Schriften und Textgröße',
+      'close': 'Schließen',
+      'section': 'Theme',
+      'appearance': 'Erscheinungsbild',
+      'mode.system': 'System',
+      'mode.light': 'Hell',
+      'mode.dark': 'Dunkel',
+      'themeTitle': 'Themenfarbe',
+      'theme.import': 'Theme-JSON importieren',
+      'theme.hint': 'Mit einer Voreinstellung beginnen oder Theme-JSON importieren, dann unter „Benutzerdefiniert“ anpassen.',
+      'fontsTitle': 'Schriften',
+      'latin': 'Lateinisch',
+      'cjk': 'Chinesisch',
+      'codeFont': 'Codeschrift',
+      'fontSize': 'Textgröße',
+      'reset': 'Zurücksetzen',
+      'theme.none': 'Standard',
+      'theme.custom': 'Benutzerdefiniert',
+      'customTitle': 'Benutzerdefiniertes Theme',
+      'back': 'Zurück',
+      'boldBorders': 'Kräftige Rahmen',
+      'states': 'Statusfarben',
+      'custom.namePlaceholder': 'Theme-Name',
+      'custom.nameRequired': 'Bitte vor dem Speichern einen Namen vergeben',
+      'custom.save': 'Speichern',
+      'custom.delete': 'Löschen',
+      'custom.basePlaceholder': 'Mit einer Voreinstellung beginnen',
+      'custom.baseLabel': 'Basis-Theme',
+      'custom.savedPlaceholder': 'Gespeichertes Theme laden',
+      'custom.importedName': 'Importiertes Theme',
+      'custom.example': 'Beispiel',
+      'custom.fromFile': 'Aus Datei importieren',
+      'custom.exampleName': 'Theme-Name, frei wählbar',
+      'custom.exampleBg': 'Hintergrund',
+      'custom.exampleAccent': 'Akzent',
+      'custom.exampleHint': 'Hell/Dunkel-Paare werden unterstützt; weitere Felder sind optional',
+      'font.showLocal': 'Lokale Schriften',
+      'custom.export': 'Exportieren',
+      'custom.import': 'Importieren',
+      'custom.importPrompt': 'Theme-JSON einfügen',
+      'custom.importFailed': 'Import fehlgeschlagen: ungültiges JSON',
+      'custom.savedTitle': 'Meine Themes',
+      'custom.manage': 'Verwalten',
+      'custom.done': 'Fertig',
+      'custom.cancel': 'Abbrechen',
+      'custom.importConfirm': 'Importieren',
+      'custom.importPlaceholder': 'Theme-JSON einfügen',
+      'color.bg': 'Hintergrund',
+      'color.layer': 'Karte',
+      'color.overlay': 'Overlay',
+      'color.sidebar': 'Seitenleiste',
+      'color.label': 'Text',
+      'color.border': 'Rahmen',
+      'color.accent': 'Akzent',
+      'color.error': 'Fehler',
+      'color.success': 'Erfolg',
+      'color.warn': 'Warnung',
+      'font.detect': 'Lokale Schriften erkennen',
+      'font.detected': 'Lokale Schriften erkannt; wähle eine aus den Vorschlägen',
+      'font.detectUnsupported': 'Automatische Erkennung ist hier nicht verfügbar; Schriftnamen eingeben',
+      'font.detectFailed': 'Erkennung fehlgeschlagen; Schriftnamen eingeben',
+      'font.localPrefix': 'Lokal · ',
+      'font.latin.system': 'System',
+      'font.latin.humanist': 'Humanistisch',
+      'font.latin.serif': 'Serif',
+      'font.latin.rounded': 'Rund',
+      'font.latin.mono': 'Monospace',
+      'font.latin.kai': 'Palatino',
+      'font.cjk.system': 'System',
+      'font.cjk.yahei': 'YaHei',
+      'font.cjk.source-han': 'Source Han Sans',
+      'font.cjk.serif': 'Serif Song',
+      'font.cjk.kai': 'WenKai',
+      'font.cjk.mono': 'Monospace',
+      'font.cjk.rounded': 'Rund',
+      'code.default': 'Systemstandard',
+    });
+
+    const ru = Object.assign({}, en, {
+      'trigger': 'Тема оформления',
+      'title': 'Персонализация',
+      'subtitle': 'Палитра, шрифты и размер текста',
+      'close': 'Закрыть',
+      'section': 'Тема',
+      'appearance': 'Оформление',
+      'mode.system': 'Системная',
+      'mode.light': 'Светлая',
+      'mode.dark': 'Тёмная',
+      'themeTitle': 'Цвет темы',
+      'theme.import': 'Импортировать JSON темы',
+      'theme.hint': 'Начните с пресета или импортируйте JSON темы, затем откройте «Своя тема» для настройки.',
+      'fontsTitle': 'Шрифты',
+      'latin': 'Латиница',
+      'cjk': 'Китайский',
+      'codeFont': 'Шрифт кода',
+      'fontSize': 'Размер текста',
+      'reset': 'Сбросить',
+      'theme.none': 'По умолчанию',
+      'theme.custom': 'Своя тема',
+      'customTitle': 'Своя тема',
+      'back': 'Назад',
+      'boldBorders': 'Жирные границы',
+      'states': 'Цвета состояний',
+      'custom.namePlaceholder': 'Название темы',
+      'custom.nameRequired': 'Введите название темы перед сохранением',
+      'custom.save': 'Сохранить',
+      'custom.delete': 'Удалить',
+      'custom.basePlaceholder': 'Начать с пресета',
+      'custom.baseLabel': 'Базовая тема',
+      'custom.savedPlaceholder': 'Загрузить сохранённую тему',
+      'custom.importedName': 'Импортированная тема',
+      'custom.example': 'Пример',
+      'custom.fromFile': 'Импорт из файла',
+      'custom.exampleName': 'название темы, на ваш выбор',
+      'custom.exampleBg': 'фон',
+      'custom.exampleAccent': 'акцент',
+      'custom.exampleHint': 'поддерживаются пары светлая/тёмная; остальные поля необязательны',
+      'font.showLocal': 'Локальные шрифты',
+      'custom.export': 'Экспорт',
+      'custom.import': 'Импорт',
+      'custom.importPrompt': 'Вставьте JSON темы',
+      'custom.importFailed': 'Ошибка импорта: неверный JSON',
+      'custom.savedTitle': 'Мои темы',
+      'custom.manage': 'Управление',
+      'custom.done': 'Готово',
+      'custom.cancel': 'Отмена',
+      'custom.importConfirm': 'Импорт',
+      'custom.importPlaceholder': 'Вставьте JSON темы',
+      'color.bg': 'Фон',
+      'color.layer': 'Карточка',
+      'color.overlay': 'Всплывающее окно',
+      'color.sidebar': 'Боковая панель',
+      'color.label': 'Текст',
+      'color.border': 'Граница',
+      'color.accent': 'Акцент',
+      'color.error': 'Ошибка',
+      'color.success': 'Успех',
+      'color.warn': 'Предупреждение',
+      'font.detect': 'Найти локальные шрифты',
+      'font.detected': 'Локальные шрифты найдены; выберите один из подсказок',
+      'font.detectUnsupported': 'Автоопределение недоступно; введите название шрифта',
+      'font.detectFailed': 'Не удалось определить; введите название шрифта',
+      'font.localPrefix': 'Локальный · ',
+      'font.latin.system': 'Системный',
+      'font.latin.humanist': 'Гуманистический',
+      'font.latin.serif': 'С засечками',
+      'font.latin.rounded': 'Округлый',
+      'font.latin.mono': 'Моноширинный',
+      'font.latin.kai': 'Палатино',
+      'font.cjk.system': 'Системный',
+      'font.cjk.yahei': 'YaHei',
+      'font.cjk.source-han': 'Source Han Sans',
+      'font.cjk.serif': 'Serif Song',
+      'font.cjk.kai': 'WenKai',
+      'font.cjk.mono': 'Моноширинный',
+      'font.cjk.rounded': 'Округлый',
+      'code.default': 'Системный по умолчанию',
+    });
+
+    const pt = Object.assign({}, en, {
+      'trigger': 'Tema de personalização',
+      'title': 'Personalização',
+      'subtitle': 'Paleta do tema, fontes e tamanho do texto',
+      'close': 'Fechar',
+      'section': 'Tema',
+      'appearance': 'Aparência',
+      'mode.system': 'Sistema',
+      'mode.light': 'Claro',
+      'mode.dark': 'Escuro',
+      'themeTitle': 'Cor do tema',
+      'theme.import': 'Importar tema JSON',
+      'theme.hint': 'Comece com um preset ou importe um tema JSON; depois abra Personalizado para ajustar.',
+      'fontsTitle': 'Fontes',
+      'latin': 'Latina',
+      'cjk': 'Chinesa',
+      'codeFont': 'Fonte de código',
+      'fontSize': 'Tamanho do texto',
+      'reset': 'Redefinir',
+      'theme.none': 'Padrão',
+      'theme.custom': 'Personalizado',
+      'customTitle': 'Tema personalizado',
+      'back': 'Voltar',
+      'boldBorders': 'Bordas grossas',
+      'states': 'Cores de status',
+      'custom.namePlaceholder': 'Nome do tema',
+      'custom.nameRequired': 'Dê um nome ao tema antes de salvar',
+      'custom.save': 'Salvar',
+      'custom.delete': 'Excluir',
+      'custom.basePlaceholder': 'Começar com um preset',
+      'custom.baseLabel': 'Tema base',
+      'custom.savedPlaceholder': 'Carregar um tema salvo',
+      'custom.importedName': 'Tema importado',
+      'custom.example': 'Exemplo',
+      'custom.fromFile': 'Importar de arquivo',
+      'custom.exampleName': 'nome do tema, você escolhe',
+      'custom.exampleBg': 'fundo',
+      'custom.exampleAccent': 'destaque',
+      'custom.exampleHint': 'pares claro/escuro são suportados; os outros campos são opcionais',
+      'font.showLocal': 'Fontes locais',
+      'custom.export': 'Exportar',
+      'custom.import': 'Importar',
+      'custom.importPrompt': 'Cole o JSON do tema',
+      'custom.importFailed': 'Falha na importação: JSON inválido',
+      'custom.savedTitle': 'Meus temas',
+      'custom.manage': 'Gerenciar',
+      'custom.done': 'Concluído',
+      'custom.cancel': 'Cancelar',
+      'custom.importConfirm': 'Importar',
+      'custom.importPlaceholder': 'Cole o JSON do tema',
+      'color.bg': 'Fundo',
+      'color.layer': 'Cartão',
+      'color.overlay': 'Popover',
+      'color.sidebar': 'Barra lateral',
+      'color.label': 'Texto',
+      'color.border': 'Borda',
+      'color.accent': 'Destaque',
+      'color.error': 'Erro',
+      'color.success': 'Sucesso',
+      'color.warn': 'Aviso',
+      'font.detect': 'Detectar fontes locais',
+      'font.detected': 'Fontes locais detectadas; escolha uma nas sugestões',
+      'font.detectUnsupported': 'A detecção automática não está disponível; digite o nome da fonte',
+      'font.detectFailed': 'A detecção falhou; digite o nome da fonte',
+      'font.localPrefix': 'Local · ',
+      'font.latin.system': 'Sistema',
+      'font.latin.humanist': 'Humanista',
+      'font.latin.serif': 'Serifada',
+      'font.latin.rounded': 'Arredondada',
+      'font.latin.mono': 'Monoespaçada',
+      'font.latin.kai': 'Palatino',
+      'font.cjk.system': 'Sistema',
+      'font.cjk.yahei': 'YaHei',
+      'font.cjk.source-han': 'Source Han Sans',
+      'font.cjk.serif': 'Serif Song',
+      'font.cjk.kai': 'WenKai',
+      'font.cjk.mono': 'Monoespaçada',
+      'font.cjk.rounded': 'Arredondada',
+      'code.default': 'Padrão do sistema',
+    });
 
     /* ------------------------------------------------------------------ */
     /* Color utilities and palette token generation                        */
@@ -1008,24 +1497,35 @@ window.__ModuleLoader__.load({
       updatePref({ palette: 'custom', custom: cloneCustom(entry.custom), customName: entry.name });
     }
 
-    function exportCustomTheme() {
+    function downloadJson(filename, payload) {
       if (typeof document === 'undefined') return;
-      const current = prefStore.get();
-      const payload = {
-        format: 'dsh-theme-custom',
-        version: 1,
-        name: current.customName || 'dsh-theme',
-        custom: current.custom,
-      };
       const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
-      link.download = (current.customName || 'dsh-theme').replace(/[\\/:*?"<>|]+/g, '-') + '.json';
+      link.download = String(filename || 'dsh-theme').replace(/[\\/:*?"<>|]+/g, '-') + '.json';
       document.body.appendChild(link);
       link.click();
       link.remove();
       window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }
+
+    function exportCustomTheme() {
+      const current = prefStore.get();
+      downloadJson(current.customName || 'dsh-theme', {
+        format: 'dsh-theme-custom',
+        version: 1,
+        name: current.customName || 'dsh-theme',
+        custom: current.custom,
+      });
+    }
+
+    function exportThemePack(entries) {
+      downloadJson('dsh-themes', {
+        format: 'dsh-theme-pack',
+        version: 1,
+        themes: entries.map((entry) => ({ name: entry.name, custom: entry.custom })),
+      });
     }
 
     function stripJsonComments(text) {
@@ -1278,6 +1778,18 @@ window.__ModuleLoader__.load({
                   type: 'button',
                   className: 'dsph-fontDetect',
                   disabled: props.selected.length === 0,
+                  onClick: props.onExport,
+                },
+                t('custom.export'),
+              )
+            : null,
+          props.managing
+            ? h(
+                'button',
+                {
+                  type: 'button',
+                  className: 'dsph-fontDetect',
+                  disabled: props.selected.length === 0,
                   onClick: props.onDelete,
                 },
                 t('custom.delete'),
@@ -1389,8 +1901,10 @@ window.__ModuleLoader__.load({
       const pref = props.pref;
       const [mode, setMode] = useState('light');
       const [draftName, setDraftName] = useState(pref.customName || '');
+      const [nameError, setNameError] = useState(false);
       useEffect(() => {
         setDraftName(pref.customName || '');
+        setNameError(false);
       }, [pref.customName]);
       const anchors = customPalette(custom)[mode];
       const anchorKeys = {
@@ -1420,6 +1934,15 @@ window.__ModuleLoader__.load({
         if (option.tag) props.onCloneSaved(option.id.slice(6));
         else props.onClone(option.id);
       };
+      const saveNamed = () => {
+        const name = draftName.trim();
+        if (!name) {
+          setNameError(true);
+          return;
+        }
+        setNameError(false);
+        props.onSave(name);
+      };
       return h(
         'div',
         { className: 'dsph-editor' },
@@ -1441,29 +1964,22 @@ window.__ModuleLoader__.load({
             { className: 'dsph-customRow' },
             h('input', {
               type: 'text',
-              className: 'dsph-customName',
+              className: 'dsph-customName' + (nameError ? ' dsph-customNameError' : ''),
               value: draftName,
               placeholder: t('custom.namePlaceholder'),
               'aria-label': t('custom.namePlaceholder'),
-              onChange: (event) => setDraftName(event.target.value),
+              onChange: (event) => {
+                setDraftName(event.target.value);
+                setNameError(false);
+              },
             }),
             h(
               'button',
-              { type: 'button', className: 'dsph-miniButton', onClick: () => props.onSave(draftName) },
+              { type: 'button', className: 'dsph-miniButton', onClick: saveNamed },
               t('custom.save'),
             ),
-            h(
-              'button',
-              {
-                type: 'button',
-                className: 'dsph-miniButton',
-                disabled: !pref.customName,
-                onClick: () => props.onDelete(pref.customName),
-              },
-              t('custom.delete'),
-            ),
-            h('button', { type: 'button', className: 'dsph-miniButton', onClick: props.onExport }, t('custom.export')),
           ),
+          nameError ? h('div', { className: 'dsph-customError' }, t('custom.nameRequired')) : null,
           h('div', { className: 'dsph-customLabel' }, t('custom.baseLabel')),
           h(BaseStrip, { t: t, custom: custom, options: baseOptions, onPick: pickBase }),
         ),
@@ -1614,16 +2130,31 @@ window.__ModuleLoader__.load({
       const applyImport = () => {
         try {
           const data = JSON.parse(stripJsonComments(importText));
-          const custom = readCustom(data && data.custom ? data.custom : data);
-          const name = data && typeof data.name === 'string' && data.name.trim()
-            ? data.name.trim().slice(0, 40)
-            : t('custom.importedName');
           const current = prefStore.get();
-          const customs = current.customs
-            .filter((entry) => entry.name !== name)
-            .concat([{ name, custom }])
-            .slice(0, 30);
-          updatePref({ palette: 'custom', custom, customName: name, customs });
+          const entries = Array.isArray(data && data.themes)
+            ? data.themes
+                .map((entry) => ({
+                  name: typeof entry?.name === 'string' && entry.name.trim() ? entry.name.trim().slice(0, 40) : t('custom.importedName'),
+                  custom: readCustom(entry?.custom || entry),
+                }))
+            : [{
+                name: data && typeof data.name === 'string' && data.name.trim()
+                  ? data.name.trim().slice(0, 40)
+                  : t('custom.importedName'),
+                custom: readCustom(data && data.custom ? data.custom : data),
+              }];
+          const customs = current.customs.slice();
+          for (const entry of entries) {
+            const index = customs.findIndex((item) => item.name === entry.name);
+            if (index >= 0) customs[index] = entry;
+            else customs.push(entry);
+          }
+          updatePref({
+            palette: 'custom',
+            custom: cloneCustom(entries[0].custom),
+            customName: entries[0].name,
+            customs: customs.slice(0, 30),
+          });
           setImportOpen(false);
           setEditingCustom(true);
         } catch (error) {
@@ -1696,11 +2227,8 @@ window.__ModuleLoader__.load({
               onBack: () => setEditingCustom(false),
               onSave: saveCustomTheme,
               onLoad: loadCustomTheme,
-              onDelete: deleteCustomTheme,
               onClone: cloneCustomBase,
               onCloneSaved: cloneSavedCustom,
-              onExport: exportCustomTheme,
-              onImport: () => importCustomTheme(t),
             })
           : h(ThemeGrid, {
               t: t,
@@ -1732,6 +2260,8 @@ window.__ModuleLoader__.load({
                 setSelectedThemes([]);
                 setManageThemes(false);
               },
+              onExport: () =>
+                exportThemePack(pref.customs.filter((entry) => selectedThemes.includes(entry.name))),
               onLoad: (name) => loadCustomTheme(name),
             })
           : null,
@@ -1940,6 +2470,8 @@ window.__ModuleLoader__.load({
 .dsph-customRow{display:flex;align-items:center;gap:4px;min-width:0}
 .dsph-customName{flex:1;min-width:0;box-sizing:border-box;border:.5px solid var(--dsw-alias-border-l2);border-radius:7px;background:var(--dsw-alias-bg-layer-1);color:var(--dsw-alias-label-primary);font:inherit;font-size:11px;line-height:14px;padding:5px 7px;outline:none}
 .dsph-customName:focus{border-color:var(--dsw-alias-brand-primary)}
+.dsph-customNameError{border-color:var(--dsw-alias-state-error-primary)}
+.dsph-customError{font-size:10px;line-height:13px;color:var(--dsw-alias-state-error-primary)}
 .dsph-nativeSelect{flex:1;min-width:0;box-sizing:border-box;border:.5px solid var(--dsw-alias-border-l2);border-radius:7px;background:var(--dsw-alias-bg-layer-1);color:var(--dsw-alias-label-primary);font:inherit;font-size:11px;line-height:14px;padding:4px 6px;outline:none}
 .dsph-miniButton{flex:none;border:.5px solid var(--dsw-alias-border-l2);border-radius:7px;background:transparent;color:var(--dsw-alias-label-secondary);font:inherit;font-size:10px;line-height:14px;padding:4px 7px;cursor:pointer}
 .dsph-miniButton:hover:not(:disabled){background:var(--dsw-alias-bg-layer-2);color:var(--dsw-alias-label-primary)}
@@ -2201,7 +2733,7 @@ window.__ModuleLoader__.load({
 
     function apply(ctx) {
       const theme = ctx.theme;
-      ctx.effect(() => ctx.locale.register(NS, { zh, en }), 'dsh-theme: dictionaries');
+      ctx.effect(() => ctx.locale.register(NS, { zh, en, ja, es, fr, de, ru, pt }), 'dsh-theme: dictionaries');
       const t = ctx.locale.bind(NS);
 
       /* Durable preferences live in the Host settings document under this entry id. */

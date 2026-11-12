@@ -53,7 +53,8 @@ The interface copy follows the app language (Simplified Chinese / English).
   are allowed.
 - **Text size** — 10–22 px through the native theme service, so it survives
   reloads and shares the Ctrl/Cmd `+`/`-` shortcuts.
-- **Bilingual UI** — follows the app language (Simplified Chinese / English).
+- **Eight languages** — the panel follows the app language: English, Simplified
+  Chinese, Japanese, Spanish, French, German, Russian, and Brazilian Portuguese.
 - **Restart-safe persistence** — choices are stored in DSH's Host settings
   document, so they survive app restarts and profile changes of the localhost
   port. No `localStorage` surprises.

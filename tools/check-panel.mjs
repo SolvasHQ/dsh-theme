@@ -389,6 +389,10 @@ if (dicts && dicts.zh && dicts.en) {
   const missing = zhKeys.filter((key) => !dicts.en[key]);
   check(missing.length === 0, 'every key has an English string');
   check(dicts.zh.section === '主题' && dicts.en.section === 'Theme', 'settings section label is Theme');
+  check(
+    ['ja', 'es', 'fr', 'de', 'ru', 'pt'].every((locale) => dicts[locale] && dicts[locale].title),
+    'six additional locale dictionaries are registered',
+  );
 }
 
 const Trigger = harness.slotRegistrations.footer[0];
