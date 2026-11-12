@@ -14,3 +14,6 @@ Thumbs.db
 *.log
 dist/
 coverage/
+
+# release artifacts
+*.tgz
