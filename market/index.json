@@ -46,8 +46,8 @@
         "zh": "DSH 主题"
       },
       "description": {
-        "en": "Lightweight theme colors, a full DIY palette editor, fonts, and text size for the DeepSeek Harness Web GUI.",
-        "zh": "轻量的主题配色、完整 DIY 调色、字体与界面字号，用于 DeepSeek Harness Web GUI。"
+        "en": "Theme colors, a full DIY editor, named custom themes, local fonts, text size, and eight UI languages for the DeepSeek Harness Web GUI.",
+        "zh": "主题配色、完整 DIY 调色、具名自定义主题、本机字体、界面字号与八种语言，适用于 DeepSeek Harness Web GUI。"
       },
       "icon": "../assets/icon-512.png",
       "author": "SolvasHQ",
@@ -64,7 +64,9 @@
           "fonts",
           "typography",
           "appearance",
-          "chinese",
+          "custom themes",
+          "local fonts",
+          "i18n",
           "diy"
         ],
         "labels": [
@@ -75,15 +77,15 @@
       },
       "versions": [
         {
-          "version": "1.4.0",
-          "publishTimestamp": 1793606690,
+          "version": "1.5.0",
+          "publishTimestamp": 1794486719,
           "source": {
             "type": "git",
             "url": "https://github.com/SolvasHQ/dsh-theme",
-            "commit": "dd49ef3f12ff147933fcd4b29dcbfcba5759b41c"
+            "commit": "1286e42ef851992964e113367a1c853b1e811384"
           },
           "engines": {
-            "dsh": ">=0.2.1-rc.2 <0.3.0"
+            "dsh": ">=0.2.2-rc.1 <0.3.0"
           }
         }
       ]
