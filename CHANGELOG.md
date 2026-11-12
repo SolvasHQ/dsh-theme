@@ -2,7 +2,7 @@
 
 All notable changes to this plugin are documented here.
 
-## Unreleased
+## 1.5.0 — 2026-11-12
 
 - Added four community-inspired presets: **Catppuccin**, **Nord**, **Gruvbox**, and
   **Tokyo Night**, each with contrast-tuned light/dark anchors and state colours.
@@ -17,14 +17,15 @@ All notable changes to this plugin are documented here.
   required.
 - Custom themes can use a preset or a saved custom theme as their base (full
   per-mode anchors and the preset's bold-border trait are preserved), appear in a
-  **My themes** list with the active one checked, support multi-select deletion in
-  Manage mode, and import/export as JSON files with a commented example and a file
-  picker.
-- The custom theme editor can clone any preset as a base, save named custom
-  themes, switch between them, and export/import the current theme as JSON.
+  **My themes** list with the active one checked, support multi-select
+  deletion/export in Manage mode, and import/export as JSON files with a commented
+  example and a file picker. The editor keeps only naming and saving.
 - The panel is localized in all eight shipped DSH languages: Simplified Chinese,
   English, Japanese, Spanish, French, German, Russian and Brazilian Portuguese.
-- No behavioural changes to the DIY editor, fonts, or text size.
+- README documentation is now localized into the same eight languages, with
+  Chinese first, English second, and the remaining languages in DSH order.
+- No behavioural changes to the DIY editor, fonts, or text size beyond the
+  additions above.
 
 ## 1.4.0
 
