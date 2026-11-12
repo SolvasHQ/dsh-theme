@@ -68,7 +68,7 @@ linha acima de Configurações. A mesma página fica em **Configurações → Te
 2. Adicione esta fonte de índice:
 
    ```
-   https://cdn.jsdelivr.net/gh/SolvasHQ/dsh-theme@v1.5.0/market/index.json
+   https://cdn.jsdelivr.net/gh/SolvasHQ/dsh-theme@be05cdd37d6123bea5ba50435217476d0c97f516/market/index.json
    ```
 
 3. Encontre **DSH Theme**, abra a página e clique em **Install**.

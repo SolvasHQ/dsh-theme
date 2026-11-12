@@ -71,7 +71,7 @@ chinesische Aufnahmen. Die übrigen Sprachen nutzen dasselbe Layout.
 2. Diese Indexquelle hinzufügen:
 
    ```
-   https://cdn.jsdelivr.net/gh/SolvasHQ/dsh-theme@v1.5.0/market/index.json
+   https://cdn.jsdelivr.net/gh/SolvasHQ/dsh-theme@be05cdd37d6123bea5ba50435217476d0c97f516/market/index.json
    ```
 
 3. **DSH Theme** suchen, öffnen und **Install** drücken.

@@ -70,7 +70,7 @@
 2. Добавьте источник индекса:
 
    ```
-   https://cdn.jsdelivr.net/gh/SolvasHQ/dsh-theme@v1.5.0/market/index.json
+   https://cdn.jsdelivr.net/gh/SolvasHQ/dsh-theme@be05cdd37d6123bea5ba50435217476d0c97f516/market/index.json
    ```
 
 3. Найдите **DSH Theme**, откройте карточку и нажмите **Install**.
